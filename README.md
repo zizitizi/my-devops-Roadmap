@@ -74,5 +74,6 @@ Google Cloud (GCP)
 Step 7: Getting familiar with Agile software development
 Programing Language
 
+If you made yourself through here, it means that you are now a capable DevOps Engineer. from now on, we need to focus on something furthur than using technologies. in order to become a senior, you need to be aware of all the aspects.
 
-
+Agile Software DevelopmentAgile Software Development, Principles, Patterns, and Practices
