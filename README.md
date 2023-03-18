@@ -11,9 +11,10 @@ Introduction
 
 Table of Contents
 
-Programing Language
+## Programing Language
 
 Python
+GO
 
 Step 0: Basic requirements
 
