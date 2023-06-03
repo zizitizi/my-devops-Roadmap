@@ -46,5 +46,10 @@ network
 best practice is used od virtualize and containerize hybrid and combination.
 
 
+docker with .net core can cantainer windows software.
+
+windows server - microsoft azure
+linux - gitlab server
+
 
 
