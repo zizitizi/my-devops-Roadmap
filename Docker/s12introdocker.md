@@ -16,12 +16,14 @@ container run software like:
 
 linux containers - LXC
 
-docker
+docker -  golang in linux writed - then best integrated with linux
 
 rkt
+
 CRI-O
 
 podman
+
 containerd
 
 
