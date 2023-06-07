@@ -74,3 +74,13 @@ but now kubernetiz 1.24 no need to docker . kubernetiz is working for manage and
 we use nowdays kubernetiz and containerd and machin.
 
 
+nfv/sdn architecture used in cloud / devops/ virtulization/container
+
+
+
+
+
+
+
+
+
