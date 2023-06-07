@@ -52,4 +52,25 @@ windows server - microsoft azure
 linux - gitlab server
 
 
+container runtime have 2 type:
+
+high level:
+docker- CRI-O  - rkt - podman -lxc -
+
+low level:
+containerd - runc
+
+we can build image with docker , run it on other server with other runtime . becouse OCI standard is the same.
+
+nowdays: orchasterator is for containers ex.: kubernetiz - dockerswarm - apache mesos -
+
+
+
+note:
+kubernetiz is integrate with docker - CRI-O - LXC - containerd.  after that
+this list change to :
+kubernetiz - mirantis(cri-dockerd) - docker - containerd- after it
+but now kubernetiz 1.24 no need to docker . kubernetiz is working for manage and runtime(inplace of docker) - containerd
+we use nowdays kubernetiz and containerd and machin.
+
 
