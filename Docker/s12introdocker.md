@@ -77,6 +77,17 @@ we use nowdays kubernetiz and containerd and machin.
 nfv/sdn architecture used in cloud / devops/ virtulization/container
 
 
+in sdn we have control plane to manage infrastructure with app 
+IAC( ansible , terraform ) 
+k8s(control plane layer)-kubectl-->app , 
+docker (runtime) container-->app, 
+moitoring ( script - server ) , 
+cloud (openstack - automation)
+
+
+nfv - replacement of network machine with virtual (virtual convertion pool of resource) - lvm -ceph - openswitch
+
+
 
 
 
