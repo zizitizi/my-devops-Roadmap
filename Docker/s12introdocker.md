@@ -87,6 +87,45 @@ cloud (openstack - automation)
 
 nfv - replacement of network machine with virtual (virtual convertion pool of resource) - lvm -ceph - openswitch
 
+#### docker engine
+
+major component is:
+1- client docker cli
+2- rest api to commniucate with daemon
+3- a server (docker daemon ) 
+
+2 type of commands have with (nfv/sdn arcitecture):
+1- in application layer (container - image)
+2- in infra layer ( network - volume)
+
+
+
+a movable image that is like a snapshot of virtual machine server (for ex.: ubuntu image)
+container is like vm machine.
+in docker hub we can find many image for running container. image is readonly
+when an image run it called container
+build an image is containerize app by devops engineer
+to save data in host form container we shulod use docker volume . kubernetize help this process
+
+we push image to docker registery that include our custom repository to save and publish them in it
+
+
+note: gitlab is: source code, gitrepo ci/cd and local registery. github is too.
+git lab:
+src-->CI/CD-->clone-->docker build-->image-->push again in gitlab as container registery-->deploy and run container
+
+
+when we didnt acces to net we can use below options:
+1- our laptop to sftp to server. pull from docker hub .tar file. and sftp it to specified server
+2- local registery: jfrog/nexus/gitlab as local registery/-- after gitlab nexus is most common becouse both apt repo and docker registery could be run on it.
+3- if our register in none docker hub , we sholud go to docker config anf tell him  to pull and push image to specified registery
+
+docker client: bulid - pull - run
+
+note:
+docker run = pull + run
+
+
 
 
 
