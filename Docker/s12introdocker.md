@@ -107,7 +107,7 @@ when an image run it called container
 build an image is containerize app by devops engineer
 to save data in host form container we shulod use docker volume . kubernetize help this process
 
-we push image to docker registery that include our custom repository to save and publish them in it
+we push image to docker registery that include our custom repositories to save and publish them in it
 
 
 note: gitlab is: source code, gitrepo ci/cd and local registery. github is too.
@@ -125,6 +125,18 @@ docker client: bulid - pull - run
 note:
 docker run = pull + run
 
+local docker registery: nexus - jfrog - gitlab
+
+### docker hub 
+
+is a online and default docker registery. we could have many public repo and one private repo in free plan of it. 
+
+### docker installation
+docker-ee is enterprise edtion and it is not free
+docker-ce - is a complete free version of docker
+docker.io is default exit in ubunutu but its small version and not include some feature
+
+we use docker-ce in devops field. so to install it follow instaruction:
 
 
 
