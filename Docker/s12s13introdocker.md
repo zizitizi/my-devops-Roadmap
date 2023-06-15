@@ -175,7 +175,41 @@ sudo apt update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 
+docker --version
+
+
 sudo docker run hello-world
+
+
+
+#### ssh tunnel
+
+ssh-keygen
+ssh-copy-id -p 2022 sshuser@ipvpsserver 
+
+for use ssh port ip should not be 22: 0/0 means all ip and all subnet- no latancy for increase speed - and for background
+
+sshuttle --dns -r sshuser@ipvpsserver:2022 0/0 -x ipvpsserver --no-latancy-control & 
+
+to check connection 
+curl ipinfo.oi
+
+
+
+
+to practice docker go to site docker play ground
+https://labs.play-with-docker.com/
+
+
+
+#### docker command
+
+docker + container (default- could be empty) or image or volume or network + related to parent command
+
+docker run hello-world == docker container run hello-world
+
+
+
 
 
 
