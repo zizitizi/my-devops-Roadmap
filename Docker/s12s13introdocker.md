@@ -209,6 +209,73 @@ docker + container (default- could be empty) or image or volume or network + rel
 docker run hello-world == docker container run hello-world
 
 
+### image
+
+image name:tagname - default is lastest
+
+
+docker run gitlab-ce:latest==docker run gitlab-ce
+docker run gitlab-ce:v15.0
+
+
+note:
+in docker hub with out account for every 1 hour we can pull just 6 image
+with free account evey 6 hour we can pull 100 image
+with enterprise account no limit
+
+
+to login do :
+docker login
+
+
+to add docker user to docker group (that biult-in) do this:
+id - if not member of docker group
+
+sudo usermod -aG docker username
+
+after do logout and login
+logout
+su - username
+
+
+not we can run docker without sudo
+
+docker run hello-world
+
+docker search ubuntu
+
+docker run = docker create + docker start
+
+container is varying in 2 type: 
+1- works like daemon works. for ex.: nginx
+2- do task and exit. for ex: hello-world
+
+docker ps  - list of up and running container -a see all container even exited
+ container id is unique - name is randomly - exit (0) means finished sucesfully
+ 
+
+docker rm -f - remove container
+
+docker stop is not remove
+
+
+to see all data of docker do:
+sudo -i
+ 
+cd /var/lib/docker
+
+docker run centos
+
+alpine is very light version ubuntu with out bash . just include sh
+
+docker run enginx
+
+
+ 
+
+
+
+
 
 
 
