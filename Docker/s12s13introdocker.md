@@ -292,7 +292,13 @@ docker exec -it ubuntu1 cat /etc/resolv.conf  - to run and execute container
 
 docker exec -it ubuntu1 cat /etc/hostname  - return hostname by default its container id
 
-docker exec -it ubuntu1 /bin/bash  - attach to specified container to run command in it
+docker exec -it ubuntu1 /bin/bash  - attach to specified container to run command in it - to exit type exit or ctl+d
+
+docker exec -it nginx1 bash - curl localhost to see default website
+
+cd /usr/share/nginx/html  - this folder is default website of nginx copy your html code to replace it
+
+
  
  
 
@@ -303,6 +309,10 @@ docker exec -it ubuntu1 /bin/bash  - attach to specified container to run comman
 ##### note
 
 nginx has base image in it like contos
+
+even if we found container ip we cant ssh to it becouse bydefault all port of it closed. but service container like nginx default port 80 is opend.
+ apt install iproute2 - install ip package
+you can ping container ip
 
 
  
