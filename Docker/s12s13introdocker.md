@@ -270,6 +270,40 @@ alpine is very light version ubuntu with out bash . just include sh
 
 docker run enginx
 
+docker run -d nginx
+
+docker logs containername or id  - show container lof with -f follow it
+
+docker stop containername
+
+docker start containername
+
+docker run -dit centos  - dit is important option - detach interactive tty
+
+docker run -dit --name nginx1 nginx:latest  - - up and run the container with specified name 
+
+docker run -dit --name ubuntu1 ubuntu:22.04
+ 
+docker rm -f containername  - remove container without stop
+
+docker exec -it containername <command>
+
+docker exec -it ubuntu1 cat /etc/resolv.conf  - to run and execute container 
+
+docker exec -it ubuntu1 cat /etc/hostname  - return hostname by default its container id
+
+docker exec -it ubuntu1 /bin/bash  - attach to specified container to run command in it
+ 
+ 
+
+
+
+
+
+##### note
+
+nginx has base image in it like contos
+
 
  
 
