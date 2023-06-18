@@ -382,9 +382,22 @@ systemctl restart enginx - in containers not have this command we can docker res
 by export and import command. 
 
 
+take snapshot from paused or running container and out put it with tar file. export it as a image in other location
+
+docker export ubuntu2 > ./ubuntu2.tar
+
+docker import -m " hello import" ubuntu2.tar myubuntuexpo:v1.0
+ 
+docker image ls
+
+
+docker run -dit --name myubuntu22 myubuntuexpo:v1.0 bash  -- to run this image we should use command that that image used when take backup. with out that commadn it show an error
+ 
+use docker inspect containername to grep that used commad . the last thing in docker run is image name after that we have commads.
 
 
 
+ 
 
 
 
