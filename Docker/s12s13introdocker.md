@@ -316,7 +316,39 @@ you can ping container ip
 
 
  
+per container one vnic would be made. we can see it in 2 way:
+docker exec -it containername
+docker inspect containername | grep IPAddress
 
+
+docker zero is gateway . 172.17.0.1.
+
+docker container prune - delet all exited container or dangling removed
+
+docker image ls - list all locally image ==docker images
+
+docker exec -it ubuntu1 bash - if bash is not installed in image ( like alpine) use sh 
+
+docker run -dit --name alpine1 alpine:latest
+
+
+docker exec -it alpine1 sh
+
+echo $SHELL
+
+uname -a
+
+apk add nano  - note : important---**** we use nano add instead of apt install in alpine
+
+
+#### docker cp
+in host use cp to copy from or to container
+
+ docker cp text1 ubuntu1:/tmp
+ 
+ docker exec -it ubuntu1 bash
+
+cd tmp/  - see ls -l
 
 
 
