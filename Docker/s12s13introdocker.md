@@ -396,6 +396,8 @@ docker run -dit --name myubuntu22 myubuntuexpo:v1.0 bash  -- to run this image w
 use docker inspect containername to grep that used commad . the last thing in docker run is image name after that we have commads.
 
 
+bitnami is beiggest image provider container in world
+
 
  
 
