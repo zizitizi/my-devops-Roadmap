@@ -350,6 +350,39 @@ in host use cp to copy from or to container
 
 cd tmp/  - see ls -l
 
+docker cp ubuntu1:/home/kdoc.txt /home/zizi/d
+
+
+docker run -dit --name ubuntu2 --dns 8.8.8.8 --env myname=arash --env myage=33 --hostname ubuntu3 ubuntu:22.04   - to set multiple environmental variable use that option as need
+
+
+kill == same as stop container but seriosly
+
+docker ps ==container ls
+
+docker pause container stop for a seconnd
+
+
+docker update -- refresh change in docker conf file
+
+docker stats  - shows resource usage
+
+docker top containername  - show process
+
+sysytemctl use systemd(first system process)
+
+host os share systemd . containers not have systemd .
+
+systemctl restart enginx - in containers not have this command we can docker restart nginx container instead
+
+
+
+### backup frm containers
+
+by export and import command. 
+
+
+
 
 
 
