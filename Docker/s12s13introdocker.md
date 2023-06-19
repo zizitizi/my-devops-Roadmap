@@ -399,9 +399,16 @@ use docker inspect containername to grep that used commad . the last thing in do
 bitnami is beiggest image provider container in world
 
 
- 
 
+practice:
 
+i change my /etc/resolv.conf in v pc . restart to apply. (netapply didnt change dns)
+ docker run -dit --dns 178.22.122.100 --name doc1 ubuntu:22.04
+ docker exec -it doc1 bash
+ apt update
+ apt install 
+apt install iputils-ping -y
+ ping 172.17.0.3
 
 
 
