@@ -33,7 +33,13 @@ nameserver 8.8.8.8
 change /etc/netplan in static ip worked. when we have dhcp it didnt work correctly
 
 
-# Docker 
+# Docker back up
+
+export and import : container>export>.tar>scp>import (with specified command) 
+
+see that command in docker inspect | Cmd
 
 
 
+
+# docker image
