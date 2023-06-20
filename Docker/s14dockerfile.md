@@ -224,7 +224,7 @@ when we add all directory its best to COPY important file or .tgz file again.
 
 practice1- write gitlab-ce instaal stage dockerfile
 
-practice2- write nexus instaal stage dockerfile - sudo==run -
+practice2- write nexus instaal stage dockerfile - sudo==run - port ==expose  - config file==first make file in host and copy it from host to guest
 
 
 
