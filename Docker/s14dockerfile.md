@@ -156,8 +156,10 @@ CMD ["localhost"]
 
 docker run -dit --name apache myapache:latest 8.8.8.8  -  here localhost in running replaced with 8.8.8.8  - elinks 8.8.8.8 
 
-
 ENTRYPOINT ["elinks","localhost"]
+
+
+
 
 
 
