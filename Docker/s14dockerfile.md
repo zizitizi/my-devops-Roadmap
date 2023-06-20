@@ -228,6 +228,46 @@ practice2- write nexus instaal stage dockerfile - sudo==run - port ==expose  - c
 
 
 
+#### docker image
+
+docker image ls - 
+
+docker image history imagename:tagname  - docker image layer history - last layer image id is same as image id that show here. but previouse layer in pulled image from docker hub id is missing . its secure for maintener. 
+
+to rename an image do:
+
+docker tag previousename:tagversion newname:newtagversion
+
+docker image ls
+
+you can see docker biuld an other image with same id but new name and tag . its just one file but different called. to remove it docker  rmi name - we can not remove with id here.
+
+#### push an image to docker registery
+
+for ex. in docker hub fiirst create new repo. with below command:
+
+docker push dockerhubUSER/dockerimagename:tagname
+
+tag your container in below format:
+
+docker tag ubuntu-ssh:v1.0 dockerhubUSER/dockerimagename:ubuntu-ssh:v1.0
+
+docker image ls
+
+docker login 
+
+docker push dockerhubUSER/dockerimagename:ubuntu-ssh:v1.0
+
+if upload speed be low yu can make docker file in docker play groun site and push from there to docker hub. and then download it to your server.
+
+
+
+
+
+
+
+
+
 
 
 
