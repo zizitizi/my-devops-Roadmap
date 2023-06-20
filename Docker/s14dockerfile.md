@@ -146,9 +146,16 @@ CMD ["localhost"]
 
 cmd and entrypoint just one time used. 
 when we have:
-if last command need to be replaced use CMD -it means last command in docker run -----  execute and replace with CMD
-if last command not to be replaced use ENTRYPOINT - it means last command in docker run ----- not execute
-if last command partially need to be replaced use one ENTRYPOINT and one CMD
+if last command need to be replaced use CMD -it means last command in docker run -----  execute and replace with CMD 
+if last command not to be replaced use ENTRYPOINT - it means last command in docker run ----- not execute  - force
+if last command partially need to be replaced and partially forced use one ENTRYPOINT and one CMD - for ex.:
+
+ENTRYPOINT ["elinks"]
+
+CMD ["localhost"]
+
+docker run -dit --name apache myapache:latest 8.8.8.8  -  here localhost in running replaced with 8.8.8.8  - elinks 8.8.8.8 
+
 
 ENTRYPOINT ["elinks","localhost"]
 
