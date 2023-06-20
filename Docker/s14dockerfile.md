@@ -90,7 +90,7 @@ FROM	- Defines base image. It must be first instruction in Dockerfile. mandatory
 LABEL	- It's a description about anything needs to define about the image.
 
 
-ADD	- Copies a file into the image and supports tar & remote URL. left host right container. tar gz file extract for url download  (readonly)*****
+ADD	- Copies a file into the image and supports tar & remote URL. left host right container. tar gz file extract for url download. and hidden file (.git , ..) will added from host to guest  (readonly)*****
 COPY	- Copy files into the image, preferred over ADD. file just copy even tar and url *****
 
 
