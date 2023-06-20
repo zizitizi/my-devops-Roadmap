@@ -40,6 +40,33 @@ export and import : container>export>.tar>scp>import (with specified command)
 see that command in docker inspect | Cmd
 
 
+save and load : image 
+
+
 
 
 # docker image
+
+image is excutable package that includes everything needed to run an application (code - runtime library - environmental variable - config files) 
+
+image can be exist without container but whereas container need to run an image for exist - a container is a runtime instance of an image (can be multiple container form an image)- we can not delet image that have running container 
+
+
+we can pull an image from repository or buld it from docker file.
+
+we can tag image from git tag and also it relative to k8s-
+
+
+### image layer
+
+is a files that made from excutable command in docker file
+
+
+
+
+
+
+
+
+
+
