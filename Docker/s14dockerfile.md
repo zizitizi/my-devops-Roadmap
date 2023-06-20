@@ -90,8 +90,8 @@ FROM	- Defines base image. It must be first instruction in Dockerfile. mandatory
 LABEL	- It's a description about anything needs to define about the image.
 
 
-ADD	- Copies a file into the image and supports tar & remote URL.*****
-COPY	- Copy files into the image, preferred over ADD.*****
+ADD	- Copies a file into the image and supports tar & remote URL. left host right container. tar gz file extract for url download  (readonly)*****
+COPY	- Copy files into the image, preferred over ADD. file just copy even tar and url *****
 
 
 VOLUME	-Creates a mount point when the container will run.
@@ -108,14 +108,49 @@ MAINTAINER	- It’s used to document the author of the Dockerfile (typically an 
 ONBUILD	- Only used when the image is used to build other images. It will define commands to run "on build“.
 
 
-RUN	- Runs a new command in a new layer. run and install in r/o layer image layer ********* 
+RUN	- Runs a new command in a new layer. run and install in r/o layer image layer . for best performance and low storage and layer usage to lower layer we write many command in one command with \ , && .********* 
 
 WORKDIR -	Defines the working directory of the container. when -it /bin/bash to container first location would be here.
 
 
 
+** note: last command in dockerfile is very important to keep container up and running . recommadn write script file excute to tail -f  to a log file to keep container running to prevent exited.ro ping 127.0.0.1 . for ex.:
+CMD ["ping" "127.0.0.1" ">>" "/dev/null"]
+
+ENTRYPOINT ["/sbin/entrypoint.sh"]  - if there is many command in container layer 
 
 
+apache2 and nginx is webserver - elinks is a command line browser .
+elinks user to brows nginx website - elinks 172.17.0.4
+sudo apt install elinks 
+elinks google.com  - press q to exit
+
+
+sample:
+
+vi Dockerfile
+# Get the base image
+FROM ubuntu:16.04
+# Install all packages
+RUN apt-get update && apt-get -y upgrade && apt-get install -y apache2
+# adding some content for Apache server
+RUN echo "This is a test docker" > /var/www/html/index.html
+# Copying setting file & adding some content to be served by apache
+COPY /home/httpd.conf /etc/apache2/httpd.conf
+# Defining a command to be run after the docker is up
+ENTRYPOINT ["elinks"]
+CMD ["localhost"]
+
+
+
+
+cmd and entrypoint just one time used. 
+when we have:
+if last command need to be replaced use CMD -it means last command in docker run -----  execute and replace with CMD
+if last command not to be replaced use ENTRYPOINT - it means last command in docker run ----- not execute
+if last command partially need to be replaced use one ENTRYPOINT and one CMD
+
+ENTRYPOINT ["elinks","localhost"]
 
 
 
