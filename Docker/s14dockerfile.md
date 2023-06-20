@@ -80,6 +80,8 @@ container layer - R/W layer - cmd line - save it - run and cmd
 
 # docker file
 
+installation instruction and its containrize
+
 is important task for devops- Dockerfile with this name made docker to build image
 
 
@@ -158,15 +160,71 @@ docker run -dit --name apache myapache:latest 8.8.8.8  -  here localhost in runn
 
 ENTRYPOINT ["elinks","localhost"]
 
+we can expose port in 2 way:
+expose 22,443,200 - in docker file and build image , make it readonly
+docker run -dit --name ubuntu2 --expose 22 --expose 80 ubuntu:22.04   - in docker run commands
+
+
+note: Devops engineer should do something to reduce the project's up initialize time in the pipeline.
+
+
+to remove image: docker rmi imagename
+to remove container: docker rm -f containername
+
+to reduce image size, clean apt update meta data. couse base image of os never did apt update to install command in docker file we need to run it before. meta data is in below directory . to clean it run:
+
+cd /var/lib/apt/lists/
+rm -rf /var/lib/apt/lists/*
+
+
+****** sample ssh server dockerfile:
+
+vi Dockerfile 
+
+FROM ubuntu:22.04
+RUN apt update \
+&& apt install openssh-server \
+&& apt install vim -y \
+&& rm -rf /var/lib/apt/lists/* 
+
+EXPOSE 22
+
+CMD /bin/bash
+
+
+to build image run:
+
+docker build -t ubuntu-ssh:v1.0 -f Dockerfile .
+
+docker image ls
+
+docker run -dit --name ubuntu-ssh ubuntu-ssh:v1.0
+
+docker ps -a
+
+docker exec -it ubuntu-ssh bash
+
+
+vi /etc/ssh/sshd_config
+
+
+ssh user@172.17.0.1   - ssh to docker zero
 
 
 
 
+docker build --tag imagename:tagname -f dockerfilename /dockerfilepath.
 
 
 
+if we have 2 FROM in docker file we should name each section with name - as name  - first stage is preconfiguration and second stage is main. if we have more than one FROM the size of image is equal last one . The previous ones will be deleted. 
+
+when we add all directory its best to COPY important file or .tgz file again.
 
 
+practice1- write gitlab-ce instaal stage dockerfile
+
+practice2- write nexus instaal stage dockerfile - sudo==run -
 
 
 
