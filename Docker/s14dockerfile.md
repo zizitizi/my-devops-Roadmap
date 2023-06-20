@@ -261,6 +261,8 @@ docker push dockerhubUSER/dockerimagename:ubuntu-ssh:v1.0
 if upload speed be low yu can make docker file in docker play groun site and push from there to docker hub. and then download it to your server.
 
 
+#### docker commit
+
 
 
 
