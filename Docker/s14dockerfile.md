@@ -263,6 +263,26 @@ if upload speed be low yu can make docker file in docker play groun site and pus
 
 #### docker commit
 
+one back up solution. make or take a snapshot image from a container . then save it or push it to repository. you can writ ea crontab to take fro ex. per 1 hour backup (commit ) from all containers. 
+
+docker commit containername repouser/reponame:tagname
+
+docker commit ubuntu2 backup-ubuntu:20230616
+
+
+practice 3 - write cron tab to take a backup fron container per hour . commit --> image --> save (or load) --> .tar . if  docker save command be successful (?) then remove previouse image (docker rmi ).  
+
+in real environment we dont use export becouse of cmd line (last command). best practice is :
+
+container --> commit --> image --> docker save --> .tar  ( in source server)
+
+docker load --input .tarfile  - then run it as continer.  (in destination server) - in this solution we can save and tun container in new config 
+
+
+
+
+
+
 
 
 
