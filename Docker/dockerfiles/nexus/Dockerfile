@@ -1,15 +1,10 @@
-FROM openjdk:8-jdk
+FROM openjdk:19-jdk-alpine3.16
 
-RUN apt-get update && apt-get install -y wget
-
-RUN mkdir /app && cd /app
-
-RUN wget -O nexus.tar.gz https://download.sonatype.com/nexus/3/latest-unix.tar.gz
-
-
-RUN tar -xvf nexus.tar.gz
-
-RUN mv nexus-3* nexus
+RUN apt-get update && apt-get install -y wget \
+    && mkdir /app && cd /app \
+    && wget -O nexus.tar.gz https://download.sonatype.com/nexus/3/latest-unix.tar.gz \
+    && tar -xvf nexus.tar.gz \
+    && mv nexus-3* nexus
 
 # Set necessary environment variables
 
@@ -30,6 +25,6 @@ WORKDIR $NEXUS_HOME
 
 CMD ./bin/nexus run```
 
-##Replace `3.x.x` in `NEXUS_HOME` with the correct Nexus version you downloaded.
 
 ##Once you have the Dockerfile ready, you can build the Docker image using the `docker build` command and then run it using `docker run` to start the Nexus container.
+
