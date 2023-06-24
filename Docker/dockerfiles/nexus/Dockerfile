@@ -1,7 +1,6 @@
 FROM openjdk:19-jdk-alpine3.16
 
-RUN apt-get update && apt-get install -y wget \
-    && mkdir /app && cd /app \
+RUN mkdir /app && cd /app \
     && wget -O nexus.tar.gz https://download.sonatype.com/nexus/3/latest-unix.tar.gz \
     && tar -xvf nexus.tar.gz \
     && mv nexus-3* nexus
