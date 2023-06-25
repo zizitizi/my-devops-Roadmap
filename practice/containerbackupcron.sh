@@ -1,8 +1,10 @@
 #!/bin/bash
 
+#this script take an iage of all running container and save it in .tar in home directory and remove old one form previouse 60 minute.
+
 #*********please give this file +x permission to execute backup********************
 
-#*********please copy this file in /etc/cron.hourly/ to perform auotomated action backup********************
+#*********please copy this file in /etc/cron.hourly/ to perform auotomated action backup per hour********************
 
 # get all running docker container names
 
