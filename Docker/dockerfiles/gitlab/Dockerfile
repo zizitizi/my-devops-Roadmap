@@ -8,19 +8,19 @@ MAINTAINER zein_tiz@yahoo.com
 ENV DEBIAN_FRONTEND 
 #noninteractive
 #Update the package list and install dependencies
-RUN apt-get update \
-&& apt-get install -y --no-install-recommends
+RUN apk update \
+&& apk add -y --no-install-recommends
         ca-certificates
         curl
         openssh-server
         tzdata
         perl
-    && apt-get clean
+    && apk clean
     && rm -rf /var/lib/apt/lists/*
 
 #Install GitLab CE
 RUN curl -sS https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | bash \
-&& apt-get install -y --no-install-recommends gitlab-ce
+&& apk add -y --no-install-recommends gitlab-ce
 
 #Configure GitLab
 RUN echo "external_url 'http://localhost'" >> /etc/gitlab/gitlab.rb
