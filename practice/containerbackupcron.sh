@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#*********please give this file +x permission to execute backup********************
+
 #*********please copy this file in /etc/cron.hourly/ to perform auotomated action backup********************
 
 # get all running docker container names
