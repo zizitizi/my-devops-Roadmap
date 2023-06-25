@@ -1,6 +1,8 @@
 #This Dockerfile installs GitLab CE on an Ubuntu 20.04 base image,
 
-FROM ubuntu:20.04
+#FROM ubuntu:20.04
+FROM alpine:3.14
+
 #Set environment variables
 ENV DEBIAN_FRONTEND 
 #noninteractive
