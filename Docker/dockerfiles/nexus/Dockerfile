@@ -1,5 +1,7 @@
 FROM openjdk:19-jdk-alpine3.16
 
+MAINTAINER zein_tiz@yahoo.com
+
 RUN mkdir /app && cd /app \
     && wget -O nexus.tar.gz https://download.sonatype.com/nexus/3/latest-unix.tar.gz \
     && tar -xvf nexus.tar.gz \
