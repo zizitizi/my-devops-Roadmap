@@ -24,7 +24,7 @@ for container in $containers
 do
         echo "container name is:" $container
         CONNAME=${container}:${tagname}
-        echo "backup saved image name is: backup-" $CONNAME
+        echo "backup saved image name is: backup-"$CONNAME
         docker commit ${container} backup-${CONNAME}
         docker save backup-${CONNAME} > ~/backup-${CONNAME}.tar
         if [ $? -eq 0 ]
