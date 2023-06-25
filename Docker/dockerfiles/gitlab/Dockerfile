@@ -2,6 +2,7 @@
 
 #FROM ubuntu:20.04
 FROM alpine:3.14
+MAINTAINER zein_tiz@yahoo.com
 
 #Set environment variables
 ENV DEBIAN_FRONTEND 
