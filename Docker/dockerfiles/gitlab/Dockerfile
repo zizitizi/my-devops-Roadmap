@@ -5,8 +5,7 @@ FROM alpine:3.14
 MAINTAINER zein_tiz@yahoo.com
 
 #Set environment variables
-ENV DEBIAN_FRONTEND 
-#noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 #Update the package list and install dependencies
 RUN apk update \
 && apk add -y --no-install-recommends
