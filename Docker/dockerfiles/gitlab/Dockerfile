@@ -1,5 +1,7 @@
 FROM ubuntu:20.04
-Set environment variablesENV DEBIAN_FRONTEND noninteractive
+#Set environment variables
+ENV DEBIAN_FRONTEND 
+noninteractive
 Update the package list and install dependenciesRUN apt-get update \
 && apt-get install -y --no-install-recommends
         ca-certificates
