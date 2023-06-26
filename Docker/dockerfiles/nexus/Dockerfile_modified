@@ -25,3 +25,5 @@ WORKDIR "$NEXUS_HOME"
 EXPOSE 8081
 
 CMD mkdir -p "$NEXUS_DATA" && chown -R nexus:nexus "$NEXUS_DATA" && ./bin/nexus run
+
+#docker run -dit --dns 178.22.122.100 -p 8081:8081 --name nex3 zeintiz/nexusa:v1.0
