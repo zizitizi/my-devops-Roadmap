@@ -280,6 +280,14 @@ docker push dockerhubUSER/dockerimagename:ubuntu-ssh:v1.0
 if upload speed be low yu can make docker file in docker play groun site and push from there to docker hub. and then download it to your server.
 
 
+
+sample:
+
+docker run -dit --dns 178.22.122.100 -p 8081:8081 --name nex3 zeintiz/nexusa:v1.0
+
+
+
+
 # docker commit
 
 one back up solution. make or take a snapshot image from a container . then save it or push it to repository. you can writ ea crontab to take fro ex. per 1 hour backup (commit ) from all containers. 
