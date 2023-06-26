@@ -6,7 +6,7 @@ MAINTAINER zein_tiz@yahoo.com
 
 RUN apk update\
 && apk add openssh-server\
-&& apk add vim -y\
+&& apk add vim\
 && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 22
