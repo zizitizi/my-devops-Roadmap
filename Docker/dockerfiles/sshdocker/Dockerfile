@@ -11,4 +11,4 @@ RUN apk update\
 
 EXPOSE 22
 
-CMD /bin/bash
+CMD /bin/sh
