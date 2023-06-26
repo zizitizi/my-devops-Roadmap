@@ -227,6 +227,25 @@ practice1- write gitlab-ce instaal stage dockerfile
 practice2- write nexus instaal stage dockerfile - sudo==run - port ==expose  - config file==first make file in host and copy it from host to guest
 
 
+# docker build
+
+docker build -t ubuntu-ssh:v1.0 -f Dockerfile .
+
+docker image ls
+
+
+# docker run
+
+
+docker run -dit --name ubuntu-ssh ubuntu-ssh:v1.0
+
+docker ps -a
+
+# Docker excute 
+
+docker exec -it ubuntu-ssh bash
+
+
 
 #### docker image
 
