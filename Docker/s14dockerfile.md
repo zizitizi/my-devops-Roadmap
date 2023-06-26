@@ -247,7 +247,7 @@ docker exec -it ubuntu-ssh bash
 
 
 
-#### docker image
+# docker image
 
 docker image ls - 
 
@@ -261,7 +261,7 @@ docker image ls
 
 you can see docker biuld an other image with same id but new name and tag . its just one file but different called. to remove it docker  rmi name - we can not remove with id here.
 
-#### push an image to docker registery
+# push an image to docker registery
 
 for ex. in docker hub fiirst create new repo. with below command:
 
@@ -280,7 +280,7 @@ docker push dockerhubUSER/dockerimagename:ubuntu-ssh:v1.0
 if upload speed be low yu can make docker file in docker play groun site and push from there to docker hub. and then download it to your server.
 
 
-#### docker commit
+# docker commit
 
 one back up solution. make or take a snapshot image from a container . then save it or push it to repository. you can writ ea crontab to take fro ex. per 1 hour backup (commit ) from all containers. 
 
