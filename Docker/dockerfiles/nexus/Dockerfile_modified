@@ -4,7 +4,7 @@ LABEL maintainer="zein_tiz@yahoo.com"
 
 ENV NEXUS_VERSION=latest
 ENV NEXUS_HOME=/opt/nexus
-ENV NEXUS_DATA=/nexus-data
+ENV NEXUS_DATA=/opt/sonatype-work/nexus3
 
 RUN apk --no-cache add wget && \
     addgroup -S -g 1000 nexus && \
@@ -24,4 +24,4 @@ WORKDIR "$NEXUS_HOME"
 
 EXPOSE 8081
 
-CMD ["./bin/nexus", "run"]
+CMD mkdir -p "$NEXUS_DATA" && chown -R nexus:nexus "$NEXUS_DATA" && ./bin/nexus run
