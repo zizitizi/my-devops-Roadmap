@@ -5,7 +5,7 @@ MAINTAINER zein_tiz@yahoo.com
 #FROM ubuntu:22.04 
 
 RUN apk update\
-&& apk add openssh-server\
+&& RUN apk add --no-cache openssh\
 && apk add vim\
 && rm -rf /var/lib/apt/lists/*
 
