@@ -1,7 +1,23 @@
-# docker volume
+# docker volume and storage
+
+to save container data - we can save data in 3 options:
+
+1- volumes  - save data in docker area (/var/lib/docker/) in /volumes/ folder - recommand for persist data
+2- bind mounts  - custom directory but limited functionality - 
+3- tmpfs mounts  - stored  in hosts memory - least recommanded- for very high speed compute container (microsecend- dataanalyse-big data) - 
 
 
+mostly use volumes and bind mounts -
 
+docker file system - storage driver - change file system block in sectors - in ext4 512 B - 
+in linux we have - ext4 (default in debian) - xfs (default in RHEL)  - zfs (default in mac)  - btrfs - ..... 
+windows file system - fat32 - ntfs
+
+
+to see filesystem in linux use df command
+df -h   -  human readable df
+
+df -Th   - human readable df with type of fs
 
 
 
@@ -23,6 +39,8 @@ crontab -e  - backup script could be here
 
 
 ****** one trick if you dont know dockerfile well, you can run an ubuntu container and gitclone and insatll needed app after docker commit ready container and save it as image then push that image to repo and use it as a ready image - as reverse engineering but best practice write dockerfile
+
+# docker network
 
 
 
