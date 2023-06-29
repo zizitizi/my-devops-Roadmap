@@ -18,6 +18,13 @@ crontab -e  - backup script could be here
 
 ****** one trick if you dont know dockerfile well, you can run an ubuntu container and gitclone and insatll needed app after docker commit ready container and save it as image then push that image to repo and use it as a ready image - as reverse engineering but best practice write dockerfile
 
+docker commit containerbackupname containername
+
+docker image ls
+
+docker save containerbackupname>>~/containerbackupname.tar
+
+
 
 
 # docker volume and storage
@@ -55,8 +62,32 @@ docker file system defaults is overlay2
 docker info - see docker fs
 
 
-#### important note: if you have 1 t stroage for infra to devops, when install linux server give partion size 300 to / and 700 to /var/,  lack of enough space to /var/ cause server crash. 
-all apps like kuber and jenkins , ... uses /var/ to work. If all the storage space is occupied by Docker the serverwould be crashes. 
+#### important note: if you have 1 t stroage for infra to devops, when install linux server give partion size 300 to / and 700 to /var/,  lack of enough space to / cause server crash. 
+all apps like kuber and jenkins , ... uses /var/ to work and may be full and need to extend. If all the storage space is occupied by Docker the server would be crashes. if we use sparate partiotion to / and /var/ we can extend it in case of full memory in /var/ . OS file in / and its not extendable.
+but we can extend  /var/ if it was separate partion with out / or os file.  
+
+
+####  volume 
+
+
+docker volume ls    - list of volumes used by docker and make manually with camand by us. note that df -Th display docker overlay that made by docker itself for commit command we can not see those in docker volume ls   - command
+
+docker volume --help
+
+docker volume rm   - remove volume
+
+docker volume prune - remove unused local volumes 
+
+docker volume inspect volumename  - inspect about that volume
+
+docker volume create volumename -  create volume 
+
+after create new volume we can mount or attach it to a container . it look like share directory . we can see its size in host directory. 
+
+
+#### bind mounts
+
+
 
 
 # docker network
