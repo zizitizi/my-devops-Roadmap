@@ -1,3 +1,25 @@
+
+****practice****  :
+container --> save -->.tar --> load --input --> image -->run
+
+to print runiing container name:
+
+docker ps --format {{.Names}}
+
+
+docker ps -a | awk '(NR>1)'  - display container info without headline
+
+docker ps -a --format "table  {{.ID}}\t{{.Names}}"  - retaurn container id and names culomns
+
+
+crontab -e  - backup script could be here
+0 0 * * * /root/script.sh >> /root/backup.log 2>&1    - if we didnot write output here - we should write >>output end of each line in above script
+
+
+****** one trick if you dont know dockerfile well, you can run an ubuntu container and gitclone and insatll needed app after docker commit ready container and save it as image then push that image to repo and use it as a ready image - as reverse engineering but best practice write dockerfile
+
+
+
 # docker volume and storage
 
 to save container data - we can save data in 3 options:
@@ -19,26 +41,23 @@ df -h   -  human readable df
 
 df -Th   - human readable df with type of fs
 
+docker file system is :
+
+overlay2  - defaults for docker fs
+btrfs & zfs
+vfs
+aufs
+devicemapper  - for lvm
+overlay  - old linux efor ,inux 3
+
+docker file system defaults is overlay2
+
+docker info - see docker fs
 
 
-****practice****  :
-container --> save -->.tar --> load --input --> image -->run
+#### important note: if you have 1 t stroage for infra to devops, when install linux server give partion size 300 to / and 700 to /var/,  lack of enough space to /var/ cause server crash. 
+all apps like kuber and jenkins , ... uses /var/ to work. If all the storage space is occupied by Docker the serverwould be crashes. 
 
-to print runiing container name:
-
-docker ps --format {{.Names}}
-
-
-docker ps -a | awk '(NR>1)'  - display container info without headline
-
-docker ps -a --format "table  {{.ID}}\t{{.Names}}"  - retaurn container id and names culomns
-
-
-crontab -e  - backup script could be here
-0 0 * * * /root/script.sh >> /root/backup.log 2>&1    - if we didnot write output here - we should write >>output end of each line in above script
-
-
-****** one trick if you dont know dockerfile well, you can run an ubuntu container and gitclone and insatll needed app after docker commit ready container and save it as image then push that image to repo and use it as a ready image - as reverse engineering but best practice write dockerfile
 
 # docker network
 
