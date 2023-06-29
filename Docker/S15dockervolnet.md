@@ -26,7 +26,6 @@ docker save containerbackupname>>~/containerbackupname.tar
 
 
 
-
 # docker volume and storage
 
 to save container data - we can save data in 3 options:
@@ -118,6 +117,21 @@ or
 
  cd /app && echo "hello im containervol" >> containerdata.txt  - in container see in host myvol - if container remove volume data resist in myvol directory and we can bind it agin to another container with commadn: 
  docker run -dit --name containername -v volumename:/app imagename:tagver
+
+
+
+in database we use this senario: 
+
+/dbdata --> myvolume1 . write script to backup hourly this data .tar.gz and scp to other server. if container attacked or ransamware. we can delete container and restore data in myvlume1 folder mount it to new container.
+
+or we can write myvol data with one container and read it with many container 
+
+or its a load balancing solution . with one html source code we can create many (for ex>: 5 ) container to load balance. then we should use HAproxy to bind a vip (virtual or float ip to use final in dns  and proxy) ip to 5 internal ip to load balance. 
+
+
+
+database engin mastly use out of orchestrator (k8s - swarm ,..) couse it may be buttle neck . bandwith in cloud is very high . use networksharing to sync database data volume folder.  
+
 
 
 
