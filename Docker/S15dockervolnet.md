@@ -87,15 +87,15 @@ after create new volume we can mount or attach it to a container . it look like 
 
 #### bind mounts
 
-every path in host can be bind mount to container in this type. no need to docker create . docker volume ls not show this types vols. we can use this type in to way:
+every path in host can be bind mount to container in this type. no need to docker create . docker volume ls not show this types vols. 
 
-opt1:
+to assign vol to container:
 
 -- mount source=sourceonhostpath,target=targetpathonguest 
 
 docker run -d -it --name devtest --mount type=bind,source=/home/mydir,target=/app nginx:latest
 
-opt2:*****recommand
+*****recommand:
 
 --volume or -v host:guestpath   - most used
 
@@ -104,6 +104,20 @@ docker run -d -it --name devtest --volume /home/mydir:/app nginx:latest
 docker inspect devtest | less
 
 
+
+to remove all container that running : 
+docker ps -q  - show containers id
+docker rm -f `docker ps -aq`
+
+
+docker run -dit --name containername -v volumename:/app imagename:tagver
+docker exec -it containername bash
+
+
+or
+
+ cd /app && echo "hello im containervol" >> containerdata.txt  - in container see in host myvol - if container remove volume data resist in myvol directory and we can bind it agin to another container with commadn: 
+ docker run -dit --name containername -v volumename:/app imagename:tagver
 
 
 
