@@ -87,6 +87,26 @@ after create new volume we can mount or attach it to a container . it look like 
 
 #### bind mounts
 
+every path in host can be bind mount to container in this type. no need to docker create . docker volume ls not show this types vols. we can use this type in to way:
+
+opt1:
+
+-- mount source=sourceonhostpath,target=targetpathonguest 
+
+docker run -d -it --name devtest --mount type=bind,source=/home/mydir,target=/app nginx:latest
+
+opt2:*****recommand
+
+--volume or -v host:guestpath   - most used
+
+docker run -d -it --name devtest --volume /home/mydir:/app nginx:latest
+
+docker inspect devtest | less
+
+
+
+
+
 
 
 
