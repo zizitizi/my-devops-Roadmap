@@ -1,0 +1,13 @@
+# NGINX static css html website
+
+  docker run -dit --name nginxyoga -v "/home/zizi/yogast-html/":/usr/share/nginx/html -v /var/log/nginx1:/var/log/nginx -p 8080:80 nginx
+
+    see localhost:8080 or external serverip:8080
+
+# ubuntu ssh container 
+
+      docker run -dit --name ubuntussh -p 2022:22 ubuntu:22.04
+
+       docker commit ubuntussh ubuntussh:v1.0
+
+         
