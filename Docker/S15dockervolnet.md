@@ -1,4 +1,4 @@
-![image](https://github.com/zizitizi/my-devops-Roadmap/assets/123273835/27fe6e83-6edd-4fb7-b772-e7013799440d)
+![image](https://github.com/zizitizi/my-devops-Roadmap/assets/123273835/c606da2a-77e3-4458-8996-f72637db3db3)![image](https://github.com/zizitizi/my-devops-Roadmap/assets/123273835/27fe6e83-6edd-4fb7-b772-e7013799440d)
 ****practice****  :
 container --> save -->.tar --> load --input --> image -->run
 
@@ -350,10 +350,115 @@ It’ll creates a firewall rule which maps a container port to a port on the hos
 -p 8080:80/udp  -  Map UDP port 80 in container to port 8080 on Docker host. 
 
 -p 8080:80/tcp -p 8080:80/udp  - Map TCP port 80 in th container to TCP port 8080 on Docker host, & map UDP port 80 in container to UDP port 8080 on Docker host.
-![image](https://github.com/zizitizi/my-devops-Roadmap/assets/123273835/689c1cc7-aad7-417e-8776-fff5e31e87cf)
+
+
+*****-p host:guest****
+
+ docker run -dit --name nginxpo2 -p 8080:80 -p 1444:443 nginx
+
+ now:
+
+ curl 172.17.0.9 == curl localhost:8080
+ 
+
+ note that port assignation is possible just in docker run .
+
+
+0.0.0.0  - means all ip- if not specify protocol its default is tcp
+
+
+note: in host we have one port 80 but we can make alias in network card to many internal ip to have multiple 80 port with different alias ip. 
+assign multipla ip address (aliases) to single nic:
+
+ifconfig ens33:0 192.168.1.3 netmask 255.255.255.0 up 
+
+ifconfig ens33:0 down
+
+
+ip addr add 192.168.1.10/24 dev ens160 label ens160:0 
+
+
+ip addr add 192.168.1.10/24 dev ens33 label ens33:0
+
+ip addr add 192.168.1.11/24 dev ens33 label ens33:1
+
+ip addr add 192.168.1.12/24 dev ens33 label ens33:2
+
+ip a
+
+
+ docker run -dit --name nginxalias1 -p 192.168.1.10:80:80 nginx
+
+ docker run -dit --name nginxalias2 -p 192.168.1.11:80:80 nginx
+
+ docker run -dit --name nginxalias3 -p 192.168.1.12:80:80 nginx
+
+
+curl 192.168.1.10
+
+
+curl 192.168.1.11
+
+
+curl 192.168.1.12
 
 
 
+docker exec -it nginxalias bash
+
+
+ cd usr/share/nginx/html/
+
+docker run -dit --name nginx1 -p 192.168.1.10:80:80 -v nginx1:/usr/share/nginx/html -v /var/log/nginx1:/var/log/nginx nginx
+
+
+ls -l /var/log/nginx1/
+
+cd /var/lib/docker/volumes/nginx1/_data/
+
+ls -l
+
+ vi index.html  - make chnage and save it
+
+
+ curl 192.168.1.10
+
+
+cd /var/log/nginx1/
+
+tail -f access.log
+
+
+ status 200 in website means it opens succesfully - every request is one person
+
+
+ #### docker logs
+
+
+ docker logs -f nginx1  - entrypoints or cmd logs
+
+
+ docker events  - its about container up and downs in system- give this command to scrpit and monitoring app to monitor and email each event to admin
+
+ docker top nginx1  - top in container
+
+ docker stats  - demondtrate resource usage of containers
+
+ to limit resource usage do:
+
+
+ docker run -dit --cpus 1.0 ubuntu             -> Assign 1 CPU to container
+
+
+ docker run -dit --cpu-shares 1024 ubuntu      -> Assign from 1~1024 Cycle- 512 assining 50% total cpus (4 cores) 
+ 
+docker run -dit --memory 200m centos       -> Limit no assign memory usage to 200Mb 
+
+docker run -dit --memory-reservation 150m --memory 200m centos -> assign for reserve memory .Set soft limit for memory usage to warn before exceeding limit
+
+
+
+practice: ssh container with 2022 port expose that we can ssh from mobaeterme into container:
 
 
 
