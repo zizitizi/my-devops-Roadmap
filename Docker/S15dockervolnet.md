@@ -1,4 +1,4 @@
-
+![image](https://github.com/zizitizi/my-devops-Roadmap/assets/123273835/27fe6e83-6edd-4fb7-b772-e7013799440d)
 ****practice****  :
 container --> save -->.tar --> load --input --> image -->run
 
@@ -325,8 +325,32 @@ docker rm -f `docker ps -aq`   - remove all container
  docker network inspect netbrid1  - show network info and assign container but docker volume not.
 
  
+apt update ; apt  install iputils-ping  - install ping package 
 
 
+ping nginxhost1
+
+docker stop and start may be  get different ip address from docker 0
+
+
+# ports
+
+By default, when a container created, it doesn’t publish any of its ports to outside.
+
+To make a port available to services outside of Docker, or to containers which are not connected to the container’s network, use the --publish or -p flag.
+
+It’ll creates a firewall rule which maps a container port to a port on the host.
+
+-p 8080:8   -   Map TCP port 80 in container to port 8080 on Docker host.
+
+
+-p 192.168.1.100:8080:80  - Map TCP port 80 in container to port 8080 on Docker host for connections to host IP 192.168.1.100.
+
+
+-p 8080:80/udp  -  Map UDP port 80 in container to port 8080 on Docker host. 
+
+-p 8080:80/tcp -p 8080:80/udp  - Map TCP port 80 in th container to TCP port 8080 on Docker host, & map UDP port 80 in container to UDP port 8080 on Docker host.
+![image](https://github.com/zizitizi/my-devops-Roadmap/assets/123273835/689c1cc7-aad7-417e-8776-fff5e31e87cf)
 
 
 
