@@ -264,13 +264,40 @@ docker network ls
 
 ip a 
 
+ docker run -dit --name ubuntunetbr1 --network netbrid1 ubuntu:22.04  - network card default  is down when assign to a container it change to up
+
+docker inspect ubuntunetbr1
+
+note: when we run a container we can just assign a network . but after runnig we can coonect it with below command:
+
+ docker network connect test ubuntunetbr1
+
+docker inspect ubuntunetbr1
 
 
 
+docker network disconnect netbrid1 ubuntunetbr1   - discon
+
+
+note that we can not create and  assign network card on air on docker run command cause it need to  create before to specify  network card type. 
+
+
+docker run -dit --name nginxhost1 --network host nginx
+
+ docker ps -a
+
+
+ docker inspect nginxhost1
+ 
+ docker exec -it nginxhost1 bash
+
+ ip a
+
+apt update ; apt install iproute2
 
 
 
-
+ 
 
 
 
