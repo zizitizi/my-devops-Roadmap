@@ -214,6 +214,60 @@ in docker run:
 
 # docker network
 
+container network model or CNM - 
+
+all container's made NAT connection from docker0 
+
+server is infra - docker engine made 2 component (network driver(ip , mac ,dhcp to networks) - IPAM driver(ip , mac and dhcp server for endpionts)) that have two type module: network - endpoint
+
+network module is docker0 that may be vary in different range. work like swith in network. container in same range can ping together. for ex.:
+
+172.17.0.1/16
+172.18.0.1/16
+.
+.
+.
+.
+
+
+endpoint module is containers network card. fro ex.:
+172.17.0.4 - or - 172.17.0.5 -or- 172.18.0.6 ,....
+
+
+
+we have 5 type of network drivers:
+1- bridge  - is default network driver - works same as nat in vm - we call nat in container . like: docker1 - docker 2 ,... ******
+2- host   - is same as host in vm- containers have not nic and ip. it use laptop or host network card. if nginx in this type use 80 in host it binds to 80 hosts. we have always 1 host driver
+3- none  - no network card
+4- overlay -  we have multiple host and server - we have this model just in docker ee or in docker swarm - web server ,db server,app server ,...negotiate in this model
+5- macvlan  - allows you to assign a mac address to container and making it appear as phisical device on network. use in different range ip like: 10.10.10.10 , 192.168.0.2,.... in host we have nic (wifi) - docker0 - macvlan  - ,.. - dockerd routs to container by mac - in place network driver
+
+
+in vm we have 4 type of network driver:
+1- nat  - with other range of ip - vnic that guests bind to it . vnic bind to nic server to connect to net.
+2- bridge  - with vnic all guests connect directly to modem router like server nic. and get ip from router. their ip range is device ip range in home that connect to router.
+3- host  - i this model we dont have vnic. no one of gust have vnic . all of them is connect to nic directly and ip is same as nic server. 
+4- none  - no nic and no vnic
+
+
+
+
+
+docker network ls  - show docker network drivers -
+
+docker network connect  - we can make and connect new network to a running container without stop or rm it. same as disconnect
+
+docker network create --driver bridge netbrid1  - we can not make host couse we have just one host in host
+
+docker network ls
+
+
+ip a 
+
+
+
+
+
 
 
 
