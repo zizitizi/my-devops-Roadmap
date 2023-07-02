@@ -1,4 +1,4 @@
-![image](https://github.com/zizitizi/my-devops-Roadmap/assets/123273835/c606da2a-77e3-4458-8996-f72637db3db3)![image](https://github.com/zizitizi/my-devops-Roadmap/assets/123273835/27fe6e83-6edd-4fb7-b772-e7013799440d)
+
 ****practice****  :
 container --> save -->.tar --> load --input --> image -->run
 
@@ -457,8 +457,15 @@ docker run -dit --memory 200m centos       -> Limit no assign memory usage to 20
 docker run -dit --memory-reservation 150m --memory 200m centos -> assign for reserve memory .Set soft limit for memory usage to warn before exceeding limit
 
 
+docker run -dit --name ubuntulimit --cpus 1.0 --memory-reservation 300m --memory 500m ubuntu:22.04
+
+
+docker stats
+
 
 practice: ssh container with 2022 port expose that we can ssh from mobaeterme into container:
+
+apt update ; apt install stress
 
 
 
