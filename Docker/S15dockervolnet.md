@@ -133,6 +133,36 @@ or its a load balancing solution . with one html source code we can create many 
 database engin mastly use out of orchestrator (k8s - swarm ,..) couse it may be buttle neck . bandwith in cloud is very high . use networksharing to sync database data volume folder.  
 
 
+docker run -dit --name ubuntumyvol2 -v myvol:/app -v myvol2 ubuntu:22.04
+
+docker run -dit --name ubuntumyvol3 -v myvol:/app -v myvol2:/app2 -v myvol4:/app4 ubuntu:22.04
+
+docker exec -it ubuntumyvol3 bash
+
+echo "heloo app4 from ubuntu myvol3" > app4.txt
+
+cd /var/lib/docker/volumes/myvol4/_data
+
+vi app4.txt
+
+### create and manage bind mounts volume
+
+
+bind custome directory in host to custom directory in guest with --volume or --mount:
+
+docker run -d -it --name devtest --mount type=bind,source=/home/mydir,target=/app nginx:latest
+
+docker run -d -it --name devtest --volume /home/mydir:/app nginx:latest
+
+docker inspect devtest | less
+
+
+docker volume inspect myvol4
+
+no need to create volumes before. dockers make volume is not exist automatically.
+
+to finde wich container assign to witch volume use :
+docker inspect ubuntumyvol3
 
 
 
