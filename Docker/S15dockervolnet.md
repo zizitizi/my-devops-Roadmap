@@ -468,6 +468,20 @@ practice: ssh container with 2022 port expose that we can ssh from mobaeterme in
 apt update ; apt install stress
 
 
+note: mail in server user internal in linux:
+
+upt update; apt install mailutils
+
+
+mail -s "hello" ubuntu@localhost
+
+cat /var/spool/mail/ubuntu
+
+
+
+to mail server we can install postfix and ,... but grafana has mail server built in we use this to alert and admin usage.
+
+
 
 
 
