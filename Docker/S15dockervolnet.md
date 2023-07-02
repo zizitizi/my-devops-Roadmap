@@ -295,6 +295,44 @@ docker run -dit --name nginxhost1 --network host nginx
 
 apt update ; apt install iproute2
 
+ip a --- its exactly same as ip a in host
+
+exit
+
+now curl localhost return same in container and host
+
+elinks http://localhost
+
+in this model no need to docker inspect to specify nginx container id to curl it. and we can see container fron external
+
+
+# docker embedded DNS server
+
+
+docker had a embedded dns server in default . this dns works just with user defined bridge networks not default bridge. this feature is used to configure container to call each other and ping with name. cause container ip  may be vary on each running of image docker. caintainer can resolv each other with container name.
+
+builtin dns server always run at addresss 127.0.0.11
+
+
+container on default bridge can access or call and ping each other just on ip address.
+
+
+
+docker rm -f `docker ps -aq`   - remove all container
+
+
+
+ docker network inspect netbrid1  - show network info and assign container but docker volume not.
+
+ 
+
+
+
+
+
+
+
+
 
 
  
