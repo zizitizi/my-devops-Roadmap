@@ -152,6 +152,8 @@ bind custome directory in host to custom directory in guest with --volume or --m
 
 docker run -d -it --name devtest --mount type=bind,source=/home/mydir,target=/app nginx:latest
 
+or simply use
+
 docker run -d -it --name devtest --volume /home/mydir:/app nginx:latest
 
 docker inspect devtest | less
@@ -164,8 +166,50 @@ no need to create volumes before. dockers make volume is not exist automatically
 to finde wich container assign to witch volume use :
 docker inspect ubuntumyvol3
 
+best practice is use this:
+
+ docker run -dit --name ubuntuvol -v /tmp/:/apptmp -v /home/zizi/:/homezizi -v myvol3:/app3 ubuntu:22.04
+
+ docker exec -it ubuntuvol bash
+
+ cd apptmp/
 
 
+
+docker volume ls  - just demonstrate docker area volume not bind mounts.
+
+
+ 
+### tmpfs mounts
+
+memory space allocation to guest volume. its not safe on crash or reboot all data will be lost. use for compute data and data analyse in very high speed proccess. we dont have source here just specify destination.
+
+docker run -d -it --name tmptest --mount type=tmpfs,destination=/app nginx:latest
+
+or 
+
+docker run -d -it --name tmptest --tmpfs /app nginx:latest
+
+
+docker run -dit --name ubuntutmpfs --tmpfs /apptmpfs -v /home/zizi/:/appzizi -v myvol3:/appmyvol3 ubuntu:22.04
+
+ docker exec -it ubuntutmpfs bash
+
+ echo "tmpfs" >>/apptmpfs/ou.txt 
+
+
+****hint:*****
+in docker run: 
+--restart always  - when container stop - it restart and try to keep up container  - best practice use this
+
+--restart on_failure   - if container exit code is not 0 it restarted
+
+--rm   - when we use it on exit container not stop it removes automatically on exit - it use in temmporary container in pipeline - 
+
+
+
+
+ 
 
 
 # docker network
