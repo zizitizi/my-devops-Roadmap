@@ -306,6 +306,34 @@ elinks http://localhost
 in this model no need to docker inspect to specify nginx container id to curl it. and we can see container fron external
 
 
+
+docker network create --driver=bridge --subnet=192.168.0.0/16 br0
+
+Additionally, you also specify the --gateway --ip-range and --aux-address options.
+
+
+docker network create \
+  --driver=bridge \
+  --subnet=172.28.0.0/16 \
+  --ip-range=172.28.5.0/24 \
+  --gateway=172.28.5.254 \
+  br0
+
+
+If you omit the --gateway flag the Engine selects one for you from inside a preferred pool. For overlay networks and for network driver plugins that support it you can create multiple subnetworks. This example uses two /25 subnet mask to adhere to the current guidance of not having more than 256 IPs in a single overlay network. Each of the subnetworks has 126 usable addresses.
+
+
+docker network create -d overlay \
+  --subnet=192.168.10.0/25 \
+  --subnet=192.168.20.0/25 \
+  --gateway=192.168.10.100 \
+  --gateway=192.168.20.100 \
+  --aux-address="my-router=192.168.10.5" --aux-address="my-switch=192.168.10.6" \
+  --aux-address="my-printer=192.168.20.5" --aux-address="my-nas=192.168.20.6" \
+  my-multihost-network  
+
+
+
 # docker embedded DNS server
 
 
