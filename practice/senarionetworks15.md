@@ -18,31 +18,40 @@ to solve this senario:
 
      docker network create --driver=bridge --subnet=10.10.0.0/16 prod
      
+     sudo ip addr add 192.168.1.3/24 dev ens33 label ens33:dev
 
 
-
-
-
-
-
-
-
+     
 
 
 
 # 2- run docker for each container 
 
+*ubuntu:*
 
      docker run -dit --name ubdev2 --network=host --dns 4.2.2.4 ubuntu:22.04
 
 
+     docker network connect dev ubdev2
+     
+
+*mysql:*
+
+
      docker run -dit --name mysqltestip --net=test --ip 172.16.1.10 --expose 3306 -p 3306:3306 mysql
+
+
+*nginx:*
 
      
      docker run -dit --name nginx --net=prod --ip 10.10.10.10 --hostname nginx nginx
 
+
+*busybox:*     
+
      
      docker run -dit --name busyboxprod --net=prod --ip 10.10.10.11 --hostname checker busybox
+     
 
 
 # 3- push to docker hub
