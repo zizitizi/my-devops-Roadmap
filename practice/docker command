@@ -11,3 +11,37 @@
        docker commit ubuntussh ubuntussh:v1.0
 
          
+
+# docker senario with nginx busybox mysql host
+
+     docker network create --driver=bridge --subnet=10.10.0.0/16 test
+
+     docker network create --driver=bridge --subnet=10.10.0.0/16 prod
+
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
