@@ -50,12 +50,14 @@ to solve this senario:
   docker login
 
 ****************************ubuntu**************************************************************
+####
 
-  docker commit mysqltestip mysqltest:v1.0
-  
-  docker tag mysqltest:v1.0 zeintiz/mysql:v1.0
-  
-  docker push zeintiz/mysql:v1.0
+
+        docker commit mysqltestip mysqltest:v1.0
+        
+        docker tag mysqltest:v1.0 zeintiz/mysql:v1.0
+        
+        docker push zeintiz/mysql:v1.0
 
 links:
 
