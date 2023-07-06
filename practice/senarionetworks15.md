@@ -49,7 +49,7 @@ to solve this senario:
 
   docker login
 
-****************************ubuntu
+****************************ubuntu**************************************************************
 
   docker commit mysqltestip mysqltest:v1.0
   
@@ -62,7 +62,7 @@ links:
 https://hub.docker.com/repository/docker/zeintiz/mysql/general
 
 
-********************************\nginx\********************************
+********************************nginx************************************************************
 
 
   docker commit nginx nginxprod
@@ -75,7 +75,7 @@ links:
 
 https://hub.docker.com/repository/docker/zeintiz/nginxprod/general
 
-*************************************
+*************************************busybox*********************************************************
 
 
   docker commit busyboxprod busyboxprodip:v1.0
