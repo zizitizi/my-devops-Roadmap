@@ -47,7 +47,7 @@ to solve this senario:
 
 # 3- push to docker hub
 
-  docker login
+        docker login
 
 ****************************ubuntu**************************************************************
 ####
@@ -67,11 +67,11 @@ https://hub.docker.com/repository/docker/zeintiz/mysql/general
 ********************************nginx************************************************************
 
 
-  docker commit nginx nginxprod
-  
-  docker tag nginxprod:latest zeintiz/nginxprod:v1.0
-  
-  docker push zeintiz/nginxprod:v1.0
+       docker commit nginx nginxprod
+       
+       docker tag nginxprod:latest zeintiz/nginxprod:v1.0
+       
+       docker push zeintiz/nginxprod:v1.0
 
 links:
 
@@ -80,11 +80,11 @@ https://hub.docker.com/repository/docker/zeintiz/nginxprod/general
 *************************************busybox*********************************************************
 
 
-  docker commit busyboxprod busyboxprodip:v1.0
-  
-  docker tag busyboxprodip:v1.0 zeintiz/busyboxprod:v1.0
-  
-  docker push zeintiz/busyboxprod:v1.0
+        docker commit busyboxprod busyboxprodip:v1.0
+        
+        docker tag busyboxprodip:v1.0 zeintiz/busyboxprod:v1.0
+        
+        docker push zeintiz/busyboxprod:v1.0
 
 
 links: 
