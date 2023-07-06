@@ -21,6 +21,13 @@ docker network ls | awk 'NR <= 2; NR > 2 { print $0 | "sort -b -k 3,3 -k 1,1" };
      docker network create --driver=bridge --subnet=10.10.0.0/16 prod
 
 
+docker run -dit --name mysqltestip --net=test --ip 172.16.1.10 --expose 3306 -p 3306:3306 mysql
+
+
+
+
+
+
 
 
 docker run -dit --name ubdev2 --network=host --dns 4.2.2.4 ubuntu:22.04
