@@ -22,11 +22,54 @@ docker network ls | awk 'NR <= 2; NR > 2 { print $0 | "sort -b -k 3,3 -k 1,1" };
 
 
 
+
+docker run -dit --name ubdev2 --network=host --dns 4.2.2.4 ubuntu:22.04
+
+sudo docker inspect -f '{{.State.Pid}}' ubdev2
+
+50809
+
+sudo mkdir -p /var/run/netns
+
+ip netns list
+
+
+Using the PID you have just obtained, create the symlink:
+
+
+sudo ln -sf /proc/50809/ns/net /var/run/netns/dev
+
+
+From now on, there is no docker specific stuffs, just create a veth pair, bring them up, and attach one end of it to the container and you are fine: 
+
+
+sudo ip link add veth2_container type veth peer name veth2_root
+
+sudo ifconfig veth2_container up
+
+sudo ifconfig veth2_root up
+
+sudo ip link set veth2_container netns dev
+
+sudo ip netns exec dev ifconfig veth2_container up
+
+
+docker exec -it ubdev2 bash
+
+apt update ;apt install iproute2
+
+ip a
+
+u can see network dev
+
+
 docker network ls | sort -k3
 
 or
 
 docker network ls | awk 'NR <= 2; NR > 2 { print $0 | "sort -b -k 3,3 -k 1,1" };'
+
+
 
 
 
