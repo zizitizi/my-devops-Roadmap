@@ -21,6 +21,11 @@ docker network ls | awk 'NR <= 2; NR > 2 { print $0 | "sort -b -k 3,3 -k 1,1" };
      docker network create --driver=bridge --subnet=10.10.0.0/16 prod
 
 
+
+docker network ls | sort -k3
+
+or
+
 docker network ls | awk 'NR <= 2; NR > 2 { print $0 | "sort -b -k 3,3 -k 1,1" };'
 
 
