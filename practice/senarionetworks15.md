@@ -62,7 +62,7 @@ links:
 https://hub.docker.com/repository/docker/zeintiz/mysql/general
 
 
-********************************nginx********************************
+********************************\nginx\********************************
 
 
   docker commit nginx nginxprod
