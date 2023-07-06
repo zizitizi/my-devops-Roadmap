@@ -32,40 +32,44 @@ to solve this senario:
 
 # 2- run docker for each container 
 
-docker run -dit --name ubdev2 --network=host --dns 4.2.2.4 ubuntu:22.04
 
+     docker run -dit --name ubdev2 --network=host --dns 4.2.2.4 ubuntu:22.04
 
 
      docker run -dit --name mysqltestip --net=test --ip 172.16.1.10 --expose 3306 -p 3306:3306 mysql
-docker run -dit --name nginx --net=prod --ip 10.10.10.10 --hostname nginx nginx
-docker run -dit --name busyboxprod --net=prod --ip 10.10.10.11 --hostname checker busybox
+
+     
+     docker run -dit --name nginx --net=prod --ip 10.10.10.10 --hostname nginx nginx
+
+     
+     docker run -dit --name busyboxprod --net=prod --ip 10.10.10.11 --hostname checker busybox
 
 
 # 3- push to docker hub
 
-docker login
+  docker login
 
-****************************
+****************************ubuntu
 
-docker commit mysqltestip mysqltest:v1.0
-
-docker tag mysqltest:v1.0 zeintiz/mysql:v1.0
-
-docker push zeintiz/mysql:v1.0
+  docker commit mysqltestip mysqltest:v1.0
+  
+  docker tag mysqltest:v1.0 zeintiz/mysql:v1.0
+  
+  docker push zeintiz/mysql:v1.0
 
 links:
 
 https://hub.docker.com/repository/docker/zeintiz/mysql/general
 
 
-********************************
+********************************nginx********************************
 
 
-docker commit nginx nginxprod
-
-docker tag nginxprod:latest zeintiz/nginxprod:v1.0
-
-docker push zeintiz/nginxprod:v1.0
+  docker commit nginx nginxprod
+  
+  docker tag nginxprod:latest zeintiz/nginxprod:v1.0
+  
+  docker push zeintiz/nginxprod:v1.0
 
 links:
 
@@ -74,11 +78,11 @@ https://hub.docker.com/repository/docker/zeintiz/nginxprod/general
 *************************************
 
 
-docker commit busyboxprod busyboxprodip:v1.0
-
-docker tag busyboxprodip:v1.0 zeintiz/busyboxprod:v1.0
-
-docker push zeintiz/busyboxprod:v1.0
+  docker commit busyboxprod busyboxprodip:v1.0
+  
+  docker tag busyboxprodip:v1.0 zeintiz/busyboxprod:v1.0
+  
+  docker push zeintiz/busyboxprod:v1.0
 
 
 links: 
