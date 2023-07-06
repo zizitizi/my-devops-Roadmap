@@ -49,8 +49,22 @@ to solve this senario:
 
         docker login
 
-****************************mysql**************************************************************
 
+****************************ubuntu**************************************************************
+
+
+        docker commit ubdev2 ubdev
+
+        docker tag ubdev zeintiz/ubuntu:v1.0
+
+        docker push zeintiz/ubuntu:v1.0
+
+links:
+
+https://hub.docker.com/repository/docker/zeintiz/ubuntu/general
+
+
+****************************mysql**************************************************************
 
 
         docker commit mysqltestip mysqltest:v1.0
@@ -58,6 +72,7 @@ to solve this senario:
         docker tag mysqltest:v1.0 zeintiz/mysql:v1.0
         
         docker push zeintiz/mysql:v1.0
+
 
 links:
 
