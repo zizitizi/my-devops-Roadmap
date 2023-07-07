@@ -88,7 +88,7 @@ links:
 https://hub.docker.com/repository/docker/zeintiz/mysql/general
 
 
-*********************************nginx************************************************************
+*********************************nginx********************************************************************
 
 
        docker commit nginx nginxprod
@@ -101,7 +101,7 @@ links:
 
 https://hub.docker.com/repository/docker/zeintiz/nginxprod/general
 
-*************************************busybox*********************************************************
+*************************************busybox***************************************************************
 
 
         docker commit busyboxprod busyboxprodip:v1.0
