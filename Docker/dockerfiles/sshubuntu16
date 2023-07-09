@@ -1,0 +1,29 @@
+###############################################################################################################
+# special tanks to : Sagar for sharing this useful tutorial                                                   #
+# it works for me like charm; related image url                                                               #
+# docker hub url:  https://hub.docker.com/repository/docker/zeintiz/sshubuntu16                               #
+###############################################################################################################
+
+
+# Instruction for Dockerfile to create a new image on top of the base image (ubuntu)
+
+FROM ubuntu:16.04
+
+RUN apt-get update && apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
+RUN echo 'root:mypassword' | chpasswd
+RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+EXPOSE 22
+CMD ["/usr/sbin/sshd", "-D"]
+
+###############################################################################################################
+# after build df run this command:                                                                            #
+# sudo docker build -t sshd_tagged_image -f sshubuntu16  .                                                    #
+# docker run -d -P --name test_sshd_container sshd_tagged_image                                               #
+# sudo docker port test_sshd_container                                                                        #
+# docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' test_sshd_container      #
+# ssh root@Ip-Address-of-the-container                                                                        #
+###############################################################################################################
+# url: https://adamtheautomator.com/ssh-into-docker-container/                                                #
+###############################################################################################################
