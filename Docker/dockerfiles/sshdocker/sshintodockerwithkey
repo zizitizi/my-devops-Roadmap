@@ -1,0 +1,32 @@
+# SSH into Docker Container with ssh key
+# i did below commads with root user.
+# its very important to make id-rsa key with 
+# ssh-keygen
+# copy id_rsa.pub key to dockerfile folder then run below command
+# cp /root/.ssh/id_rsa.pub .
+# dont forget to do : cp /root/.ssh/id_rsa.pub .
+# vi bl
+
+FROM ubuntu:latest
+RUN apt update && apt install  openssh-server sudo -y
+# Create a user “sshuser” and group “sshgroup”
+RUN groupadd sshgroup && useradd -ms /bin/bash -g sshgroup sshuser
+# Create sshuser directory in home
+RUN mkdir -p /home/sshuser/.ssh
+# Copy the ssh public key in the authorized_keys file. The idkey.pub below is a public key file you get from ssh-keygen. They are under ~/.ssh directory by default.
+COPY id_rsa.pub /home/sshuser/.ssh/authorized_keys
+# change ownership of the key file. 
+RUN chown sshuser:sshgroup /home/sshuser/.ssh/authorized_keys && chmod 600 /home/sshuser/.ssh/authorized_keys
+# Start SSH service
+RUN service ssh start
+# Expose docker port 22
+EXPOSE 22
+CMD ["/usr/sbin/sshd","-D"]
+
+
+
+# docker build -t sshubuntu -f bl .
+# docker run -d -p 2022:22 sshubuntu
+# ssh -i idkey sshuser@localhost -p 2022
+
+## answer yes and enjoy ssh into container!!!!!!
