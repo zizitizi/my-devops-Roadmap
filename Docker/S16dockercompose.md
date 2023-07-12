@@ -73,7 +73,158 @@ this 5 container together make our voting app.
 
 first clone it from related github:
 
-wget https://github.com/dockersamples/example-voting-app.git
+cd votingapp/ 
+
+git clone https://github.com/dockersamples/example-voting-app.git
+
+
+to specify that vote and result app image build corectly we build them separatly.
+
+
+ cd result/
+
+ docker build -t result-app:latest .
+
+cd vote/
+
+docker build -t voting-app:latest .
+
+cd worker/
+
+docker build -t worker:latest .
+
+
+in this docker file we use best practice and minimum specified command .
+
+
+vi docker-compose.yml
+
+
+
+
+version: "3.8"
+ 
+services:
+  vote:
+    image: voting-app:latest
+    container_name: voting-app-vote
+    hostname: vote
+    restart: always
+    command: python app.py
+    volumes:
+     - ./vote:/app
+    ports:
+     - "5000:80"
+    networks:
+     - voting-app-network
+
+     
+
+  redis:
+    image: redis:alpine
+    container_name: voting-app-redis
+    hostname: redis
+    dns:
+      - 8.8.8.8
+      - 4.2.2.4
+    ports: ["6379"]
+    networks:
+     - voting-app-network
+
+     
+
+  worker:
+    image: worker:latest
+    container_name: voting-app-worker
+    hostname: worker
+    networks:
+     - voting-app-network
+
+     
+  db:
+    image: postgres:9.4
+    container_name: voting-app-postgres
+    hostname: postgres
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres“
+    volumes:
+      - postgres_data: /var/lib/postgresql/data
+    networks:
+     - voting-app-network
+    
+
+  result:
+    image: result-app:latest
+    container_name: voting-app-result
+    hostname: result
+    command: nodemon server.js
+    volumes:
+      - ./result:/app
+    ports:
+      - "5001:80"
+      - "5858:5858“
+    networks:
+      - voting-app-network
+
+networks:
+  voting-app-network:
+  voting-app-front
+volumes:
+  postgres_data:
+    driver: nfs
+
+
+
+docker compose up -d   - detach containers
+
+
+docker compose ps  - we can use this command only on specified previously docker compose folder.
+
+docker ps  - show all container in system not for this docker compose related.
+
+default container name for docker compose is folder name+ service name + 1 - to specified name manually use container_name command (that is projectname+containername).  use hostname to see that name in docker exec
+
+best practice is use network name for spcify same network for container to call each other by name in each docker compose. in this senario its the best to use 2 network for frontend and backend. but redis and db is in 2 net. to create network right from docker compose we could be write networks section same identation as services at the ens of file . default driver is bridge then we can ignore to write it. but in other type we should specify for ex. with : (driver: host) 
+
+  voting-app-front:
+    driver: overlay
+
+same as volume . for volume in docker area we should specify in end of docker compose.
+
+volumes:
+  pro_data_dev:
+  postgres_data:
+    driver: local
+
+docker compose down
+
+
+if our docker compose file not in default name we should below commadn to build:
+
+docker compose -f mydockercomposename.yml up -d
+
+docker compose -f mydockercomposename.yml ps  - so its recommadn to use default name.
+
+
+docker compose -f mydockercomposename.yml down
+
+
+now we can brows for vote in : 13.41.227.209:5000
+
+now we can brows for result in : 13.41.227.209:5001
+
+
+
+docker compose file line have not priority . cause all of them is compile together with specified python version.
+
+
+
+
+
+
+
+ 
 
 we need 2 dockerfile for vote and result app . but for redis and postgre and .net we use docker hub images.
 
@@ -95,39 +246,6 @@ ports:
   - "hostport:frontendport"
 
 
-
-
-version: "3.8"
- 
-services:
-  vote:
-    image: voting-app:latest
-    command: python app.py
-    volumes:
-     - ./vote:/app
-    ports:
-     - "5000:80"
-
-  redis:
-    image: redis:alpine
-    ports: ["6379"]
-
-  worker:
-    image: worker:latest
-  db:
-    image: postgres:9.4
-    environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "postgres“
-
-  result:
-    image: result-app:latest
-    command: nodemon server.js
-    volumes:
-      - ./result:/app
-    ports:
-      - "5001:80"
-      - "5858:5858“
 
 
 
