@@ -73,9 +73,14 @@ this 5 container together make our voting app.
 
 first clone it from related github:
 
-
+wget https://github.com/dockersamples/example-voting-app.git
 
 we need 2 dockerfile for vote and result app . but for redis and postgre and .net we use docker hub images.
+
+
+microsoft .net use to dockerize in windows but for linux we use .net core image base
+
+docker compose version is python version of it. docker compose write in python 
 
 
 
