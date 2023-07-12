@@ -82,8 +82,62 @@ microsoft .net use to dockerize in windows but for linux we use .net core image 
 
 docker compose version is python version of it. docker compose write in python 
 
+best practice is that version in docker compose file be older that installed docker compose.
+
+docker compose version
 
 
+we specified container in services section. 
+
+
+ports:
+
+  - "hostport:frontendport"
+
+
+
+
+version: "3.8"
+ 
+services:
+  vote:
+    image: voting-app:latest
+    command: python app.py
+    volumes:
+     - ./vote:/app
+    ports:
+     - "5000:80"
+
+  redis:
+    image: redis:alpine
+    ports: ["6379"]
+
+  worker:
+    image: worker:latest
+  db:
+    image: postgres:9.4
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres“
+
+  result:
+    image: result-app:latest
+    command: nodemon server.js
+    volumes:
+      - ./result:/app
+    ports:
+      - "5001:80"
+      - "5858:5858“
+
+
+
+
+hint: when we use db as container we should specified env variable for user and password for db admin. also specified  volume.
+
+for image we can biuld from dockerfile directly from dockercompose or use docker hub repo.
+
+  vote:
+    build: ./vote  --> here dockercompose search this directory for dockerfile and build with container name.
 
 
 
