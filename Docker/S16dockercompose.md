@@ -57,6 +57,14 @@ first clone it from related github:
 
 
 
+### aws create server
+
+1- login to your aws account
+
+EC2> instance(running)> lunch instance> ubuntu> 64bit > instance type: t2.medium 2cou 4 mem> key pair name: create new key pair> newkeypairname - rsa - create key pair (dowmload and save)> firewall: select create security group > edit> inbound security group role > type: all traffic > configure storage> 1*20gig - gp2 > lunch instance.
+
+
+after success creation 
 
 
 
