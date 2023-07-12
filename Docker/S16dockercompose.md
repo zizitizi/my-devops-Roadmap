@@ -169,10 +169,47 @@ services:
 
 networks:
   voting-app-network:
-  voting-app-front
+  voting-app-front:
+    name: frontendnet
 volumes:
   postgres_data:
     driver: nfs
+
+to see postgres data : 
+
+
+cd /var/lib/docker/volumes/example_voting_app_postgres_data/_data  - then write script to backup data to .tr.gz 
+
+
+we use depends on to condition to other container
+
+ depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s    - wait for 10 second and test it again after 15 s.
+
+
+
+we can use seed to generate dabase and use fake data to keep db up
+
+ #this service runs once to seed the database with votes
+  #it won't run unless you specify the "seed" profile
+  #docker compose --profile seed up -d
+  seed:
+    build: ./seed-data
+    profiles: ["seed"]
+    depends_on:
+      vote:
+        condition: service_healthy
+    networks:
+      - front-tier
+    restart: "no"
+
 
 
 
