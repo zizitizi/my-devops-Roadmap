@@ -46,6 +46,10 @@ docker-compose up    -----is change to  ---> docker compose up    - if we need d
 
 
 
+# example voting app
+
+first clone it from related github:
+
 
 
 
