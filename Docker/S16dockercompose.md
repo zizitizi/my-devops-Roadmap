@@ -39,6 +39,13 @@ caddy is other simple reverse proxy. with swarm.
 
 
 
+docker version  - after version 20 docker compose commadn is be more simple
+
+docker-compose up    -----is change to  ---> docker compose up    - if we need docker-compose we should apt install docker-compose
+
+
+
+
 
 
 
