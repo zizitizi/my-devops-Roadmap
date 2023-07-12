@@ -48,8 +48,34 @@ docker-compose up    -----is change to  ---> docker compose up    - if we need d
 
 # example voting app
 
+in this senario we have 
+
+
+
+
+
+
+in front end:
+
+voting app (in python): people vote here
+
+result app (in node js): query result from database
+
+in backend:
+
+in-memory db (redis): vote data with high speed is here but not persist.
+
+worker ( microsoft .net) : read data from redis and write it on postgres to persist data. 
+
+db (postgresql): save the vote data persistant to save the result
+
+this 5 container together make our voting app.
+
 first clone it from related github:
 
+
+
+we need 2 dockerfile for vote and result app . but for redis and postgre and .net we use docker hub images.
 
 
 
@@ -64,7 +90,17 @@ first clone it from related github:
 EC2> instance(running)> lunch instance> ubuntu> 64bit > instance type: t2.medium 2cou 4 mem> key pair name: create new key pair> newkeypairname - rsa - create key pair (dowmload and save)> firewall: select create security group > edit> inbound security group role > type: all traffic > configure storage> 1*20gig - gp2 > lunch instance.
 
 
-after success creation 
+after success creation go to menu > instances > select instance that early created . 
+
+in moba extreme > new ssh session > enter specified ip and user name > in advanced ssh setting > use private key > select downloaded .pem file in previouse section in aws > press ok
+
+
+refresh aws instace page to wait for ssh session to initializa. it may take a while.
+
+
+
+
+now we can install docker in this server to run voting app senario
 
 
 
