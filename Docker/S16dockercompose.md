@@ -97,8 +97,7 @@ docker build -t worker:latest .
 in this docker file we use best practice and minimum specified command .
 
 
-vi docker-compose.yml
-
+vi docker-compose.yml:
 
    version: "3.8"
    
