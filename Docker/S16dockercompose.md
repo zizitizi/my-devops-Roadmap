@@ -103,7 +103,7 @@ vi docker-compose.yml
 
 
 version: "3.8"
- 
+
 services:
   vote:
     image: voting-app:latest
@@ -118,7 +118,7 @@ services:
     networks:
      - voting-app-network
 
-     
+
 
   redis:
     image: redis:alpine
@@ -131,7 +131,7 @@ services:
     networks:
      - voting-app-network
 
-     
+
 
   worker:
     image: worker:latest
@@ -140,19 +140,19 @@ services:
     networks:
      - voting-app-network
 
-     
+
   db:
-    image: postgres:13.4
+    image: postgres:latest
     container_name: voting-app-postgres
     hostname: postgres
     environment:
       POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "postgres“
+      POSTGRES_PASSWORD: "postgres"
     volumes:
-      - postgres_data: /var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     networks:
      - voting-app-network
-    
+
 
   result:
     image: result-app:latest
@@ -163,7 +163,7 @@ services:
       - ./result:/app
     ports:
       - "5001:80"
-      - "5858:5858“
+      - "5858:5858"
     networks:
       - voting-app-network
 
@@ -173,7 +173,6 @@ networks:
     name: frontendnet
 volumes:
   postgres_data:
-    driver: nfs
 
 
 #### this version is my docker hub refer :
