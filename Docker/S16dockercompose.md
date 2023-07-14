@@ -142,7 +142,7 @@ services:
 
      
   db:
-    image: postgres:9.4
+    image: postgres:13.4
     container_name: voting-app-postgres
     hostname: postgres
     environment:
@@ -174,6 +174,86 @@ networks:
 volumes:
   postgres_data:
     driver: nfs
+
+
+#### this version is my docker hub refer :
+
+
+version: "3.8"
+
+services:
+  vote:
+    image: zeintiz/voting-app:latest
+    container_name: voting-app-vote
+    hostname: vote
+    restart: always
+    command: python app.py
+    volumes:
+     - ./vote:/app
+    ports:
+     - "5000:80"
+    networks:
+     - voting-app-network
+
+
+
+  redis:
+    image: redis:alpine
+    container_name: voting-app-redis
+    hostname: redis
+    dns:
+      - 8.8.8.8
+      - 4.2.2.4
+    ports: ["6379"]
+    networks:
+     - voting-app-network
+
+
+
+  worker:
+    image: zeintiz/worker:latest
+    container_name: voting-app-worker
+    hostname: worker
+    networks:
+     - voting-app-network
+
+
+  db:
+    image: postgres:latest
+    container_name: voting-app-postgres
+    hostname: postgres
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+     - voting-app-network
+
+
+  result:
+    image: zeintiz/result-app:latest
+    container_name: voting-app-result
+    hostname: result
+    command: nodemon server.js
+    volumes:
+      - ./result:/app
+    ports:
+      - "5001:80"
+      - "5858:5858"
+    networks:
+      - voting-app-network
+
+networks:
+  voting-app-network:
+  voting-app-front:
+    name: frontendnet
+volumes:
+  postgres_data:
+
+
+
+
 
 to see postgres data : 
 
@@ -233,6 +313,9 @@ volumes:
   pro_data_dev:
   postgres_data:
     driver: local
+
+### docker compose command
+
 
 docker compose down
 
