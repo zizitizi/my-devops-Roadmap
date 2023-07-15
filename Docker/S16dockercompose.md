@@ -511,7 +511,7 @@ make 3 server (vm) with docker-ce installed. to run swarm cluster that is master
 
 advertise address - port addres that cluster advertise to it. cause may be we have many other network card.
 
-masters and worker connect via ssl port 6443 (k8s use 8443) that you should open it via firewall in nodes. 
+masters and worker connect via ssl port 2377 (k8s use 8443) that you should open it via firewall in nodes. 
 
 
 docker pull mysql
