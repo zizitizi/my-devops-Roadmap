@@ -532,7 +532,18 @@ docker swarm join-token manager    - to join manager to this cluster and follow 
 
 ### ssl
 
-in docker you have ca or certificate autority server that generate ssl certificate - private certificate is self signed and invalid but in cluster in local is valid - when a node be master it generate token or (ssl certificate) - if we run this token on a server that'll be a worker and join to cluster. this make connection secure and encrypted with that token and no one can be sniffing. but if token is haked it may be misused . but that token is expire after 24 hour after generation.
+in docker you have ca or certificate autority server that generate ssl certificate - private certificate is self signed and invalid but in cluster in local is valid - when a node be master it generate token or (ssl certificate) - if we run this token on a server that'll be a worker and join to cluster. this make connection secure and encrypted with that token and no one can be sniffing. but if token is haked it may be misused . but that token is expire after 24 hour after generation. just ansible is ssh base. other is same ssl base.
+
+
+
+#### SDN architecture
+
+
+docker service (kubectl)  - manage app - container- replica ,....
+
+docker swarm (kubeadm) - manage infra - join left ,...
+
+
 
 
 
