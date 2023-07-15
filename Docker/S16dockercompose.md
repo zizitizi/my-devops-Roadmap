@@ -503,10 +503,24 @@ docker swarm --help
 
 
 
-practice 
+#### practice 
 
 
 make 3 server (vm) with docker-ce installed. to run swarm cluster that is master and worker
+
+ docker swarm init --advertise-addr 192.168.44.136
+
+ docker swarm join --token SWMTKN-1-2pzjl9uiyvlids6808d4214azkmpvy3ukeqxhbvp14gdlr66co-75eo0g3fp5fbe6opi7afh9mm9 192.168.44.136:2377
+
+
+ docker node ls
+ 
+
+
+
+
+
+
 
 
 advertise address - port addres that cluster advertise to it. cause may be we have many other network card.
