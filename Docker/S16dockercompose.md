@@ -474,11 +474,65 @@ its best practice that The database is not included in the orchestration . becou
 
 #### The internal structure of swarm
 
+swarm manager module:
+
+api - when you run command accept it and create service object
+
+orchestrator  - reconcilation loop that create task for service object. to assign task to containers.
+
+allocator - assign ip addressses to task  ( in swarm service=containers and assign ip to service )
+
+dispatcher  - assign task to nodes
+
+scheduler -  instruct a worker to run a task
+
+
+worker node:
+
+have runnig container and 2 module:
+
+worker - connect with scheduler - connect to dispatcher to check assigned tasks. also manitor container and report to scheduler 
+
+executor - executes tasks that assign to worker
+
+
+swarm works with many container run time but k8s works with docker, containerd and cri-o and mirantis (translator that can negotiate with docker) nowday.
+
+
+docker swarm --help
+
+
+
+practice 
+
+
+make 3 server (vm) with docker-ce installed. to run swarm cluster that is master and worker
+
+
+advertise address - port addres that cluster advertise to it. cause may be we have many other network card.
+
+masters and worker connect via ssl port 6443 (k8s use 8443) that you should open it via firewall in nodes. 
+
+
+docker pull mysql
+
+docker run -d -p0.0.0.0:80:80 mysql:latest
+
+
+docker swarm init --advertise-addr 192.168.0.13  - run this on manager node to make it manager
+
+
+docker swarm join --token SWMTKN-1-5ttj713qief5dfmumellnkp1eklfmztyag1uo2l74g6eq6ivrg-0vkotnzicghfpfsou7no4gtv2 192.168.0.13:2377  - to join worker to cluster
+
+
+docker swarm join-token manager    - to join manager to this cluster and follow instrauction
 
 
 
 
+### ssl
 
+in docker you have ca or certificate autority server that generate ssl certificate - private certificate is self signed and invalid but in cluster in local is valid - when a node be master it generate token or (ssl certificate) - if we run this token on a server that'll be a worker and join to cluster. this make connection secure and encrypted with that token and no one can be sniffing. but if token is haked it may be misused . but that token is expire after 24 hour after generation.
 
 
 
