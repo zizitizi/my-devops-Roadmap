@@ -513,7 +513,7 @@ make 3 server (vm) with docker-ce installed. to run swarm cluster that is master
  docker swarm join --token SWMTKN-1-2pzjl9uiyvlids6808d4214azkmpvy3ukeqxhbvp14gdlr66co-75eo0g3fp5fbe6opi7afh9mm9 192.168.44.136:2377
 
 
- docker node ls
+ docker node ls  - * reveal we are on which node. engin version is docker version - 
  
 
 
