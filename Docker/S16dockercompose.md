@@ -657,9 +657,27 @@ docker service ls
 
 docker service ps alpineswarm
 
+run on each server 
+
+docker ps -a  - to see replica on each one
 
 
 
+in load balace for nginx ip for assign to domain is leader ip address. 
+
+
+
+
+practice 3 vm (1 core 1 gig or 2 core 2 gig) create swarm cluster - make all manager and leave leader . run service and container and shutdown leader see what happen to our server and service . nginx -alpine - ubuntu -after leave second - who will be leader.
+again above senario with leave reachable - see difference. 
+
+
+
+
+stack  ---> compose to swarm
+
+
+docker stack deploy
 
 
 
