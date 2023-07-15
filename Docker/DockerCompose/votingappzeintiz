@@ -1,3 +1,6 @@
+##dont forget copy folder from repo
+# git clone https://github.com/dockersamples/example-voting-app.git
+
 version: "3.8"
 
 services:
