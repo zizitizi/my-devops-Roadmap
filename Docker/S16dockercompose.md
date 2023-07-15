@@ -472,7 +472,7 @@ its best practice that The database is not included in the orchestration . becou
 
 
 
-
+#### The internal structure of swarm
 
 
 
