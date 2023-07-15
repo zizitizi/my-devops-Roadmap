@@ -546,6 +546,20 @@ docker swarm (kubeadm) - manage infra - join left ,...
 
 
 
+*******ssh tunnel to use in our servers :**********
+sshuttel --dns -r username@12.10.25.2:5025 0/0
+
+after connection :
+
+ssh-keygen
+
+after creation:
+
+ssh-copy-id -p 5025 username@12.10.25.2
+
+
+
+
 
 
 
