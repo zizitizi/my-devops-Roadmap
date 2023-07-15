@@ -396,6 +396,51 @@ refresh aws instace page to wait for ssh session to initializa. it may take a wh
 now we can install docker in this server to run voting app senario
 
 
+#### environmant variable in docker compose
+
+in 2ways . in docker compose . or out of it with file with name it .env beside the main docker compose file:
+
+for ex. in docker compose: 
+
+environmet:
+  POSTGRES_USER: ${POSTGRES_USER}
+
+again :
+
+vi .env
+
+POSTGRES_USER="username"
+
+
+
+#### working with docker compose container
+
+we can use it with :
+
+docker exec -it 
+
+or
+
+docker compose exec redis sh
+
+same as other commands in docker dompose and docker. commonly use docker command
+
+
+
+# docker swarm
+
+its an orchestrator like kuber , mesos ,.... for scaling , load balancing, managing container ,..... its on nfv/sdn architecture.
+
+replica in orchestration = same containers and sync together
+
+docker swarm = simple and featureless les  == 30 to 40 
+
+kuber = more complicated and many fature for more than 50 --60 use kuber
+
+
+when we install docker-ce , swarm also be installed
+
+
 
 
 
