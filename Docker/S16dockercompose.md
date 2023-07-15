@@ -435,10 +435,50 @@ replica in orchestration = same containers and sync together
 
 docker swarm = simple and featureless les  == 30 to 40 
 
-kuber = more complicated and many fature for more than 50 --60 use kuber
+kuber = more complicated and many fature for more than 50 --60 use kuber- need one server just for its control plane
 
 
 when we install docker-ce , swarm also be installed
+
+
+#### docker cli
+
+one server as control plane has docker cli. other one didnt have cli.
+
+when swarm is installed we have control plane or swarm manager sometime master node in server 
+
+other server or node is worker
+
+
+when we use docker run db , control plane decided which serve is best to run a database ( load ,.. other factor). this is scheduler. a container on which node runs.
+
+
+hint: we can select which node. but its best do it swarm manager.
+
+
+When the master node goes down, the whole cluster goes down , nodes left the cluster and related container removes. to prevent diaster solution is have primary secondary manager node. all one them have cli and sync together. 
+
+All master nodes follow the 50% or 2N+1 rule. couse when availability is more than 51% service is up. less or equal than 50% service is down. then we should have odd number of master node. 1,3,5,7,...  - 3 master is safe for 1 master down. in 5 master if 3 master goes down then cluster down. but worker or computed is unlimited. masters area is under cloud or uc. worker layer is over cloud or oc.
+
+in swarm when a worker goes downd manager run its container on another node. didnt retry on it again. also in swarm we may have manager swarm and worker on same node. worker node can run container , master node too. manager node have not additional load on server just have commadn line and see other node. then recommanded if you have 3 server then use 3 worker and 3 manager in swarm for haigh availability. 8 server ---> 8 werker,8manager
+
+but in k&s its difference. master node in k8S can not run container . master node have heavy load on itself. we can not run container and control plane on same node. in 8 server ----> 5 worker , 3 master
+
+
+in swarm we have service that we need to run but containers need task to assign it to be up and running.
+
+
+its best practice that The database is not included in the orchestration . becouse persist data missed in db serever if geos down. it have solution like nfs folder (sharing folder betwwn servers) and mount it to db container. but not recommad it. its recommand to seperat server as data base . other worker to other apps.
+
+
+
+
+
+
+
+
+
+
 
 
 
