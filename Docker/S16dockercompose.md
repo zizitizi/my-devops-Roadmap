@@ -573,18 +573,89 @@ ssh-copy-id -p 5025 username@12.10.25.2
 
 
 
+leader - honds on  - swarm worker and master
+
+manager - concept and manage - k8s is manager not worker
 
 
 
+### docker swarm command
+
+docker swarm init --advertise-addr 192.168.0.13  - run this on manager node to make it manager  - to init cluster on manager
+
+docker swarm join-token worker  - give us worker join command with token ( expire after 24 h) 
+
+docker swarm join-token manager  - give us manager join command with token ( expire after 24 h)
+
+
+docker swarm leave - leave from cluster after a while
+
+
+docker swarm lock  - lock cluster prevent join other node 
+
+
+docker swarm update - update version of swarm     - not recommanded
+
+
+docker node rm 7h0zov0rio11dxu0dd00z9lzq   - not see leaved node (down status)
+
+
+docker node ps  - reveal service that run on cluster
+
+docker inspect <nodeid>   - info about node
+
+
+docker node demote - manager to worker
+
+docker node promote - worker to manager
+
+docker node promote server-4
+
+
+## build service in cluster
+
+
+Manage Swarm services:
+
+docker service --help
+
+
+docker service scale  -  increase number of replica
+
+docker service create --help   - we can write every command that we write in docker run command.
+
+
+docker service create --name alpineswarm alpine:latest ping google.com
 
 
 
+docker service ls  -  in column replicas -->  currentstate/desiredstate
+
+
+main duty of an orchestrator keep currentstate=desiredstate
+
+
+for number of replica=5 
+
+
+docker service ps servicecontainername
+
+docker ps -a    - just run in same server that create service .
+
+docker service logs alpineswarm
+
+docker service logs alpineswarm -f 
 
 
 
+to scale and replica:
 
 
+docker service scale alpineswarm=5
 
+docker service ls
+
+docker service ps alpineswarm
 
 
 
