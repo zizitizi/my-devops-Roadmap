@@ -320,7 +320,7 @@ if our docker compose file not in default name we should below commadn to build:
 
 docker compose -f mydockercomposename.yml up -d
 
-docker compose -f mydockercomposename.yml ps  - so its recommadn to use default name.
+docker compose -f mydockercomposename.yml ps  - so its recommand to use default name.
 
 
 docker compose -f mydockercomposename.yml down
@@ -610,6 +610,11 @@ docker node demote - manager to worker
 docker node promote - worker to manager
 
 docker node promote server-4
+
+
+note: make sure you add firewall rule :
+sudo ufw allow 2377
+
 
 
 ## build service in cluster
