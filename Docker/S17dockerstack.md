@@ -52,7 +52,7 @@ They don't touch what works. when a service is up and running dont add anythings
 after specifeid number of restart , swarm change the node for that service.
 
 
-
+swarm has auto load balance but kubernetese dont. 
 
 
 
