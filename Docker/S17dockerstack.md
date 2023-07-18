@@ -40,6 +40,13 @@ docker service create --name nginx-service --publish 8080:80 --max-replica-per-n
 docker service scale nginx-service=5
 
 
+
+docker service rm nginx-service
+
+
+docker service create --name nginx-service --publish 8080:80 --replicas 5 nginx:latest
+
+
 the rule :
 They don't touch what works. when a service is up and running dont add anythings. if you need do that , stop or restart service to add new node to cluster.
 after specifeid number of restart , swarm change the node for that service.
