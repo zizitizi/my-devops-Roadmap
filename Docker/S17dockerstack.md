@@ -52,7 +52,11 @@ They don't touch what works. when a service is up and running dont add anythings
 after specifeid number of restart , swarm change the node for that service.
 
 
-swarm has auto load balance but kubernetese dont. 
+swarm has auto simple auto load balance roundrobin seris .in kubernetese we can also bring auto load balancer with : traefik , metal lb, ....
+
+in swarm with leader ip all other node is accessible but with one other node just that node is accessible.
+
+in swarm we works with master. just its ip. but when we have multi master should use HAproxy to get float ip (ip1 - ip2,...)  then we should add new node to cluster as HAproxy and config it with ip float and put the domain on it. it give trafic to masters and in next step master gives trafic to workers.
 
 
 
