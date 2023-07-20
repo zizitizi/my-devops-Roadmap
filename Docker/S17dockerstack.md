@@ -236,11 +236,17 @@ we use always masters ip.
 
 
 
-practice1 - config haproxy. ip float to 3 other masters? (config in approx. 10 line) 
+practice1 - config haproxy with 3  float IP (masters) ? (send config in approx. 10 line) 
 
-practice2 - create 5 vm and one for nfs (1core-1g) one for haproxy(1core - 1gig) 3 for masters and worker (1core 2 gig or 2core 2 gig) 
+practice2 - create 5 vm - one for nfs (1core-1g) - one for haproxy(1core - 1gig) - 3 node for masters and worker (1core 2 gig or 2core 2 gig) 
 
+practice3 - what goes on leader when it is down in cluster in The following states , is it return automatically or join again manually?:
 
+1- leave manually ?
+
+2- crash that node or turn off and turn on that node?
+
+practice4 - what and how is labeling? how can we label workers and masters in docker swarm?
 
 
 
