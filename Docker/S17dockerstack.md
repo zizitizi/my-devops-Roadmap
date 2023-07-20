@@ -188,6 +188,15 @@ docker service create --name nginx-service -p 8080:80 --mount type=bind,source=/
 
 
 
+couse in nfs used storage is server1 or master server then we should give it large storage and resource as well. in swarm and kuber masters node should have resource mount bigger that other node. worker is half than master
+
+docker service ps nginx-service
+
+
+curl 192.168.10.10:8080
+
+
+
 
 
 
