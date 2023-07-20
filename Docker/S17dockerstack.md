@@ -182,6 +182,19 @@ cd /var/www   - everything write here i ll see in server
 touch test1.txt 
 
 
+also mount point should be added to workers fstab to be permanent.
+
+in worker:
+
+vi /etc/fstab
+
+192.168.33.10:/backups /backups nfs defaults,timeo=900,retrans=5,_netdev 0 0
+
+
+192.168.33.10:/www /srv/www nfs defaults,timeo=900,retrans=5,_netdev 0 0
+
+
+
 now in master node we create serveice with --mount  (note that service create have not --volume):
 
 docker service create --name nginx-service -p 8080:80 --mount type=bind,source=/var/www,target=/var/www --replicas 5 nginx:latest
