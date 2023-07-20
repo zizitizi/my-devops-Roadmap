@@ -228,13 +228,17 @@ we use always masters ip.
 
 1- nfs server just for storage no added program (1core- 1gig- more than 1TB) . unvisible to others in network. just for storage for masters(swarm or k8s or other orchestrator)
 
-2- a node for HAproxy to lb to masters
+2- a node for HAproxy to lb to masters - hubswitch role
 
 3- 3 master that is worker too. there is nfs client (nfs-common installed) 
 
 4- other node unlimited is worker
 
 
+
+practice1 - config haproxy. ip float to 3 other masters? (config in approx. 10 line) 
+
+practice2 - create 5 vm and one for nfs (1core-1g) one for haproxy(1core - 1gig) 3 for masters and worker (1core 2 gig or 2core 2 gig) 
 
 
 
