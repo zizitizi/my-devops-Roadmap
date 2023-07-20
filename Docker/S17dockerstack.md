@@ -246,11 +246,18 @@ practice3 - what goes on leader when it is down in cluster in The following stat
 
 2- crash that node or turn off and turn on that node?
 
-practice4 - what and how is labeling? how can we label workers and masters in docker swarm?
+practice4 - what and how is labeling? how can we label workers and masters in docker swarm? wich command is for label node? wich command is for assign service for specific node?
 
 
 
+## swarm labeling
 
+in real we dont have virtual clustering in swarm. but with labeling we can do it manually.  in practice when we have 5 server or node one solution is make 2 swarm cluster with  2 for staging and 3 for production. but its not best practice. we do 5 node in one swarm cluster and label with 2 stg and 3 with prd . 
 
+docker service create --label stg
+
+docker service create --label prd
+
+then make all 5 node masters and workers. its persist to fault of 2 node. 
 
 
