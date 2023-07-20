@@ -105,6 +105,89 @@ now add shared file list to export
 
 vi /etc/exports
 
+/srv/nfs4  192.168.10.0/24(rw,sync,no_subtree_ckeck,crossmnt,fsid=0)
+
+/srv/nfs4/backups  192.168.10.0/24(ro,sync,no_subtree_ckeck)
+
+/srv/nfs4/www  192.168.10.0/24(rw,sync,no_subtree_ckeck)
+
+
+first line is our global root directory . everything is in it is shared. IP ranged that can see shared folder and connect with specified specification to it is determine here.(maybe single ip) or maybe multiple ip range with determine difference specification.
+rw  -  read and write
+
+ro - readonly
+
+sync  - immediatly sync if anyone in other server write to nfs is recommanded
+
+no_subtree_check   -  if there is subdirectory in this folder parent folder permission is inherited or not seperated from parent. bestpractice is to be.
+
+crossmnt   - for directory's that have subdirectory to share - root directory must have it
+
+fsid=0   - just to detemine this is global root directory .
+
+
+
+
+
+then export all -a and read config to execute them -r and -v to verbose to ckech it again
+
+exportfs -ar
+
+exportfs -v
+
+then open nfs port in your firewall - nfs port is 2049
+
+ufw allow from 192.168.33.0/24 to any port nfs
+
+ufw status
+
+
+now we should install nfs in client servers
+
+apt install nfs-common   - in centos use yum install nfs-utils - its default installed in many linux distro.
+
+
+and make mount point in all client servers.
+
+mkdir /var/www   -  make dir if not exist
+
+mkdir /opt/backups   
+
+mount that:
+
+mount -t nfs -o vers=4 192.168.10.10:/backups  /opt/backups/    - servers know global root directory . 
+
+mount -t nfs -o vers=4 192.168.10.10:/www  /var/www/
+
+
+to ckeck it use:
+
+df -Th   - df list file system , T reveal type of file systems and h is human readable
+
+hint: in master nfs servre in 
+
+cd /srv/nfs4/
+
+chmod 777 www
+
+chmod 777 backups
+
+chmod 777 /var/www
+
+
+now we can write in server-2:
+
+cd /var/www   - everything write here i ll see in server
+
+touch test1.txt 
+
+
+now in master node we create serveice with --mount  (note that service create have not --volume):
+
+docker service create --name nginx-service -p 8080:80 --mount type=bind,source=/var/www,target=/var/www nginx:latest
+
+
+
 
 
 
