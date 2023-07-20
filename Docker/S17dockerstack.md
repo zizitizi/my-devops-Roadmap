@@ -61,12 +61,49 @@ in swarm we works with master. just its ip. but when we have multi master should
 
 
 
+## nfs
+
+network file sharing (lpic2 -file sharing) . when we have for ex. 3 node with nginxi and want to run specifiec wesite (ex.: git.com) we should use same volume folder to mount between webserver on network (nfs).  same as in windows we have smb or server message protocol. samba server and samba client also in linux can interact with smb in windows. 
+
+but nowdays after windows 2016 nfs is supprting in windows os too. 
+
+install nfs:
+
+apt install nfs-kernel-server -y
+
+
+in nfs share means export. share dir1 == export dir1
+
+first create global root directory to export
+
+then creat to folder in it to bind mount them to our main direstory  . we use nfs commonly on master
+
+/srv/nfs4/   - root directory   - couse we know everytime just everything that is here is shared with other.
+
+mkdir -p /srv/nfs4/backups   - to bind mount /opt/backups/
+
+mkdir -p /srv/nfs4/www   - to bind mount /var/www/
+
+
+mount --bind /var/www/ /srv/nfs4/www/
+
+mount --bind /opt/backups/ /srv/nfs4/backups/
+
+
+in etc we have file system table or fstab. to make 2 mount temporary path persist (after restart or shutdown persist) we should write 2 path in fstab:
+
+vi /etc/fstab
+
+
+/opt/backups /srv/nfs4/backups  none bind 0 0
+
+/var/www /srv/nfs4/www  none bind 0 0
 
 
 
+now add shared file list to export
 
-
-
+vi /etc/exports
 
 
 
