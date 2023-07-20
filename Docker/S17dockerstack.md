@@ -184,7 +184,7 @@ touch test1.txt
 
 now in master node we create serveice with --mount  (note that service create have not --volume):
 
-docker service create --name nginx-service -p 8080:80 --mount type=bind,source=/var/www,target=/var/www nginx:latest
+docker service create --name nginx-service -p 8080:80 --mount type=bind,source=/var/www,target=/var/www --replicas 5 nginx:latest
 
 
 
