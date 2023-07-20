@@ -208,6 +208,32 @@ docker service ps nginx-service
 
 curl 192.168.10.10:8080
 
+in nginx html code is in:
+/usr/share/nginx/html
+
+in apache html code is in:
+/var/www/html
+
+
+
+to see this nfs network and out ip from outside net
+
+in virtual box go to network port forward 127.0.0.1 8080 add role. in vmware dont need do this. it forward automatically.
+
+
+we use always masters ip.
+
+
+## bestpractice senario:
+
+1- nfs server just for storage no added program (1core- 1gig- more than 1TB) . unvisible to others in network. just for storage for masters(swarm or k8s or other orchestrator)
+
+2- a node for HAproxy to lb to masters
+
+3- 3 master that is worker too. there is nfs client (nfs-common installed) 
+
+4- other node unlimited is worker
+
 
 
 
