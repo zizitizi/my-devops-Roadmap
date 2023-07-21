@@ -277,5 +277,96 @@ git clone https://github.com/dockersamples/example-voting-app.git
 docker stack deploy --compose-file docker-stack.yml voting-app
 
 
+docker service ls
+
 
 docker stack can work with docker swarm and k8s<=v1.23 . depends on in docker stack may not work. 
+
+
+nfs in k8s in complicated. if data is so critical and sensitive then Ask the organization's network administrator or db engineers to cluster that data and place the data in the relevant servers and give its address .
+
+#### this file is meant for Docker Swarm stacks only
+#### trying it in compose will fail because of multiple replicas trying to bind to the same port
+#### Swarm currently does not support Compose Spec, so we'll pin to the older version 3.9
+
+version: "3.9"
+
+services:
+
+  redis:
+    image: redis:alpine
+    networks:
+      - frontend
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  vote:
+    image: dockersamples/examplevotingapp_vote
+    ports:
+      - 5000:80
+    networks:
+      - frontend
+    deploy:
+      replicas: 2
+
+  result:
+    image: dockersamples/examplevotingapp_result
+    ports:
+      - 5001:80
+    networks:
+      - backend
+
+  worker:
+    image: dockersamples/examplevotingapp_worker
+    networks:
+      - frontend
+      - backend
+    deploy:
+      replicas: 2
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  db-data:
+
+
+
+
+docker stack ls
+
+docker stack ps voting-app
+
+
+docker stack services voting-app  == docker service ls
+
+
+senario:  4 server parspack - 1 server and main is for hosting (nfs - gitlab for push and commit . developers write compose file - graffana and prometeus - monitoring - backup for db and everything - HAproxy - static and valid ip for domain that is for production - ,....). this server have periodical snapshot for backup maybe weekly or 2 or 3 time in week. keep 5 last snapshot. 
+
+3 node for swarm all is master and worker - 1 labeled for stg ( test domain : domainexample-stg.com) and 2 labeled for prd (production domain : example.com that configured in haproxy)  - we write ci/cd pipelind and play button to run stg and another for production.  
+
+
+
+#### local registery:
+
+2 type local registery:
+
+1- nexus is open source and free. The most comprehensive repo software in the world.repo managment: apt - yum - docker - maven - dll - helm repo's. jfrog is other that nowdays not free and open source. nexus has gui - web account managment and user pass - ssl - https -  recommanded****
+
+
+2- insecure registary - small and simple for small company that is not sensitiev data and security - or data centers not connected to net. https - have not account and user pass managment - have not gui - just cli - based on container as registery - not recommanded
+
+
+
+use notion to keep your note.
+
+
