@@ -261,3 +261,21 @@ docker service create --label prd
 then make all 5 node masters and workers. its persist to fault of 2 node. 
 
 
+
+# docker stack
+
+compose in swarm. instead of docker service create for docker compose use docker stack:
+
+docker stack deploy --compose-file docker-compose.yml voting-app
+
+
+in voting app ex. we do:
+
+git clone https://github.com/dockersamples/example-voting-app.git
+
+
+docker stack deploy --compose-file docker-stack.yml voting-app
+
+
+
+docker stack can work with docker swarm and k8s<=v1.23 . depends on in docker stack may not work. 
