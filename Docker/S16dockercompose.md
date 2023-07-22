@@ -668,7 +668,9 @@ docker ps -a  - to see replica on each one
 
 
 
-in load balace for nginx ip for assign to domain is leader ip address. 
+in load balace for nginx ip for assign to domain is leader ip address. (not container ip. leader node ip address : )
+
+curl 192.168.44.143:8080
 
 
 
