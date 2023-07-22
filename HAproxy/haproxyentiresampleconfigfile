@@ -1,3 +1,8 @@
+#Prior to creating your HAProxy service in Swarm, prepare your configuration file. 
+#The entire sample is found here. Please note that you have to store this file on the same path on all of your cluster nodes that could run your HAProxy container. 
+#We use /etc/haproxy/haproxy.cfg.
+
+
 global
     log     	 fd@2 local2
     chroot  	 /var/lib/haproxy
