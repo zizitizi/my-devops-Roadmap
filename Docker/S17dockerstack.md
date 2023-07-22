@@ -235,6 +235,8 @@ we use always masters ip.
 4- other node unlimited is worker
 
 
+### practices
+************************************
 
 practice1 - config haproxy with 3  float IP (masters) ? (send config in approx. 10 line) 
 
@@ -244,7 +246,12 @@ practice3 - what goes on leader when it is down in cluster in The following stat
 
 1- leave manually ?
 
+after leave manully with --force it did not return automatically we should user join command again
+
 2- crash that node or turn off and turn on that node?
+
+after turn off and turn on node return automatically but leadership not assign again. 
+
 
 practice4 - what and how is labeling? how can we label workers and masters in docker swarm? wich command is for label node? wich command is for assign service for specific node?
 
