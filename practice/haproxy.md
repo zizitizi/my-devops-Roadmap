@@ -1,3 +1,6 @@
+https://www.haproxy.com/blog/how-to-run-haproxy-with-docker
+
+
 Run Haproxy With Docker
 We’ll create three instances of a web application, one instance of HAProxy, and a bridge network to join them together. So, once you’ve installed Docker, use the following command to create a new bridge network in Docker:
 
