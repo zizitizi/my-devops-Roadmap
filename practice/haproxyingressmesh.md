@@ -15,55 +15,55 @@ now make haproxy configuration file in any path u like. i make it in (/opt/hapro
 
 vi haproxy.cfg
 *******************************
-global
-    log          fd@2 local2
-    chroot       /var/lib/haproxy
-    pidfile      /var/run/haproxy.pid
-    maxconn      4000
-    user         haproxy
-    group        haproxy
-    stats socket /var/lib/haproxy/stats expose-fd listeners
-    master-worker
-
-resolvers docker
-    nameserver dns1 127.0.0.11:53
-    resolve_retries 3
-    timeout resolve 1s
-    timeout retry   1s
-    hold other      10s
-    hold refused    10s
-    hold nx         10s
-    hold timeout    10s
-    hold valid      10s
-    hold obsolete   10s
-
-defaults
-    timeout connect 10s
-    timeout client 30s
-    timeout server 30s
-    log global
-    mode http
-    option httplog
-
-frontend  fe_web
-    bind *:80
-    use_backend stat if { path -i /my-stats }
-    default_backend be_nginx_service
-
-backend be_nginx_service
-    balance roundrobin
-    server-template nginx- 6 nginx-service:80 check resolvers docker init-addr libc,none
-
-backend be_nginx_service_wrong_case
-    balance roundrobin
-    server-template nginx- 6 nginx-service:80 check resolvers docker init-addr libc,none
-
-backend stat
-    stats enable
-    stats uri /my-stats
-    stats refresh 15s
-    stats show-legends
-    stats show-node
+    global
+        log          fd@2 local2
+        chroot       /var/lib/haproxy
+        pidfile      /var/run/haproxy.pid
+        maxconn      4000
+        user         haproxy
+        group        haproxy
+        stats socket /var/lib/haproxy/stats expose-fd listeners
+        master-worker
+    
+    resolvers docker
+        nameserver dns1 127.0.0.11:53
+        resolve_retries 3
+        timeout resolve 1s
+        timeout retry   1s
+        hold other      10s
+        hold refused    10s
+        hold nx         10s
+        hold timeout    10s
+        hold valid      10s
+        hold obsolete   10s
+    
+    defaults
+        timeout connect 10s
+        timeout client 30s
+        timeout server 30s
+        log global
+        mode http
+        option httplog
+    
+    frontend  fe_web
+        bind *:80
+        use_backend stat if { path -i /my-stats }
+        default_backend be_nginx_service
+    
+    backend be_nginx_service
+        balance roundrobin
+        server-template nginx- 6 nginx-service:80 check resolvers docker init-addr libc,none
+    
+    backend be_nginx_service_wrong_case
+        balance roundrobin
+        server-template nginx- 6 nginx-service:80 check resolvers docker init-addr libc,none
+    
+    backend stat
+        stats enable
+        stats uri /my-stats
+        stats refresh 15s
+        stats show-legends
+        stats show-node
 *******************************
 
 
