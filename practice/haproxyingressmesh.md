@@ -9,7 +9,7 @@ make nginx-network to communicate 3 node safly together:
 
 docker network create --attachable --driver overlay nginx-network
 
-### do this step in 3 node
+### do this step in 3 nodes:
 
 now make haproxy configuration file in any path u like. i make it in (/opt/haproxyzizi/) so do:
 
@@ -74,11 +74,19 @@ now make nginx servive on one of nodes:
 
 sudo docker service create   --mode replicated   --replicas 3   --name nginx-service   --network nginx-network   --endpoint-mode dnsrr   nginx:latest
 
+docker service ls
+
 
 now make HAproxy service on one of nodes:
 
 
 docker service create   --mode replicated   --replicas 1   --name haproxy-service   --network nginx-network   --publish published=80,target=80,protocol=tcp,mode=ingress   --publish published=443,target=443,protocol=tcp,mode=ingress   --mount type=bind,src=/opt/haproxyzizi/,dst=/etc/haproxy/,ro=true   --dns=127.0.0.11   haproxytech/haproxy-debian:2.0
+
+
+docker service ls
+
+docker service ps haproxy-service
+
 
 
 wait a moments to HAproxy service be available. than run to see service state on any node ip for ex.:
