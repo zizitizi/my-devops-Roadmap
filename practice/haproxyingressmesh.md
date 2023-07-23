@@ -14,8 +14,7 @@ docker network create --attachable --driver overlay nginx-network
 now make haproxy configuration file in any path u like. i make it in (/opt/haproxyzizi/) so do:
 
 vi haproxy.cfg
-
-
+*******************************
 global
     log          fd@2 local2
     chroot       /var/lib/haproxy
