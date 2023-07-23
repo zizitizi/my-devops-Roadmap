@@ -102,3 +102,13 @@ Conclusion
 In this blog post, you learned how running HAProxy inside of a Docker container can simplify its deployment and lifecycle management. Docker provides a standardized way for deploying applications, making the process repeatable and testable. While the CPU overhead of running Docker is negligible, it can incur extra network latency, but the impact of that depends on your use case and throughput needs.
 
 To run HAProxy, simply create an HAProxy configuration file and then call the docker run the command with the name of the HAProxy Docker image. HAProxy Technologies supplies up-to-date Docker images on Docker Hub.
+
+
+
+also read:
+
+
+https://docs.docker.com/engine/swarm/ingress/
+
+
+
