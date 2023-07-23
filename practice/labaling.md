@@ -6,7 +6,7 @@ Run these commands on any manager:
 
 **********************
   
-    sudo docker node update --label-add LB-NODE=yes dock2
+  >  sudo docker node update --label-add LB-NODE=yes dock2
     sudo docker node update --label-add LB-NODE=yes dock3
     
 **********************
