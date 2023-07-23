@@ -30,12 +30,13 @@ for ex.:
       --dns=127.0.0.11 \
       --constraint node.labels.LB-NODE==yes \
       haproxytech/haproxy-debian:2.0 /usr/sbin/haproxy -f /etc/haproxy/haproxy.cfg -L local_haproxy
-view raw
-blog20191008-22.sh hosted with ❤ by GitHub
+
+
 
 Or on an existing service with the docker service update command:
-$ docker service update --constraint-add node.labels.LB-NODE==yes haproxy-service
-view raw
-blog20191008-23.sh hosted with ❤ by GitHub
+
+
+    docker service update --constraint-add node.labels.LB-NODE==yes haproxy-service
+
 
 The container will only be started on nodes with a matching label.
