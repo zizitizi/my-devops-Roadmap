@@ -116,4 +116,11 @@ http://192.168.44.145
 
 
 
+to see logs
+
+sudo docker service logs --tail 20 haproxy-service
+
+
+
+
 
