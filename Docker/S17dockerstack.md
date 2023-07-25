@@ -199,10 +199,10 @@ in worker:
 
 vi /etc/fstab
 
-192.168.33.10:/backups /backups nfs defaults,timeo=900,retrans=5,_netdev 0 0
+192.168.44.136:/backups /opt/backups nfs defaults,timeo=900,retrans=5,_netdev 0 0
+192.168.44.136:/www /usr/share/nginx/html nfs defaults,timeo=900,retrans=5,_netdev 0 0
 
 
-192.168.33.10:/www /srv/www nfs defaults,timeo=900,retrans=5,_netdev 0 0
 
 
 
