@@ -149,9 +149,9 @@ apt install nfs-common   - in centos use yum install nfs-utils - its default ins
 
 and make mount point in all client servers.
 
-mkdir /var/www   -  make dir if not exist
+mkdir /mnt/www   -  make dir if not exist
 
-mkdir /opt/backups   
+mkdir /mnt/backups   
 
 mount that:
 
