@@ -164,15 +164,26 @@ to ckeck it use:
 
 df -Th   - df list file system , T reveal type of file systems and h is human readable
 
-hint: in master nfs servre in 
 
-cd /srv/nfs4/
+now we can :
+ cd /usr/share/nginx/html/
+
+ in any of servers:
+ touch text1.txt
+
+ see reault in all servers that path and directory
+
+
+
+ 
+
+hint: in master nfs servre give permission 777 to all directory of that writable path 
 
 chmod 777 www
 
-chmod 777 backups
+chmod 777 var
 
-chmod 777 /var/www
+chmod 777 /usr/share/nginx/html
 
 
 now we can write in server-2:
@@ -200,6 +211,7 @@ now in master node we create serveice with --mount  (note that service create ha
 docker service create --name nginx-service -p 8080:80 --mount type=bind,source=/var/www,target=/var/www --replicas 5 nginx:latest
 
 
+in docker service we must use --mount . we can tnot use --volume .
 
 couse in nfs used storage is server1 or master server then we should give it large storage and resource as well. in swarm and kuber masters node should have resource mount bigger that other node. worker is half than master
 
