@@ -122,5 +122,5 @@ sudo docker service logs --tail 20 haproxy-service
 
 
 
-
+https://www.haproxy.com/blog/haproxy-on-docker-swarm-load-balancing-and-dns-service-discovery
 
