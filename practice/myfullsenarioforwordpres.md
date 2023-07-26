@@ -14,7 +14,7 @@ below is my designation for word press installation for kingplus company:
 
 
 
-this is my convas link(onnly for me)
+this is my convas link(only for me)
 
 https://www.canva.com/design/DAFpt5GqAC4/JTdKq1xdiF3g81nGQ_OeoA/view?utm_content=DAFpt5GqAC4&utm_campaign=share_your_design&utm_medium=link&utm_source=shareyourdesignpanel
 
