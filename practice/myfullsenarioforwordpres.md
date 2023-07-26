@@ -10,7 +10,7 @@ this is my designed full senario for wordpress installation, we have 4 node tota
 below is my designation for word press installation for kingplus company:
 
 
-![wordpress app container](https://github.com/zizitizi/my-devops-Roadmap/assets/123273835/d52066a5-c0e4-4230-ab51-96c3d0a8d176)
+![wordpress app container (1)](https://github.com/zizitizi/my-devops-Roadmap/assets/123273835/3625c511-a5e8-415d-81e7-2a045a3b5a56)
 
 
 
