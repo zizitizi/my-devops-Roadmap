@@ -2,7 +2,7 @@
 # wordpress installtion senario
 
 
-this is my designed full senario for wordpress installation
+this is my designed full senario for wordpress installation, we have 4 node totally. we let one for nfs and haproxy that we right script for backup it weekly. 3 other node for installing wordpress and mysql containers.
 
 
 ## 1- designing arcitecture
