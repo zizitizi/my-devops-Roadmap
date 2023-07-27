@@ -159,6 +159,10 @@ now run haproxy container with specified configuration:
 
 now check the URLs:
 
+curl localhost
+
+curl localhost:8404
+
 http://192.168.44.136/    ---->haproxy server ip 
 
 http://192.168.44.136:8404/
