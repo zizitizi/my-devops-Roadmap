@@ -3,6 +3,10 @@
 
 docker service create -d --name nginx1 --network nginx-network -p 8080:80 nginx:latest
 
+
+haproxy is created in node that has below config file. 
+
+
 docker service create -d --name ha --network nginx-network -p 80:80     -p 8404:8404   --mount type=bind,source=$(pwd),target=/usr/local/etc/haproxy haproxytech/haproxy-alpine:2.4
 
 
@@ -40,6 +44,14 @@ backend http_back
    server node2 nginx1:8080 check
 
 
+
+http://192.168.44.145/
+
+http://192.168.44.145:8480
+
+http://192.168.44.145:8080
+
+also check for other ip
 
 
 
