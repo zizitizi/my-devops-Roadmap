@@ -176,7 +176,10 @@ To run HAProxy, simply create an HAProxy configuration file and then call the do
 
 
 
-### also read for swarm :
+### also read :
+
+
+https://www.haproxy.com/blog/how-to-run-haproxy-with-docker
 
 
 https://docs.docker.com/engine/swarm/ingress/
