@@ -1,4 +1,3 @@
-https://www.haproxy.com/blog/how-to-run-haproxy-with-docker
 
 
 # Run Haproxy With Docker
