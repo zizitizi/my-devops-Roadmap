@@ -157,7 +157,11 @@ now run haproxy container with specified configuration:
             docker run -d    --name haproxy    --net mynet    -v $(pwd):/usr/local/etc/haproxy:ro    -p 80:80    -p 8404:8404    haproxytech/haproxy-alpine:2.4
 
 
+now check the URLs:
 
+http://192.168.44.136/    ---->haproxy server ip 
+
+http://192.168.44.136:8404/
 
 ​
 # Conclusion
