@@ -107,6 +107,58 @@ To delete the containers and network, run the docker stop, docker rm, and docker
       $ sudo docker network rm mynetwork
 
 
+
+
+# sample 2 nginx
+
+first you should define appriciate network. for swarm choose --driver=overlay and for docker network type bridge.
+
+            docker network create --driver=bridge mynet
+
+then make your proper nginx docker with specifeid network and other desired options.
+
+            docker run --name nginx136 -dit --network mynet nginx:latest
+
+make config file for haproxy container to mount it in container:
+
+            vi haproxy.cfg
+
+copy below configuration file with Pay attention to the nginx service name, other server name is optional:            
+
+
+            global
+              stats socket /var/run/api.sock user haproxy group haproxy mode 660 level admin expose-fd listeners
+              log stdout format raw local0 info
+            
+            defaults
+              mode http
+              timeout client 10s
+              timeout connect 5s
+              timeout server 10s
+              timeout http-request 10s
+              log global
+            
+            frontend stats
+              bind *:8404
+              stats enable
+              stats uri /
+              stats refresh 10s
+            
+            frontend myfrontend
+              bind :80
+              default_backend webservers
+            
+            backend webservers
+              server zizi-pc nginx136:80 check
+
+
+now run haproxy container with specified configuration:
+
+            docker run -d    --name haproxy    --net mynet    -v $(pwd):/usr/local/etc/haproxy:ro    -p 80:80    -p 8404:8404    haproxytech/haproxy-alpine:2.4
+
+
+
+
 ​
 # Conclusion
 
