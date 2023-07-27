@@ -5,19 +5,19 @@ https://www.haproxy.com/blog/how-to-run-haproxy-with-docker
 
 We’ll create three instances of a web application, one instance of HAProxy, and a bridge network to join them together. So, once you’ve installed Docker, use the following command to create a new bridge network in Docker:
 
-$ sudo docker network create --driver=bridge mynetwork
+      $ sudo docker network create --driver=bridge mynetwork
 
 
 Then use the docker run command to create and run three instances of the web application. In this example, I use the Docker image jmalloc/echo-server. It’s a simple web app that returns back the details of the HTTP requests that you send to it.
 
-$ sudo docker run -d \
-   --name web1 --net mynetwork jmalloc/echo-server:latest
-   
-$ sudo docker run -d \
-   --name web2 --net mynetwork jmalloc/echo-server:latest
-   
-$ sudo docker run -d \
-   --name web3 --net mynetwork jmalloc/echo-server:latest
+      $ sudo docker run -d \
+         --name web1 --net mynetwork jmalloc/echo-server:latest
+         
+      $ sudo docker run -d \
+         --name web2 --net mynetwork jmalloc/echo-server:latest
+         
+      $ sudo docker run -d \
+         --name web3 --net mynetwork jmalloc/echo-server:latest
 
 
 Notice that we assign each one a unique name and attach it to the bridge network we created. You should now have three web applications running, which you can verify by calling the docker ps command:
