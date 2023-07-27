@@ -184,4 +184,5 @@ https://www.haproxy.com/blog/how-to-run-haproxy-with-docker
 https://docs.docker.com/engine/swarm/ingress/
 
 
+https://www.haproxy.com/blog/haproxy-configuration-basics-load-balance-your-servers
 
