@@ -1,0 +1,77 @@
+version: "3.8"
+
+services:
+  database:
+    deploy:
+      placement:
+        constraints:
+          - "node.role == manager"
+      replicas: 1
+      restart_policy:
+        condition: any
+    environment:
+      - MYSQL_ROOT_PASSWORD=roottoor
+      - MYSQL_USER=wpdb
+      - MYSQL_PASSWORD=Password123
+      - MYSQL_DATABASE=wpdb
+    image: mariadb:latest
+    networks:
+      - backend-net
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - ./database/mariadb.cnf:/etc/mysql/conf.d/mariadb.cnf
+      - ./database/initdb.d:/docker-entrypoint-initdb.d
+      - db_vol:/var/lib/mysql
+
+  phpmyadmin:
+    deploy:
+      placement:
+        constraints:
+          - "node.role == manager"
+      replicas: 1
+      restart_policy:
+        condition: any
+    environment:
+      - PMA_HOST=database
+      - UPLOAD_LIMIT=1024000000
+    image: phpmyadmin/phpmyadmin:latest
+    networks:
+      - backend-net
+    ports:
+      - "127.0.0.1:9000:80"
+
+  wordpress:
+    deploy:
+      mode: replicated
+      placement:
+        constraints:
+          - "node.role == worker"
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: any
+    environment:
+      - WORDPRESS_DB_HOST=database:3306
+      - WORDPRESS_DB_USER=wpdb
+      - WORDPRESS_DB_NAME=wpdb
+      - WORDPRESS_DB_PASSWORD=Password123
+    image: wordpress:5.5-php7.4-apache
+    ports:
+      - "80:80"
+    networks:
+      - backend-net
+    volumes:
+      - wp_vol:/var/www/html
+
+networks:
+  backend-net:
+    driver: overlay
+    driver_opts:
+      encrypted: ""
+
+volumes:
+  db_vol:
+  wp_vol:
