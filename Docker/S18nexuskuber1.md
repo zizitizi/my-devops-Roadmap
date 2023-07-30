@@ -239,13 +239,35 @@ setting is for config managment .  we can create new repo in repositories in thi
 
 in create repo section we have 3 type:
 
-*****hosted*****  - local private repo that we can pull and push to it.
+*****hosted*****  - local private repo that we can pull and push to it. no need for internet. 
 
-**proxy**  -
+***proxy***  - nexus repo is proxy to other external repo for ex.: docker hub - or ubuntu.com - you can push and pull to it but it need to internet connection. its transparent. we can place it in private network that just nexus server access the internet to be proxy repo. 
 
-***group***  -
+***group***  - it can be proxy repo that proxied to multiple site or different external repo. for ex.: pypi. 
 
+#### blob store
 
+is storage for nexus that where to save its data. Blob storage is a type of cloud storage for unstructured data. A "blob," which is short for Binary Large Object, is a mass of data in binary form that does not necessarily conform to any file format. Blob storage keeps these masses of data in non-hierarchical storage areas called data lakes.
+
+it used in cloud specially in azure cloud. 
+
+#### Proprietary Repositories
+
+is oposite of open source. its confidentional repo. just drag and drop repo to Proprietary Hosted Repositories. 
+
+#### security 
+
+privillage -- can make new acl and policy  - role: admin high privilaged and ananymose least privilage just can pull from repo . user and ananymose also for access management.
+
+ldap is linux active directory - centralise user with ldap (lpic2) - configuring ldap server (active directory server in windows) - give the ldap or ad server address to make connection. then no need to user and role to be defined in nexus. 
+
+realm - is scope that define user to athunticate for default nexus do realm for local authenticate and authorization we can add docker bearer realm and save it.
+
+you can buy and put here ssl certificate to have https connection. then reset docker compose to be applied. 
+
+#### email server
+
+we can configure nexus user mail in our email serve here for alert. 
 
 # kubernetese - k8s
 
