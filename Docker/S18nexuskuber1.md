@@ -79,7 +79,18 @@ bind mount this path to save image:
 
 /home/zizi/repodocker/:/var/lib/registry/docker/registry/v2/
 
+to remove one image do :
 
+rm -rf nginx/
+
+also garbage collect to remove all layer of that image . use it inside that container:
+
+registry garbage-collect /etc/docker/registry/config.yml
+
+
+### to see that image related  tag:
+
+curl -sS 192.168.44.136:5000/v2/redis/tags/list
 
 
 
