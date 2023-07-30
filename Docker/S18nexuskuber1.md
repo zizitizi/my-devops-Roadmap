@@ -294,6 +294,25 @@ sed -i 's|http://ir.archive.ubuntu.com/ubuntu|http://192.168.44.136:8081/reposit
 docker(proxy) --->repodocker--->tick http: write 8082 for port . next repo will be 8083. ---> Allow anonymous docker pull ( Docker Bearer Token Realm required ) ticked ----> Allow clients to use the V1 API to interact with this repository(allow older docker to connect) ticked---> remote storage: https://registry-1.docker.io (if it has ssl tick :Use certificates stored in the Nexus Repository truststore to connect to external systems) or other gitlab docker repository or github address. ---> here we use docker hub then select: Use Docker Hub -----> create repository. 
 
 
+now get its url address:
+
+http://192.168.44.136:8081/repository/repodocker/
+
+now go to :
+
+sudo vi /etc/docker/daemon.json
+
+
+{
+"insecure-registries" : ["192.168.44.136:8082"]
+}
+
+ 
+systemctl daemon-reload
+
+systemctl restart docker
+
+
 
 
 
