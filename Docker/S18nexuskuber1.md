@@ -34,7 +34,7 @@ curl 127.0.0.1:5000/v2/_catalog
 
 now just 127.0.0.1 ip can push to registry but for announce it to other server with default ip address we should change the default regidtry to it then :
 
-for this purpose in every server do:
+for this purpose in every server do: (default  registry for docker host)
 
 vi /etc/docker/daemon.json
 
@@ -43,6 +43,15 @@ vi /etc/docker/daemon.json
 "insecure-registries" : ["192.1668.44.136:5000"]
 }
  
+
+systemctl daemon-reload
+
+systemctl restart docker
+
+
+
+
+
 
 
 
