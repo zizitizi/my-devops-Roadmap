@@ -93,6 +93,10 @@ registry garbage-collect /etc/docker/registry/config.yml
 curl -sS 192.168.44.136:5000/v2/redis/tags/list
 
 
+repo list:
+
+ curl -sS 192.168.44.136:5000/v2/_catalog
+
 
 
 # nexus
@@ -126,6 +130,18 @@ ssh  - ip port user
 
 
 ssl  - token
+
+
+apt - yum - maven - dll - docker repo ,...
+
+minimum need 2 -3 gig ram. secure- gui - to install nexus in docker :
+
+
+vi docker-compose.yml
+
+
+
+
 
 
 
