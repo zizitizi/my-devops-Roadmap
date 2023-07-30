@@ -391,7 +391,18 @@ k8s 1.23 supports: docker - crio - lxc
 k8s 1.24 and later: crio - mirantis (cri-dockerd) - containerd (without high level runtime). nowday every one recommand using containerd. ******
 
 
+#### pod
+beams pod. one pod may include more that one container . but its best practice is one main gontainer is in pod and related side care conntainer (nginx - prometeous-..)
 
+worker  ----> container runtime(docker) (kubelet) (ip:port) 30080 (ports must be over 30000) ----> pod (kubectl) (ip:port) ----> ctr (container) (ip :port)  
+
+
+container: smallest unit in docker 
+
+pod: smallest unit in k8s
+
+
+k8s is not container runtime and need minimum containerd to run container.
 
 
 
