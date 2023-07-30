@@ -381,7 +381,11 @@ kube etcd or cluster store   - save aapreciate config that recive from api serve
 
 kube controller sends request to kublet in worker . kuelet is worker daemon in node that connect with container runtime like docker and gives command from kube controller and senf it to continer runtime and monitoring reporting to controller manager. 
 
+kube proxy - is proxy server in every node in k8s. 
 
+k8s make virtual ip in cluster like : 10.244.0.1/24 . 
+
+note : kubelet and kubeproxy is on every node master and worker. all node negotiate with kubeproxy with each other. ssl connection and for keep security. port 6443. master node has ca serve that issued cert token for 24 hours.  proxy acts as proxy for source reverse proxy for destination kubelet and node. 
 
 k8s 1.23 supports: docker - crio - lxc
 k8s 1.24 and later: crio - mirantis (cri-dockerd) - containerd (without high level runtime). nowday every one recommand using containerd. ******
