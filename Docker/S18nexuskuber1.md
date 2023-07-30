@@ -60,8 +60,11 @@ hint:
 also for use docker.ir add this line to daemon.jason too.
 
 {
-        "secure-registries" : ["registry.docker.ir"]
+        "insecure-registries" : ["192.168.44.136:5000"],
+        
+        "registry-mirrors": ["https://registry.docker.ir"]
 }
+
 
 
 
