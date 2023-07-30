@@ -56,6 +56,12 @@ systemctl restart docker
 
 docker image tag nginx:latest 192.168.44.136:5000/nginx:latest
 
+hint:
+also for use docker.ir add this line to daemon.jason too.
+
+{
+        "secure-registries" : ["registry.docker.ir"]
+}
 
 
 
