@@ -205,6 +205,10 @@ use 8082 port for pull and push to docker repo. if u have another repo then use 
 
 
 
+first of all you should login for first time:
+
+
+
 # kubernetese - k8s
 
 
