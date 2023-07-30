@@ -36,13 +36,17 @@ now just 127.0.0.1 ip can push to registry but for announce it to other server w
 
 for this purpose in every server do: (default  registry for docker host)
 
-vi /etc/docker/daemon.json
+sudo vi /etc/docker/daemon.json
 
 
 {
 "insecure-registries" : ["192.1668.44.136:5000"]
 }
  
+note: if you use ssl or https just write: 
+
+"secure-registries" : ["192.1668.44.136:5000"]
+
 
 systemctl daemon-reload
 
@@ -50,7 +54,7 @@ systemctl restart docker
 
 
 
-
+docker image tag nginx:latest 192.168.44.136:5000/nginx:latest
 
 
 
