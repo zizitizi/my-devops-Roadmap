@@ -269,6 +269,23 @@ you can buy and put here ssl certificate to have https connection. then reset do
 
 we can configure nexus user mail in our email serve here for alert. 
 
+
+
+practice - create new repo:
+
+cat /etc/apt/sources.list
+
+
+apt(proxy)--> myrepojammy (name)  --> distro: apt setting: jammy --> location- if we use proxy then give address ( http://archive.ubuntu.com/ubuntu) ----> create repo. 
+
+then get url:
+
+http://192.168.44.136:8081/repository/myrepojammy/
+
+
+
+
+
 # kubernetese - k8s
 
 
