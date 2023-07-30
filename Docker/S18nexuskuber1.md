@@ -112,18 +112,6 @@ cd ~/repodocker/repositories/nginx
 
 
 
-# nexus
-
-local registery 
-
-we can install ssl to secure pull and push to it.
-
-ssl -https == secure registery
-
-
-with out ssl == insecure registery
-
-
 
 ### ssl
 
@@ -145,18 +133,58 @@ ssh  - ip port user
 ssl  - token
 
 
+
+
+# nexus
+
+local registery 
+
+we can install ssl to secure pull and push to it.
+
+ssl -https == secure registery
+
+
+with out ssl == insecure registery
+
+
+
 apt - yum - maven - dll - docker repo ,...
 
 minimum need 2 -3 gig ram. secure- gui - to install nexus in docker :
+
+first make directory
+
+ mkdir ./host-nexus-data
+
+give it permission 200 (nexus user) :
+
+sudo chown 200:200 host-nexus-data/
 
 
 vi docker-compose.yml
 
 
 
+docker compose up
+
+docker ps -a
+
+docker logs -f zizi-nexus-1
+
+wait till gor message 
+
+satrted
+
+
+then go to browser:
+
+192.168.44.136:8081
 
 
 
+
+use 8081 port for apt and yum repo.
+use 8082 port for pull and push to docker repo. if u have another repo then use added port again. every repo have one port with multiple image. but per repo per port - 
 
 
 
