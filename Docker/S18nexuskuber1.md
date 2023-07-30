@@ -363,6 +363,32 @@ google also publish GKE or Google kubernetese engine.
 
 ibm and redhat (openshift) also costumize kuber. 
 
+kuber change in version is very much need to read anf reserach more. 
+k8s - have 7 major feature: storage orchestration - secret and config managment - automatic bin packing - self healing- automatic roll out and rollback - service discovery and load balancing.
+
+kubernetese master calls control plane or cp node. worker node called node that older called miniun. 
+
+main module in cp node is:
+
+kube api server: core of cp node that connect with scheduler and controller. cli tools that send commands to kube api server is kubectl. some version has gui added to cli. 
+
+kube scheduler - main task is node selection. select worker that is less load . send to controller to run container on that node. 
+
+kube controller-manager  - sends commands from api server to workers - just negotiate with worker. and monitoring kubelet.
+
+kube etcd or cluster store   - save aapreciate config that recive from api server. config storage - kube config is for saving metadata and config for all of cluster. if we install kube ctl in our laptop and able to see master node . then with kube config file we can connect to all cluster and send commands to api serve and do every thing. then maintaining and backup and securing etcd is very important.
+
+
+kube controller sends request to kublet in worker . kuelet is worker daemon in node that connect with container runtime like docker and gives command from kube controller and senf it to continer runtime and monitoring reporting to controller manager. 
+
+
+
+k8s 1.23 supports: docker - crio - lxc
+k8s 1.24 and later: crio - mirantis (cri-dockerd) - containerd (without high level runtime). nowday every one recommand using containerd. ******
+
+
+
+
 
 
 
