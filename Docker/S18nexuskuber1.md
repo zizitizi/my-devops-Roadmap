@@ -98,6 +98,19 @@ repo list:
  curl -sS 192.168.44.136:5000/v2/_catalog
 
 
+#### practice:
+
+docker run -dit --name registry -p 5000:5000 -v /home/zizi/repodocker/:/var/lib/registry/docker/registry/v2/  registry:latest
+
+curl -sS 192.168.44.136:5000/v2/_catalog
+
+docker push 192.168.44.136:5000/nginx
+
+curl -sS 192.168.44.136:5000/v2/_catalog
+
+cd ~/repodocker/repositories/nginx
+
+
 
 # nexus
 
