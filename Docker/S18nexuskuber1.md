@@ -350,7 +350,18 @@ harbor repo is new repo manager and used for k8s
 
 # kubernetese - k8s
 
+rank #1 in orchestrator for container runtime that is opensource with many derivatives. swarm is #2 and apache mesos is rank #3. 
+container low level runtime is runc , containerd. container high level runtime is docker, RKT, CRIO, LXC , podman....
 
+this platform used to maintaining and deploying group of containers.
+
+cncf.io maintainer site for kuber. same as linux fundation. its for standards confirmation. kuber write in go/golang. 
+
+microsoft costumize kubernetese for azure that give it name , AKS or azure kubernetese service.
+amazon also publish EKS or elastic kubernetese service.
+google also publish GKE or Google kubernetese engine.
+
+ibm and redhat (openshift) also costumize kuber. 
 
 
 
