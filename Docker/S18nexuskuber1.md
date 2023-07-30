@@ -326,6 +326,27 @@ docker login 192.168.44.136:8082
 it did not go to docker hub it login to nexus server. 
 
 
+commonly used port is 5000 in repos. 
+
+**for push you should make new hosted docker repo (repo1). in proxy mode it cant push couse it want pushed image to docker hub.**
+
+
+docker image tag nginx:latest 192.168.44.136:8082/rep1/nginx:latest
+
+docker image tag nginx:latest 192.168.44.136:8082/repo1:nginx
+
+
+docker push 192.168.44.136:8082/nginx:latest
+
+
+harbor repo is new repo manager and used for k8s
+ practice - install harbor
+
+
+ note - java repo is maven hosted - npm for java script repo.
+
+ 
+
 
 # kubernetese - k8s
 
