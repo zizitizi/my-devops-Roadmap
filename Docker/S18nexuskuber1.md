@@ -239,7 +239,7 @@ setting is for config managment .  we can create new repo in repositories in thi
 
 in create repo section we have 3 type:
 
-*hosted*  - local private repo that we can pull and push to it.
+*****hosted*****  - local private repo that we can pull and push to it.
 
 **proxy**  -
 
