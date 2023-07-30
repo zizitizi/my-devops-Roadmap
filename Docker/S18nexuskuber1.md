@@ -173,7 +173,11 @@ docker logs -f zizi-nexus-1
 
 wait till gor message 
 
-satrted
+-------------------------------------------------
+zizi-nexus-1  |
+zizi-nexus-1  | Started Sonatype Nexus OSS 3.58.1-02
+zizi-nexus-1  |
+zizi-nexus-1  | -------------------------------------------------
 
 
 then go to browser:
