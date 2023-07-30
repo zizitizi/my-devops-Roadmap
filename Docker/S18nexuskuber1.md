@@ -22,7 +22,7 @@ docker image ls
 
 docker push 127.0.0.1:5000/nginx
  
-
+curl 127.0.0.1:5000/v2/_catalog
 
 now just 127.0.0.1 ip can push to registry but for announce it to other server with default ip address we should change the default regidtry to it then :
 
