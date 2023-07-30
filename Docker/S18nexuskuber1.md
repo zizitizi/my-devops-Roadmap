@@ -313,7 +313,17 @@ systemctl daemon-reload
 systemctl restart docker
 
 
+now for login in servers:
 
+in place of docker login write:
+
+docker login 192.168.44.136:8082
+
+ admin
+ 
+ zizi
+
+it did not go to docker hub it login to nexus server. 
 
 
 
