@@ -14,10 +14,17 @@ to see repo:
 
 curl 127.0.0.1:5000/v2/_catalog
 
+to push an image to it first tag your image then push it to repo:
+
+docker image tag nginx:latest 127.0.0.1:5000/nginx:latest
+
+docker image ls
+
+docker push 127.0.0.1:5000/nginx
+ 
 
 
-
- to announce it to other server:
+now just 127.0.0.1 ip can push to registry but for announce it to other server with default ip address we should change the default regidtry to it then :
 
 
  
