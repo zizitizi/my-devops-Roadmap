@@ -66,6 +66,22 @@ also for use docker.ir add this line to daemon.jason too.
 }
 
 
+### volume to persist image
+
+ docker exec -it registry sh
+
+  cd /var/lib/registry/docker/registry/v2/repositories/
+
+  
+
+
+bind mount this path to save image:
+
+/home/zizi/repodocker/:/var/lib/registry/docker/registry/v2/
+
+
+
+
 
 
 # nexus
