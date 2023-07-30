@@ -284,7 +284,7 @@ http://192.168.44.136:8081/repository/myrepojammy/
 
 sed -i 's|firstword|secondword |g'  /etc/apt/source.list
 
-sed -i 's|http://ir.archive.ubuntu.com/ubuntu|http://192.168.44.136:8081/repository/myrepojammy|g' /etc/apt/sources.list    - all address in this file replaced with nexus address. just hit this command in all servers and finish. all serever connect to nexus to use apt repo. 
+sed -i 's|http://ir.archive.ubuntu.com/ubuntu|http://192.168.44.136:8081/repository/myrepojammy|g' /etc/apt/sources.list    - all address in this file replaced with nexus address. just hit this command in all servers and finish. all serever connect to nexus to use apt repo. in common we use ansible to set this command in all servers and clients. 
 
 
 
