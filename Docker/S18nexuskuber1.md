@@ -205,7 +205,45 @@ use 8082 port for pull and push to docker repo. if u have another repo then use 
 
 
 
-first of all you should login for first time:
+first of all you should login for first and one time:
+
+go to sign in :
+
+/nexus-data/admin.password on the server.
+
+cd host-nexus-data/
+
+ cat admin.password
+
+admin
+ 
+fae43943-0b4a-4197-838f-7a01e1d3c146
+
+go to wizard give it new pass and conf. next enable ananymose access. complete setup.
+
+Enable anonymous access means that by default, users can search, browse and download components from repositories without credentials. Please consider the security implications for your organization.
+
+Disable anonymous access should be chosen with care, as it will require credentials for all users and/or build tools.
+
+
+Enable anonymous access for download ans pull anonymosly by other server is recomand for now.
+
+
+we have 2 place in nexus:
+
+
+brows is for content and repo see and brows sections . 
+
+setting is for config managment .  we can create new repo in repositories in this section. 
+
+
+in create repo section we have 3 type:
+
+*hosted*  - local private repo that we can pull and push to it.
+
+**proxy**  -
+
+***group***  -
 
 
 
