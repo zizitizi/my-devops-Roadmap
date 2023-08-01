@@ -1,4 +1,8 @@
-*******
+###You need to specify one of the following as an environment variable:
+#     - MYSQL_ROOT_PASSWORD
+#     - MYSQL_ALLOW_EMPTY_PASSWORD
+#     - MYSQL_RANDOM_ROOT_PASSWORD
+
 version: "3.8"
 services:
   db:
