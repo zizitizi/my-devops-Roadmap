@@ -2,7 +2,7 @@
 #     - MYSQL_ROOT_PASSWORD
 #     - MYSQL_ALLOW_EMPTY_PASSWORD
 #     - MYSQL_RANDOM_ROOT_PASSWORD
-
+#this stack works for me with swarm 
 version: "3.8"
 services:
   db:
