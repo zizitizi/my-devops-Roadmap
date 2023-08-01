@@ -239,15 +239,15 @@ vi docker-compose.yml:
         - "5858:5858"
       networks:
         - voting-app-network
-  
-  networks:
-    voting-app-network:
-    voting-app-front:
-      name: frontendnet
-  volumes:
-    postgres_data:
-  
-  
+    
+    networks:
+      voting-app-network:
+      voting-app-front:
+        name: frontendnet
+    volumes:
+      postgres_data:
+    
+    
   
   
 
