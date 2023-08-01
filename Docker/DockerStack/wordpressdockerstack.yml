@@ -3,6 +3,7 @@
 #     - MYSQL_ALLOW_EMPTY_PASSWORD
 #     - MYSQL_RANDOM_ROOT_PASSWORD
 #this stack works for me with swarm 
+#docker service scale  wpstack_wordpress=3
 version: "3.8"
 services:
   db:
