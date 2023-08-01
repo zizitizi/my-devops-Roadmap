@@ -1,0 +1,41 @@
+*******
+version: "3.8"
+services:
+  db:
+    image: mysql:latest
+    container_name: mysqllatestwp
+    environment:
+        MYSQL_DATABASE: zizidb
+        MYSQL_USER: zizi
+        MYSQL_PASSWORD: zizi
+        MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    restart: always
+    volumes:
+        - db:/var/lib/mysql
+    networks:
+        - wp-net
+
+
+  wordpress:
+    image: wordpress:latest
+    container_name: wplatest
+    environment:
+       WORDPRESS_DB_HOST: db
+       WORDPRESS_DB_USER: zizi
+       WORDPRESS_DB_PASSWORD: zizi
+       WORDPRESS_DB_NAME: zizidb
+    volumes:
+       - wordpress:/var/www/html
+    restart: always
+    ports:
+      - 8080:80
+    networks:
+      - wp-net
+
+networks:
+  wp-net:
+     name: wpnet
+     driver: overlay
+volumes:
+  db:
+  wordpress:
