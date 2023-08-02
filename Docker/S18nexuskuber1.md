@@ -375,6 +375,10 @@ make sure you have added insecure registery in :
   
   systemctl restart docker
 
+for pull:
+
+docker pull 192.168.44.136:8082/mydockerrepo:odoo
+
 
 # kubernetese - k8s
 
