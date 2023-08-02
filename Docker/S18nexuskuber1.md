@@ -345,7 +345,35 @@ harbor repo is new repo manager and used for k8s
 
  note - java repo is maven hosted - npm for java script repo.
 
+ *****important note:*****
+
+ for push to nexus docker repo pay attention to port on hosted repo
+
+docker image tag nginx:latest 192.168.44.136:8082/mydockerrepo:nginx
+
+ your adrres in push in following format:
+
+
+ docker login 192.168.44.136:8082
  
+ docker push 192.168.44.136:8082/mydockerrepo:nginx
+
+
+make sure you have added insecure registery in :
+
+sudo vi /etc/docker/daemon.json
+
+
+{
+        "insecure-registries" : ["192.168.44.136:5000"],
+        "insecure-registries" : ["192.168.44.136:8082"],
+        "registry-mirrors": ["https://registry.docker.ir"]
+}
+
+
+systemctl daemon-reload
+
+systemctl restart docker
 
 
 # kubernetese - k8s
