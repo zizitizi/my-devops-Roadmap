@@ -49,6 +49,31 @@ above command make change temporary to make it persist we should write it in fst
 
 for automate this write action to fstab we use sed command.
 
+cat /etc/fstab
+
+
+#/etc/fstab: static file system information.
+#Use 'blkid' to print the universally unique identifier for a
+#device; this may be used with UUID= as a more robust way to name devices
+#that works even if disks are added and removed. See fstab(5).
+#<file system> <mount point>   <type>  <options>       <dump>  <pass>
+#/ was on /dev/sda3 during installation
+UUID=195b38d8-a72d-441e-9e90-11725d5446b5 /               ext4    errors=remount-ro 0       1
+#/boot/efi was on /dev/sda2 during installation
+UUID=9DD4-5FBA  /boot/efi       vfat    umask=0077      0       1
+/swapfile                                 none            swap    sw              0       0
+/dev/fd0        /media/floppy0  auto    rw,user,noauto,exec,utf8 0       0
+
+first line is uuid hardisk 1 that is mount to partition / in format ext4 
+
+in configuration file we never delet line just comment it.
+
+
+
+
+sudo sed -i '/swap/s/^\//\#\//g' /etc/fstab
+
+
 
 
 
