@@ -45,6 +45,10 @@ swapoff -a    - make all swap off all parition on all harddisk off
 
 swapon -s    - status of swap.
 
+above command make change temporary to make it persist we should write it in fstab file. fiel system table file.
+
+for automate this write action to fstab we use sed command.
+
 
 
 
