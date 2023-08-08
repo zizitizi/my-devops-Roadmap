@@ -132,6 +132,7 @@ systemctl status containerd.service
 
 ## 4- Install kubeadm, kubelet & kubectl on all nodes:
 
+this is
 
 
 
