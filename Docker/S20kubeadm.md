@@ -111,6 +111,40 @@ containerd config include all config and write them in that file
 
 
 
+## 3- change config in containerd on all node:
+
+To use the systemd cgroup driver in containerd with runc. 
+
+linux to manage resources (HW,SW) and isolated grup of process use namespace by cgruop (control group) module. we just see and manage namespace (ns). linux automatically use cgroups to. cgroup is kernel module is bg of ns in os module. k8s force all related container runtimes to use its linux cgroup not them cgroup. then we shold change cgroup in containerd to use linux cgroup not containerd cgroups. it means in config file SystemdCgroup = true. then :
+
+vi /etc/containerd/config.toml  or best practice is use sed instead:
+
+
+sed -E -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
+
+
+systemctl daemon-reload
+
+systemctl restart containerd.service
+
+
+systemctl status containerd.service
+
+## 4- Install kubeadm, kubelet & kubectl on all nodes:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
