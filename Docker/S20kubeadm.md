@@ -87,6 +87,32 @@ sudo swapoff -a
 
 to disable it.
 
+do all above procedure in all node master and worker.
+
+
+## 2- install container runtime in all node:
+
+k8s supports CRIO - containerd - cri-dockerd mirantis.
+
+every experts just use containerd.io that is best practice. io is complete pakage with all tools . then we install containerd.io on all node mastera and worker. nowdays we dont use containerd instead we use containerd.io v1.6 and higher for k8s 1.27 . we install it from docker-ce repository.
+
+
+sudo apt-get update; sudo apt-get install ca-certificates curl gnupg -y
+
+sudo apt install containerd.io
+
+ containerd --version
+
+su -
+
+containerd config default > /etc/containerd/config.toml
+
+containerd config include all config and write them in that file
+
+
+
+
+
 
 
 
