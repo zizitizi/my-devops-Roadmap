@@ -42,3 +42,15 @@ that we exract from above link.
 
 
 then import your vless or vmess link in it explorer.
+
+
+test it on browcer:
+
+youtube.com
+
+in terminal:
+
+ping youtube.com
+
+
+
