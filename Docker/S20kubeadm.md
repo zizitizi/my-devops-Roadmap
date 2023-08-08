@@ -69,9 +69,24 @@ first line is uuid hardisk 1 that is mount to partition / in format ext4
 in configuration file we never delet line just comment it.
 
 
+sed 's/firstword/secondword/g' /etc/fstab  - in that file find firstword then replace with secondword
+
+sed '2,6s/firstword/secondword/g' /etc/fstab   -  in line 2 to 6 of that file find firstword then replace with secondword
+
+sed 'rain/s/firstword/secondword/g' /etc/fstab   -  in line that include rain in that file find firstword then replace with secondword
+
+
+use \ to scape charachter. use -i for make it replace file make it persist
 
 
 sudo sed -i '/swap/s/^\//\#\//g' /etc/fstab
+
+then press :
+
+sudo swapoff -a
+
+to disable it.
+
 
 
 
