@@ -132,7 +132,47 @@ systemctl status containerd.service
 
 ## 4- Install kubeadm, kubelet & kubectl on all nodes:
 
-this is
+kernel include modules hw and sw ro comniucate with hardware
+
+monolithic kernel supports all harware and load it
+
+none monolithic or mikro kernel not include all driver = windows
+
+linux is hybrid kernel cause linux scan your hw and install on your hard. we can load or unload modules in linux
+
+kernel.org have kernerl release.
+
+too see kernel file 
+
+cd /boot/
+
+ls -lh
+
+vmlinuz-5.19.0-50-generic is kernel module. 12 m. 
+
+lsmod   - list of module
+
+lsmod|wc -l   - count of list of module
+
+insmod  - insert mod in module but we need to add dependency manually. its too dificult ( works same ast dkpg)
+
+modeprobe   -  module prober but we do not need to add dependency manually. its automaticaly and easy and recommanded ( works same ast apt)
+
+delmod  -  delete module
+
+to install k8s we need to load module br_netfilter (bridge switch) , overlay (file format)
+
+
+modprobe br_netfilter
+
+modprobe overlay
+
+ 
+lsmod | grep  br_netfilter
+
+lsmod | grep overlay
+
+
 
 
 
