@@ -239,14 +239,68 @@ k8s upgrade is very heavy works and nead much downtime in datacenters. then we n
 apt-mark hold kubelet kubeadm kubectl
 
 
+systemctl status kubelet
+
+kubectl version
+
+kubeadm version
+
+
+kubelet --version
+
+
+
+
+
+ 
 
 hint: 
 sysctl -a | grep swap
 
-vm.swappiness = 60   - linux swappiness is 60 but we increase it to 80 or 90 every where if we have not k8s there. then when ram goes 90 it swith to swap
+vm.swappiness = 60   - linux swappiness is 60 but we increase it to 80 or 90 every where if we have not k8s there. then when ram goes 90 it swith to swap and add it to file to persist it
+
 
 sysctl -w vm.swappiness=90
 
+# k8s initialization
+
+
+kubeadm init --help
+
+
+advertise ip that all node see and ping each other on that ip  - ip a
+
+pod net work cidr - k8s gives pods ip and port and ns ,..  . we should specify rang ip /16 for k8s. ex. pattern:
+
+10.244.1.1   - worker1
+
+   10.244.1.2   - pod2
+
+   10.244.1.3   - pod3
+
+   10.244.1.4   - pod4
+
+   .
+  
+
+10.244.2.1   - worker2
+
+     10.244.2.2   - pod2
+
+     10.244.2.3   - pod3
+
+     10.244.2.4   - pod4
+
+     .
+
+.
+
+.
+
+.
+
+
+k8s make vswitch to handle connection between nodes , pods ,... that called pod network addon. 
 
 
 
@@ -267,6 +321,52 @@ sysctl -w vm.swappiness=90
 
 
 
+
+
+
+
+
+
+
+
+kubeadm init --apiserver-advertise-address 192.168.44.136 --pod-network-cidr 10.244.0.0/16
+
+
+kubeadm config images pull
+
+
+if we encounterd an error we should 
+
+kubeadm reset  - clear cluster (opsitte of kubeadm init)
+
+
+rm -rf $HOME/.kube/config 
+
+
+then run 
+
+kubeadm init --apiserver-advertise-address 192.168.44.136 --pod-network-cidr 10.244.0.0/16
+
+
+again. when you get succefully initialize message! 3 parameters should be set:
+
+
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+
+
+kubeadm join 192.168.44.136:6443 --token sayq8e.845wmtdxxkdycndy \
+        --discovery-token-ca-cert-hash sha256:e680b25aa2debb1c6100e2677ba012b90e23db14a2f7814beac84348415a7472
 
 
 
