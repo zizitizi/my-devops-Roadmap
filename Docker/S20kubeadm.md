@@ -192,8 +192,11 @@ K8s need to add below parameter. then we uncommnet it in that file:
 
 net.ipv4.ip_forward=1
 
+sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
 
+sysctl --system
 
+sysctl -a | grep net.ipv4.ip_forward
 
 
 
