@@ -132,6 +132,9 @@ systemctl status containerd.service
 
 ## 4- Install kubeadm, kubelet & kubectl on all nodes:
 
+
+#### kernel module 
+
 kernel include modules hw and sw ro comniucate with hardware
 
 monolithic kernel supports all harware and load it
@@ -162,16 +165,32 @@ delmod  -  delete module
 
 to install k8s we need to load module br_netfilter (bridge switch) , overlay (file format)
 
+  
+  modprobe br_netfilter
+  
+  modprobe overlay
+  
+   
+  lsmod | grep  br_netfilter
+  
+  lsmod | grep overlay
+  
 
-modprobe br_netfilter
+#### kernel parameters:
 
-modprobe overlay
 
- 
-lsmod | grep  br_netfilter
+configs of kernel module is  parameters. for ex.: swappiness=80x parameter in one module --> when ram usage reach to 80% then swith module to swap mem.
 
-lsmod | grep overlay
+to check kernel parameters use:
 
+sysctl  --> to manage kernel parameters. its config store in the /etc/sysctl.conf to persist them. 
+
+systemctl ---> to manage daemons
+
+
+K8s need to add below parameter. then we uncommnet it in that file:
+
+net.ipv4.ip_forward=1
 
 
 
