@@ -217,16 +217,35 @@ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
 
 echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
-apt update; apt install kubelet kubeadm kubectl –y
+apt update
+
+apt install kubelet kubeadm kubectl -y
 
 sudo apt-mark hold kubelet kubeadm kubectl
 
+to see other release version of a app run:
+
+apt-cache policy kubeadm    - see all version of kubeadm 
+
+apt install kubeadm=1.27.4-00 
+
+
+apt-mark hold  - when we hold this its not upgrade
+
+apt-mark unhold  -when we unhold this its upgrade automatically
+
+k8s upgrade is very heavy works and nead much downtime in datacenters. then we need to hold it for specific time as you need.
+
+apt-mark hold kubelet kubeadm kubectl
 
 
 
+hint: 
+sysctl -a | grep swap
 
+vm.swappiness = 60   - linux swappiness is 60 but we increase it to 80 or 90 every where if we have not k8s there. then when ram goes 90 it swith to swap
 
-
+sysctl -w vm.swappiness=90
 
 
 
