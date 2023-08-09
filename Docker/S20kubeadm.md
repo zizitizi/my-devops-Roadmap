@@ -208,6 +208,21 @@ now install below pakage:
 
 apt update; apt install apt-transport-https ca-certificates curl conntrack -y
 
+conntrack is virtual switch and ip forward . 
+
+now add google repo and sign it:
+
+
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+apt update; apt install kubelet kubeadm kubectl –y
+
+sudo apt-mark hold kubelet kubeadm kubectl
+
+
+
 
 
 
