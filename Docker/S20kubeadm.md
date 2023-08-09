@@ -194,9 +194,21 @@ net.ipv4.ip_forward=1
 
 sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
 
-sysctl --system
+sysctl --system    - to reload sysctl and apply new config without reboot. 
 
 sysctl -a | grep net.ipv4.ip_forward
+
+to change paramater from command:
+
+sysctl -w net.ipv4.ip_forward=1    - this temporary becaouse when system reboot os read file /etc/sysctl.conf
+
+
+
+now install below pakage:
+
+apt update; apt install apt-transport-https ca-certificates curl conntrack -y
+
+
 
 
 
