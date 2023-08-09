@@ -369,5 +369,21 @@ kubeadm join 192.168.44.136:6443 --token sayq8e.845wmtdxxkdycndy \
         --discovery-token-ca-cert-hash sha256:e680b25aa2debb1c6100e2677ba012b90e23db14a2f7814beac84348415a7472
 
 
+kubectl get nodes
 
+
+when pod network installed then node status change from not ready to ready.
+
+kubectl get pods -A
+
+
+coredns also depends on pod network. if it up it change from pending to running
+
+ kubectl get pods -o wide -A
+
+
+ kubeadm --help
+
+
+ 
 
