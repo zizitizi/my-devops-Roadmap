@@ -302,6 +302,386 @@ pod net work cidr - k8s gives pods ip and port and ns ,..  . we should specify r
 
 k8s make vswitch to handle connection between nodes , pods ,... that called pod network addon. 
 
+#### pod network flannel
+
+networks on k8s is yaml file that runs as pods. to run it apply it. its iclude 5-6 resource object writen in yml that merge together. 
+note that we can merge multiple yml fiel in one yml file with --- (3dash role) to specify seperation of them. frist section in this yaml file is in kind of namespace then have not spec section.
+
+
+wget https://github.com/coreos/flannel/raw/master/Documentation/kube-flannel.yml
+
+
+   ---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: kube-flannel
+  labels:
+    k8s-app: flannel
+    pod-security.kubernetes.io/enforce: privileged
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  labels:
+    k8s-app: flannel
+  name: flannel
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  resources:
+  - nodes
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - nodes/status
+  verbs:
+  - patch
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - clustercidrs
+  verbs:
+  - list
+  - watch
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  labels:
+    k8s-app: flannel
+  name: flannel
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: flannel
+subjects:
+- kind: ServiceAccount
+  name: flannel
+  namespace: kube-flannel
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    k8s-app: flannel
+  name: flannel
+  namespace: kube-flannel
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: kube-flannel-cfg
+  namespace: kube-flannel
+  labels:
+    tier: node
+    k8s-app: flannel
+    app: flannel
+data:
+  cni-conf.json: |
+    {
+      "name": "cbr0",
+      "cniVersion": "0.3.1",
+      "plugins": [
+        {
+          "type": "flannel",
+          "delegate": {
+            "hairpinMode": true,
+            "isDefaultGateway": true
+          }
+        },
+        {
+          "type": "portmap",
+          "capabilities": {
+            "portMappings": true
+          }
+        }
+      ]
+    }
+  net-conf.json: |
+    {
+      "Network": "10.244.0.0/16",
+      "Backend": {
+        "Type": "vxlan"
+      }
+    }
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: kube-flannel-ds
+  namespace: kube-flannel
+  labels:
+    tier: node
+    app: flannel
+    k8s-app: flannel
+spec:
+  selector:
+    matchLabels:
+      app: flannel
+  template:
+    metadata:
+      labels:
+        tier: node
+        app: flannel
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/os
+                operator: In
+                values:
+                - linux
+      hostNetwork: true
+      priorityClassName: system-node-critical
+      tolerations:
+      - operator: Exists
+        effect: NoSchedule
+      serviceAccountName: flannel
+      initContainers:
+      - name: install-cni-plugin
+        image: docker.io/flannel/flannel-cni-plugin:v1.2.0
+        command:
+        - cp
+        args:
+        - -f
+        - /flannel
+        - /opt/cni/bin/flannel
+        volumeMounts:
+        - name: cni-plugin
+          mountPath: /opt/cni/bin
+      - name: install-cni
+        image: docker.io/flannel/flannel:v0.22.1
+        command:
+        - cp
+        args:
+        - -f
+        - /etc/kube-flannel/cni-conf.json
+        - /etc/cni/net.d/10-flannel.conflist
+        volumeMounts:
+        - name: cni
+          mountPath: /etc/cni/net.d
+        - name: flannel-cfg
+          mountPath: /etc/kube-flannel/
+      containers:
+      - name: kube-flannel
+        image: docker.io/flannel/flannel:v0.22.1
+        command:
+        - /opt/bin/flanneld
+        args:
+        - --ip-masq
+        - --kube-subnet-mgr
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "50Mi"
+        securityContext:
+          privileged: false
+          capabilities:
+            add: ["NET_ADMIN", "NET_RAW"]
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: EVENT_QUEUE_DEPTH
+          value: "5000"
+        volumeMounts:
+        - name: run
+          mountPath: /run/flannel
+        - name: flannel-cfg
+          mountPath: /etc/kube-flannel/
+        - name: xtables-lock
+          mountPath: /run/xtables.lock
+      volumes:
+      - name: run
+        hostPath:
+          path: /run/flannel
+      - name: cni-plugin
+        hostPath:
+          path: /opt/cni/bin
+      - name: cni
+        hostPath:
+          path: /etc/cni/net.d
+      - name: flannel-cfg
+        configMap:
+          name: kube-flannel-cfg
+      - name: xtables-lock
+        hostPath:
+          path: /run/xtables.lock
+          type: FileOrCreate
+   
+
+kubectl apply -f 
+
+or write:
+
+kubectl apply -f https://github.com/coreos/flannel/raw/master/Documentation/kube-flannel.yml
+
+
+it downloads flannel.
+
+kubectl get pods -A -o wide
+
+
+then we see flannel is a pod that include 2 containers. 
+
+use watch to see and follow result :
+
+
+ watch kubectl get pods -A
+
+
+ after running flannel --> core dns is ruuning ---> after core dns running ---> our pods status change to ready.
+
+
+ kubectl get pods -A 
+
+ kubectl describe pods podname1 -n namesspaceofpods
+
+
+ hint:
+
+ to relate master and worker turn off vpns cause it make vrtual network on them. 1core 1gig freet ier aws is good for vpn. for 1 years.100 gig teraffic is free and limit it. then you should config limit badget managment to 1 $ . then ssuttle to it. 
+
+
+ when all done and all nodes get ready then reboot your all servers. 
+
+
+ to drop a node from cluster :
+
+ kubeadm reset   - delet every configuration and left cluster. that on master get all cluster down.
+
+ when a coomadn didnot work that write completion for it.
+
+
+ kubeadm completion --help
+
+
+ kubeadm completion bash > /etc/bash_completion.d/kubeadm
+
+/etc/bash_completion    ----> is a file for bash completion (tab)
+
+for third parthy bash completion we have directory (/etc/bash_completion.d) then add third party file to this directory. with above command. becareful about .d/  -  then make file with that thirdparty name and out put completion output to it. then logout and login again or press:
+
+bash -l   - reload bash again
+
+or
+
+exit
+
+
+
+do above stage again for kubectl
+
+ kubectl completion bash > /etc/bash_completion.d/kubectl
+
+ bash -l
+
+
+
+
+upgrade is used for major version 1.27 ---> 1.28
+
+
+
+
+kubeadm token list   - show topken list
+
+kubeadm token delete   - delete token
+
+
+kubectl delete nodes nodename1   - delet that node 
+
+
+kubeadm token create --print-join-command   - it makes token and give you join command
+
+
+when we add nodes its bestpractice to keep security delete tokens.
+
+
+k8s role for nodes (worker) is none we can put it names (worker) with :  
+
+kubectl label node nodenamezizi node-role.kubernetes.io/worker=worker
+
+
+kubectl get namespaces
+
+kubectl get ns
+
+
+kubectl create namespace monitoring
+
+kubectl get ns
+
+
+vim pod2.yml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  namespaces: monitoring
+spec:
+  containers:
+  - name: nginx-ctr
+    image: nginx:latest
+    ports:
+    - containerPort: 80 
+
+
+
+
+kubectl apply -f pod2.yml
+
+kubectl get pods -n monitoring
+
+kubectl get pods -n monitoring -o wide
+
+
+kubectl delete pods nginx -n monitoring   - delete it
+
+
+
+kubectl apply -f pod2.yml  --v=2   -verbose to debag message when apply what happens. its recommanded. *******  
+
+slide76
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+ 
+
+
+ 
+
+
+ 
 
 
 
