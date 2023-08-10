@@ -384,6 +384,19 @@ coredns also depends on pod network. if it up it change from pending to running
 
  kubeadm --help
 
+### kubespray
+
+a opensource tools in github repo to easy installing k8s. Kubespray is a composition of Ansible playbooks, inventory, provisioning tools, and domain knowledge for generic OS/Kubernetes clusters configuration management tasks.
+
+
+*****best practice*****
+you can write yous kubespray and put it on github. write a playbook and bashscript for install and initial k8s and push it on github. (500-600 line)
+
+
+
+
+
+
 
  
 
