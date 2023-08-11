@@ -303,7 +303,11 @@ pod net work cidr - k8s gives pods ip and port and ns ,..  . we should specify r
 k8s make vswitch to handle connection between nodes , pods ,... that called pod network addon. 
 
 
+kubeadm init needs 2 parameters:
 
+--apiserver-advertise-address   - ip address of master node that all node on that can ping each other.
+
+--pod-network-cidr    -  selected and related pod network add-on recommanded ip range.
 
 ## pod network
 
