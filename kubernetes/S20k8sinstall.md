@@ -312,6 +312,17 @@ kubeadm init needs 2 parameters:
 
 kubeadm init --apiserver-advertise-address 192.168.44.136 --pod-network-cidr 10.244.0.0/16
 
+export KUBECONFIG=/etc/kubernetes/admin.conf  - when we are in user root
+
+
+or all 3 below option in master node if we are not in user root. 
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+
+
 
 
 ## pod network
