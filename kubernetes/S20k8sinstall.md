@@ -322,6 +322,18 @@ or all 3 below option in master node if we are not in user root.
   sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 
+if we get any error in join or init - do reset and init or join again:
+
+kubeadm reset
+
+
+rm -rf $HOME/.kube/config
+
+
+kubeadm join 192.168.44.136:6443 --token sayq8e.845wmtdxxkdycndy         --discovery-token-ca-cert-hash sha256:e680b25aa2debb1c6100e2677ba012b90e23db14a2f7814beac84348415a7472
+
+
+ or kubeadm init --apiserver-advertise-address 192.168.44.136 --pod-network-cidr 10.244.0.0/16
 
 
 
