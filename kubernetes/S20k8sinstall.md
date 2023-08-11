@@ -305,9 +305,14 @@ k8s make vswitch to handle connection between nodes , pods ,... that called pod 
 
 kubeadm init needs 2 parameters:
 
---apiserver-advertise-address   - ip address of master node that all node on that can ping each other.
+--apiserver-advertise-address   - ip address of master node that all node on that can ping each other. see that ip with ip a command. 
 
 --pod-network-cidr    -  selected and related pod network add-on recommanded ip range.
+
+
+kubeadm init --apiserver-advertise-address 192.168.44.136 --pod-network-cidr 10.244.0.0/16
+
+
 
 ## pod network
 
