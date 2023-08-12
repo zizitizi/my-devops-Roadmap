@@ -522,6 +522,37 @@ slide76
 
 
 
+### sort base on 2 column scape header 
+
+sed -u 1q   - print out just header .The -u option tells sed to use unbuffered output, which means it will output each line as it processes it instead of waiting for a buffer to fill up.
+
+sort -k2   - sort based on column 2
+
+sed -u 1q; sort -k2  - sort result or out put base on culumn 2 and scape header. for ex.:
+
+
+kubectl get pods -A -o wide| (sed -u 1q; sort -k2)
+
+
+   NAMESPACE      NAME                           READY   STATUS    RESTARTS   AGE   IP               NODE      NOMINATED NODE   READINESS GATES
+   kube-system    coredns-5d78c9869d-7xj5k       1/1     Running   0          65m   10.244.0.4       zizi      <none>           <none>
+   kube-system    coredns-5d78c9869d-nwvcn       1/1     Running   0          65m   10.244.0.5       zizi      <none>           <none>
+   kube-system    etcd-zizi                      1/1     Running   5          66m   192.168.44.136   zizi      <none>           <none>
+   kube-system    kube-apiserver-zizi            1/1     Running   5          66m   192.168.44.136   zizi      <none>           <none>
+   kube-system    kube-controller-manager-zizi   1/1     Running   8          66m   192.168.44.136   zizi      <none>           <none>
+   kube-flannel   kube-flannel-ds-44prd          1/1     Running   0          61m   192.168.44.142   zizi-pc   <none>           <none>
+   kube-flannel   kube-flannel-ds-9rs66          1/1     Running   0          61m   192.168.44.136   zizi      <none>           <none>
+   kube-flannel   kube-flannel-ds-jks4q          1/1     Running   0          61m   192.168.44.143   zizi-3    <none>           <none>
+   kube-flannel   kube-flannel-ds-vr9mn          1/1     Running   0          56m   192.168.44.145   zizi-4    <none>           <none>
+   kube-system    kube-proxy-28t8g               1/1     Running   0          56m   192.168.44.145   zizi-4    <none>           <none>
+   kube-system    kube-proxy-6zd98               1/1     Running   0          65m   192.168.44.136   zizi      <none>           <none>
+   kube-system    kube-proxy-lk7l5               1/1     Running   0          65m   192.168.44.143   zizi-3    <none>           <none>
+   kube-system    kube-proxy-v792d               1/1     Running   0          65m   192.168.44.142   zizi-pc   <none>           <none>
+   kube-system    kube-scheduler-zizi            1/1     Running   6          66m   192.168.44.136   zizi      <none>           <none>
+   staging        nginx-pod                      0/1     Pending   0          25m   <none>           <none>    <none>           <none>
+   default        nginx-pod                      0/1     Pending   0          37m   <none>           <none>    <none>           <none>
+
+
 
 
 
