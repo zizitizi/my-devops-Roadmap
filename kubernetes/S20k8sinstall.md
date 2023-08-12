@@ -489,20 +489,20 @@ kubectl get ns
 
 
 vim pod2.yml
-
-apiVersion: v1
-kind: Pod
-metadata:
-  name: nginx-pod
-  namespaces: monitoring
-spec:
-  containers:
-  - name: nginx-ctr
-    image: nginx:latest
-    ports:
-    - containerPort: 80 
-
-
+    
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: nginx-pod
+      namespaces: monitoring
+    spec:
+      containers:
+      - name: nginx-ctr
+        image: nginx:latest
+        ports:
+        - containerPort: 80 
+    
+    
 
 
 kubectl apply -f pod2.yml
