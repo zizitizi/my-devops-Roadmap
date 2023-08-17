@@ -24,12 +24,12 @@ in user root:
 
 vi ~/.bashrc  - add below line at the ends.
 
-export KUBECONFIG=/etc/kubernetes/admin.conf
+                  export KUBECONFIG=/etc/kubernetes/admin.conf
 
 
 or
 
-echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> ~/.bashrc
+                  echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> ~/.bashrc
 
 
 for other user than root add below line to that file:
