@@ -2,3 +2,171 @@
 
 sudo -i
 
+echo "nameserver 10.202.10.202" > /etc/resolv.conf
+
+echo "nameserver 192.168.44.136" >> /etc/resolv.conf
+
+cat /etc/resolv.conf
+
+
+netplan apply
+
+
+
+ swapon -s
+
+
+cat /etc/fstab
+
+
+sudo sed -i '/swap/s/^//#//g' /etc/fstab
+
+
+cat /etc/fstab
+
+
+swapoff -a
+
+
+sudo apt-get update; sudo apt-get install ca-certificates curl gnupg -y
+
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+
+
+sudo apt-get update
+
+
+sudo apt install containerd.io
+
+
+
+containerd --version
+
+
+
+containerd config default > /etc/containerd/config.toml
+
+
+
+sed -E -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml
+
+
+systemctl daemon-reload
+
+
+
+systemctl restart containerd.service
+
+
+
+ systemctl status containerd.service
+
+
+
+ cat  /etc/containerd/config.toml
+
+
+
+cat  /etc/containerd/config.toml | grep SystemdCgroup
+
+
+
+modprobe br_netfilter
+
+
+ modprobe overlay
+
+
+lsmod | grep br_netfilter
+
+
+lsmod | grep overlay
+
+
+
+
+sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
+
+
+
+
+sysctl --system
+
+
+
+
+sysctl -a | grep net.ipv4.ip_forward
+
+
+
+apt update; apt install apt-transport-https ca-certificates curl conntrack -y
+
+
+
+
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+
+
+ echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+
+
+apt update
+
+
+
+apt install kubelet kubeadm kubectl -y
+
+
+
+
+sudo apt-mark hold kubelet kubeadm kubectl
+
+
+
+ systemctl status kubelet
+
+
+
+ kubectl version
+
+
+
+kubeadm version
+
+
+kubelet --version
+
+
+
+kubeadm completion bash > /etc/bash_completion.d/kubeadm
+
+
+kubectl completion bash > /etc/bash_completion.d/kubectl
+
+
+
+bash -l
+
+
+
+
+kubectl get nodes
+
+
+
+
+
+
+
+
