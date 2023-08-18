@@ -76,6 +76,24 @@ but becarefull about:
 
 it uses kuberouter not flannel.
 
+alt+enter  ---> make window max and min.
+
+
+
+other example site:
+
+
+https://k8s-examples.container-solutions.com/examples/Pod/Pod.html
+
+
+
+dns for master and worker should be same and no more than 2 for ex.:
+
+8.8.8.8
+
+9.9.9.9
+
+
 
 
 
