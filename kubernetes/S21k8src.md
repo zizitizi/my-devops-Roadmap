@@ -221,8 +221,81 @@ kubectl cp test.txt nginx-rc-4tnr2:/tmp/test.txt
 we called deploy. 
 
 
+interview: what is difference between rc and deply:
+
+replica set in deployment means a specified version of application. when we chande image version of app in template in yaml file , k8s shoutdown older deploy replica set and runs deploy with new replicaset (version of app (image)) . if new app have a bug then we manually shoutdown new replicaset and runs old shutdowned replica set. deploy rollback feature is very usefull. we dont hane rollout undo or replicaset in this means in rc.
+
+
+in rc we have just rollout update . but in deploy we have rollback(rollout undo).
+ 
+in rc we do with kubectl command rollout update that delete old version (not shutdown it) and replace it. it make app from scratch again. it means it works rolling-update == apply command.
+
+kubectl rolling-update -f rc.yaml
+
+
+
+in deployment we can revision in replicaset.
+
+
+versioning system in this replicaset is same as docker and git.
+
+
+in deployment apiversion change to : apps/v1  - kind is Deployment  - in selector we have matchLabels:.
+
+
+
+vi deploy.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+  labels:
+    app: nginx
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+
+
+
+ kubectl apply -f deploy.yaml
+
+
+  kubectl delete rc nginx-rc
+
+
+kubectl get deploy -o wide
+
+
+kubectl get pods -o wide
+
+
+we can ping curl all pod with its ip.
+
+
+kubectl get deploy -o wide
+
+
+ kubectl get rs -o wide   - replicaset
+
+ kubectl get pods -o wide
+
 
  
+
+
 
 
 
