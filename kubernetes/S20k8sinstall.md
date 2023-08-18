@@ -81,6 +81,11 @@ use \ to scape charachter. use -i for make it replace file make it persist
 
 sudo sed -i '/swap/s/^\//\#\//g' /etc/fstab
 
+for me this work on some ubuntu too:
+
+sed -i '/swap/s/^/#/g' /etc/fstab
+
+
 then press :
 
 sudo swapoff -a
