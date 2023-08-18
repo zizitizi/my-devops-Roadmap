@@ -118,22 +118,132 @@ image pull policy : always   - its default is ifnotpresent . we can delet it
 protocol - witch node - we can delete it
 
 
+preemption policy  - its for priority- by default is up to down . used in give priority to database and app. to use we sould define priority class.
 
 
 
 
 
-
-
-
-
-
-
-
+ kubectl apply -f podnginx2.yml --v 2   - its for before that running pod. its for creating stage for debug
 
 
 
 # # replication controller (rc)
+
+replication controller is one of objects (resource) in k8s. it called rc. but its deprecated now. we wite kind: ReplicationController
+
+we it when we want replica in k8s.  1 pod == 1 container and we can not scale it. when we want loadbalance =5 then we use rc.
+
+we can use multiple replica set in one rc but its not recomanded. we one rc for one app. one rc is better than a pod. couse its scalable but pod not. 
+
+be carefull in real world after version 1.21 and production environmet in practice not use pod nor rc we just use deployment . in place of pod we use 1 pod deployment. but some organization still use old version of k8s 1.20 and older. then they use rc instead of deployment.
+in yml file we use kind rc and replicas number in spec also selector , and template. we define pods in template section that include spec and metadata. in spec of template label is mandatory to specify that app. note that we dont have name in template. selector section is exactly same as lable section. 
+
+
+
+example for our pod in rc:
+
+vi rc.yml
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: nginx-rc
+spec:
+  replicas: 5
+  selector:
+    app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+
+
+
+kubectl delete pods nginx-pod -n staging
+
+
+kubectl apply -f rc.yml
+
+
+kubectl get rc -o wide
+
+kubectl get pods -o wide
+
+
+
+we can ping all pod and curl all that pod ip.
+
+curl 10.244.3.5
+
+ping 10.244.3.5
+
+
+till now we dont have load balancer. we define it in networking section. you can check it with:
+
+kubectl get svc -o wide
+
+
+ kubectl describe rc nginx-rc
+
+kubectl logs -f nginx-rc-rvfnr   - log of one of rc's
+
+to exec to rc we use:
+
+kubectl exec -it rc/nginx-rc -- bash      - that take in one of rc pods first pod of list (naming).
+
+to exec to specified pod of rc :
+
+kubectl exec -it nginx-rc-jxf26 -- bash
+
+to increase or decrease replicas. we have 2 option : by kubectl commnad by editing source yaml file.
+
+ kubectl scale --replicas 8 rc/nginx-rc
+
+kubectl get rc -o wide
+
+
+or by edit above file replicas section.
+
+kubectl get rc -o wide
+
+kubectl cp test.txt nginx-rc-4tnr2:/tmp/test.txt
+
+
+# # deployment
+
+we called deploy. 
+
+
+
+ 
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
