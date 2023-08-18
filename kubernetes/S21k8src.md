@@ -96,6 +96,39 @@ dns for master and worker should be same and no more than 2 for ex.:
 
 
 
+kubectl get pods -A -o name
+
+
+kubectl get pods -A -o wide| (sed -u 1q; sort -k2)   - you can get ip
+
+
+
+kubectl get pods -o yaml
+
+***kubectl get pods nginx-pod -o yaml -n staging***  --- its very important . you can see yaml file of running file we you have not source yaml file . copy that yaml to vscode and cutout optional parameter to make it simple. for ex.:
+
+apiversions - items - first can be deleted
+
+annotation - can be deleted 
+
+resoure version - uuid -- timestamp -- can be deleted
+
+image pull policy : always   - its default is ifnotpresent . we can delet it
+
+protocol - witch node - we can delete it
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
