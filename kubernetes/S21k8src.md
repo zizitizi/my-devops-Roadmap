@@ -301,7 +301,7 @@ kubectl describe deployments.apps nginx-deploy
 
 vi deploy.yml
 
-minReadySeconds :10s 
+minReadySeconds :10s   - if our pod takes loger time to be ready we should increase it. its time to k8s wait to run one pod to ready then go to another pod
 
    strategy :
 
@@ -309,15 +309,75 @@ minReadySeconds :10s
 
       rollingUpdate:
 
-         maxUnavailable: 1
+         maxUnavailable: 1   - let k8s to be decrease 1 replica from desired state ( here 3/4 allowed but 2/4 not allowed)
 
-         maxSurge: 1
+         maxSurge: 1   - let k8s to be increase 1 replica from desired state( for ex.: 5/4 allowed - but 6/4 not allowed when its 1)
 
 
-image: to wich version
+image: nginx:1.16.1 to wich version
+
+
+
+then for ex:
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+  labels:
+    app: nginx
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nginx
+
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx:1.16.1
+        ports:
+        - containerPort: 80
+
+
+
 
 
 kubectl apply -f deploy.yml
+
+
+
+kubectl rollout status deployment/nginx-deploy
+
+kubectl rollout history deployment/nginx-deploy
+
+
+kubectl annotate deployments.apps/nginx-deploy kubernetes.io/change-cause='image update to version 1.16.1'
+
+
+kubectl get rs -o wide
+
+
+to increase replica again:
+
+kubectl scale deployment/nginx-deploy --replicas 5   - or in yaml file and apply
+
+kubectl get rs -o wide
+
+
+
+when our pods nomber is high (for ex. 100) than we can set max surge and max unavailable to 5 than k8s update replica to new one 5 by 5 and wait for all 5 , 10s then down old version and go to next 5 no. to update (it works like: 45/50  - 55/50 ) . 
 
 
 
@@ -392,9 +452,46 @@ kubectl rollout resume deployment/nginx-deploy
  
 
 
+if rollout version rs is exist then switch between that version is quickly and on the fly but if that revision is not available it takes some times to be updated.
 
 
 
+## hoizontal pos auto scaler (hpa)
+
+total usage of cpu in all worker if reached to specified amount then decrease replica amount.
+
+ kubectl autoscale deployment/nginx-deploy --min 8 --max 12 --cpu-percent 60
+
+
+kubectl get deploy -o wide
+
+kubectl get rs -o wide
+
+kubectl get hpa -o wide
+
+
+
+### cordon - drain
+
+when we have maintenance mode in one node that may be affect pods. than we use cordon mode that means unschedulable mode. then kube scheduler do not schedule that node . its stands for new pods did not assign to cordon node but its pod still keep in ruuning mode. we use it when maintenace dont need reboot.
+
+ kubectl cordon zizi-pc3  - unsceduled and cordoned  
+
+
+ kubectl get nodes
+
+kubectl uncordon zizi-pc3
+
+  kubectl get nodes
+
+
+
+drain mode is same as cordon but make all pod on that node down and move its pod to other pods.
+
+kubectl drain zizi-pc3
+
+
+kubectl uncordon zizi-pc3   - for undrain we should uncordon we have not undrain commnand
 
 
 
