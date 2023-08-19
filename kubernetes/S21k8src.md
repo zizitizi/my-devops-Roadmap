@@ -486,12 +486,37 @@ kubectl uncordon zizi-pc3
 
 
 
-drain mode is same as cordon but make all pod on that node down and move its pod to other pods.
+drain mode is same as cordon but make all pod on that node down and move its pod to other pods. it use in maintenace mode that node needs reboot
 
-kubectl drain zizi-pc3
+kubectl drain zizi-pc3  --ignore-daemonsets   
+
+kubectl uncordon zizi-pc3   - for undrain we should uncordon we have not undrain commnand - but if new command or pod goes here not ruuning pods.
 
 
-kubectl uncordon zizi-pc3   - for undrain we should uncordon we have not undrain commnand
+
+kubectl get all   - check everything and get everything
+
+
+to restart pod or k8s we just have rollout . its one of reasons we use 1deployment with 1replica instead of 1pod or rc.
+
+
+ kubectl rollout restart deployment/nginx-deploy
+
+
+kubectl get all -o wide
+
+
+kubectl delete rs/nginx-deploy-5b846f99f4
+
+
+kubectl cluster-info   - read kube config
+
+ kubectl cluster-info dump
+
+
+kubectl cluster-info dump --output-directory /tmp   - backup to /tmp. its from every log every info in cluster make it interval backup please 
+
+
 
 
 
