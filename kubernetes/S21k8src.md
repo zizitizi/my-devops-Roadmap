@@ -295,6 +295,108 @@ kubectl get deploy -o wide
 kubectl describe deployments.apps nginx-deploy
 
 
+#### updating a deployment
+
+1- via edit yml source file. vi deploy.yml and apply . then we should set some parameters:
+
+vi deploy.yml
+
+minReadySeconds :10s 
+
+   strategy :
+
+      type: rollingUpdate
+
+      rollingUpdate:
+
+         maxUnavailable: 1
+
+         maxSurge: 1
+
+
+image: to wich version
+
+
+kubectl apply -f deploy.yml
+
+
+
+2- via kubectl set image command . this commadn make rollout . 
+
+kubectl set image deploy/nginx-deploy nginx-container=nginx:1.14   - k8s change version one by one. after first running with  new version  then shutdown older one then waits for 10 s then runs second after run shotdown old one then wait 10s  ,.....  ( it make 4/4 --> 5/4 --->4/4 ---->5/4 ,....)
+
+
+kubectl rollout status deployment/nginx-deploy  -  we see this report just one time when its updated.  to see history use history command
+                  
+                  Waiting for deployment "nginx-deploy" rollout to finish: 2 out of 4 new replicas have been updated...
+                  Waiting for deployment "nginx-deploy" rollout to finish: 2 out of 4 new replicas have been updated...
+                  Waiting for deployment "nginx-deploy" rollout to finish: 2 out of 4 new replicas have been updated...
+                  Waiting for deployment "nginx-deploy" rollout to finish: 3 out of 4 new replicas have been updated...
+                  Waiting for deployment "nginx-deploy" rollout to finish: 3 out of 4 new replicas have been updated...
+                  Waiting for deployment "nginx-deploy" rollout to finish: 3 out of 4 new replicas have been updated...
+                  Waiting for deployment "nginx-deploy" rollout to finish: 3 out of 4 new replicas have been updated...
+                  Waiting for deployment "nginx-deploy" rollout to finish: 1 old replicas are pending termination...
+                  Waiting for deployment "nginx-deploy" rollout to finish: 3 out of 4 new replicas have been updated...
+                  Waiting for deployment "nginx-deploy" rollout to finish: 1 old replicas are pending termination...
+                  Waiting for deployment "nginx-deploy" rollout to finish: 1 old replicas are pending termination...
+                  Waiting for deployment "nginx-deploy" rollout to finish: 1 old replicas are pending termination...
+                  Waiting for deployment "nginx-deploy" rollout to finish: 1 old replicas are pending termination...
+                  Waiting for deployment "nginx-deploy" rollout to finish: 3 of 4 updated replicas are available...
+                  deployment "nginx-deploy" successfully rolled out
+
+
+
+
+
+
+
+kubectl get rs -o wide
+
+
+
+#### for rollout undo:
+
+
+kubectl rollout history deployment/nginx-deploy   - to write CHANGE-CAUSE , write annotations. use it as below in current version:
+
+kubectl annotate deployment/nginx-deploy kubernetes.io/change-cause='image update to version 1.14'
+
+kubectl rollout history deployment/nginx-deploy
+
+
+roolback == rollout undo:
+
+
+if we have revisions:
+1-2-3-4-5-6   - then we want go fron 6 to 3. then k8s make new vaersion 7(=3) then delete revision 3 from list: 1-2-4-5-6-7
+
+ kubectl get deployments.apps nginx-deploy -o wide
+
+ kubectl get rs -o wide
+
+ kubectl rollout undo deployment/nginx-deploy   - rollback to before version
+
+
+ kubectl annotate deployments/nginx-deploy kubernetes.io/change-cause='rollout undo to latest'
+
+
+ kubectl rollout history deployment/nginx-deploy
+
+
+
+                       - to rollout undo or rollback to specified version
+
+
+ 
+
+
+
+
+
+
+
+
+
 
  
 
