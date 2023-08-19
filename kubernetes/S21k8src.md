@@ -292,6 +292,9 @@ kubectl get deploy -o wide
 
  kubectl get pods -o wide
 
+kubectl describe deployments.apps nginx-deploy
+
+
 
  
 
