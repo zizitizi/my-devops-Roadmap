@@ -384,9 +384,11 @@ if we have revisions:
 
 
 
-                       - to rollout undo or rollback to specified version
+kubectl rollout undo deployment/nginx-deploy --to-revision=2      - to rollout undo or rollback to specified version
 
+kubectl rollout pause deployment/nginx-deploy   - pause the rollout 
 
+kubectl rollout resume deployment/nginx-deploy
  
 
 
