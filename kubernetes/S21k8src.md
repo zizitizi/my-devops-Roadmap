@@ -538,37 +538,37 @@ kubectl delete deploy/nginx-deploy
 
 vi ds.yml
 
-
-apiVersion: apps/v1
-kind: DaemonSet
-metadata:
-  name: nginx-ds
-  labels:
-    app: nginx
-spec:
-  #replicas: 4
-  selector:
-    matchLabels:
-      app: nginx
-
-        # minReadySeconds: 10
-        # strategy:
-        # type: RollingUpdate
-        # rollingUpdate:
-        # maxUnavailable: 1
-        # maxSurge: 1
-
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - name: nginx-container
-        image: nginx:1.16.1
-        ports:
-        - containerPort: 80
-
+                  
+                  apiVersion: apps/v1
+                  kind: DaemonSet
+                  metadata:
+                    name: nginx-ds
+                    labels:
+                      app: nginx
+                  spec:
+                    #replicas: 4
+                    selector:
+                      matchLabels:
+                        app: nginx
+                  
+                          # minReadySeconds: 10
+                          # strategy:
+                          # type: RollingUpdate
+                          # rollingUpdate:
+                          # maxUnavailable: 1
+                          # maxSurge: 1
+                  
+                    template:
+                      metadata:
+                        labels:
+                          app: nginx
+                      spec:
+                        containers:
+                        - name: nginx-container
+                          image: nginx:1.16.1
+                          ports:
+                          - containerPort: 80
+                  
 
 kubectl apply -f deploy.yaml
 
