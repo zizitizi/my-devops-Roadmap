@@ -521,13 +521,13 @@ kubectl cluster-info dump --output-directory /tmp   - backup to /tmp. its from e
 use backup solution to keep cluster safety. kasten (veeam) is free for 5 node. 1 master 4 worker. velero is free and open source but more complicated that kastern. velero can run in vm or in a container. 
 
 
-deployment prones: rollout update- roolout undo  - rollout restart (prevent downtime) - hpa - replica ,....
+****deployment prones:**** rollout update- roolout undo  - rollout restart (prevent downtime) - hpa - replica ,....
 
-deploymnet generation: all below have same yaml find but differ in kind options.
+***deploymnet generation:*** all below have same yaml find but differ in kind options.
 
-1- deploymnet  - we have replica option as we want any nomber of replica
+***1- deploymnet***  - we have replica option as we want any nomber of replica
 
-2- DaemonSet or ds   - k8s make relica per node automatically on each node. 1 pod = 1 node(in). used when we want an app to be run in each agent like daemon for ex.: monitoring app agnet that need to be run on each node silently. when we install monitoring app -nms- ( prometeus , zabix ,...) ,k8s runs a gagent on each node automaticall no need to run it manually. also kubeproxy - kube flanell is a daemonset. ds just runs on worker node , to run on masters use taint options. to see daemonset run: 
+***2- DaemonSet or ds***   - k8s make relica per node automatically on each node. 1 pod = 1 node(in). used when we want an app to be run in each agent like daemon for ex.: monitoring app agnet that need to be run on each node silently. when we install monitoring app -nms- ( prometeus , zabix ,...) ,k8s runs a gagent on each node automaticall no need to run it manually. also kubeproxy - kube flanell is a daemonset. ds just runs on worker node , to run on masters use taint options. to see daemonset run: 
 
 kubectl get ds -A -o wide
 
@@ -576,7 +576,7 @@ kubectl get ds -o wide
 
 kubectl get pods -o wide
 
-3- StatefulSet 
+***3- StatefulSet***  - that run app in stateful mode like: db ,... 
 
 
  
@@ -596,6 +596,7 @@ note that we can run db in deploy but may encountered a problem in future.
 
 
 
+****note:****
 K8s have many resouce api, but you should know below resource thats more important. other resource is not main and you can wite cron jos set password ,... for them:
 
 pods - replication controller - deployments - deamonsets - statefulset - services - pv - pvc
