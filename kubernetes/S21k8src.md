@@ -518,8 +518,18 @@ kubectl cluster-info dump --output-directory /tmp   - backup to /tmp. its from e
 
 
 
+use backup solution to keep cluster safety. kasten (veeam) is free for 5 node. 1 master 4 worker. velero is free and open source but more complicated that kastern. velero can run in vm or in a container. 
 
 
+deployment prones: rollout update- roolout undo  - rollout restart (prevent downtime) - hpa - replica ,....
+
+deploymnet generation: all below have same yaml find but differ in kind options.
+
+1- deploymnet  - we have replica option as we want any nomber of replica
+
+2- DaemonSet   - k8s make relica per node automatically on each node. 1 pod = 1 node(in). used when we want an app to be run in each agent like daemon for ex.: monitoring app agnet 
+
+3- StatefulSet
 
 
  
