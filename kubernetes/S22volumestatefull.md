@@ -307,7 +307,7 @@ deploy and service should be on same namespace.
 
 ### practice 1 
 
-write  voting app in k8s - python and node in nodeport mode - no need to .net to be svc other should be deploy and svc. like above example. postgres and redis you can wite in statefulset. app in deployment kind.
+write  voting app in k8s - python and node in nodeport mode - no need to .net to be svc other should be deploy and svc. like above example. postgres and redis you can wite in statefulset. app in deployment kind. (service - statefulset - deploy) 
 
 
 
@@ -406,13 +406,77 @@ hint: image pull policy in CI/CD set to always because new image publish with ta
 ## by persistent volumes
 
 
-pv or persistent volumes
+### pv or persistent volumes 
+
+k8s make pc to manage volume group. have many type to manage pvc np need to make it on worker manually. pv type is:
+
+local - nfs - host - S3 amazone - blob store azure - ,...
+
+k8s has nfs provisioner . 
 
 
-pvc or persistent volume claim 
+Types of Persistent Volumes 
+PersistentVolume types are implemented as plugins. Kubernetes currently supports the following plugins:
+
+csi - Container Storage Interface (CSI)
+fc - Fibre Channel (FC) storage
+hostPath - HostPath volume (for single node testing only; WILL NOT WORK in a multi-node cluster; consider using local volume instead)
+iscsi - iSCSI (SCSI over IP) storage
+local - local storage devices mounted on nodes. ********recommanded
+nfs - Network File System (NFS) storage ********recommanded
+
+
+
+Different Types of PV’s Access Modes
+
+readwriteonce - RWO  - can be mounte by a single node as read write to that nfs folder. when we have more than 1 replica we can not use this
+
+read only many - ROX  - the volume can be mounted readonly by many nodes . use when we have mpre than 1 replica
+
+readwrite many - RWX  -  the volume can be mounted read and write by many nodes  .use when we have mpre than 1 replica
+
+read write once pod - RWOP  - can be mounte by a single pod as read write to that nfs folder. example: 1 folder that assign db and app and we want just app pod had accesst o write and read it.
+
+
+
+
+
+
+
+
+
+
+
+### pvc or persistent volume claim
+
+claim or request for volume or pv. works same as lv.
+
+
+
+
 
 
 in linux we have logical volume manager or lvm. 
+
+block storage is hard slot and phisical storage
+
+volume group or vg is virtual storage  can not directly mounted that is  (to use in partion or lv) called object storage. ceph , swift , gluster ,.... to manage object storage .
+
+logical volume or lv is linux partition create on vg. vg neef to create lv to be mounted.
+
+file storage is file that can store the file like: iso file or docker file 
+
+
+### practice 2
+
+write below example for pv and pvc with nfs type.
+
+
+
+
+
+example:
+
 
 
 
