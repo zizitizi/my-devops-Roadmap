@@ -305,6 +305,21 @@ deploy and service should be on same namespace.
 
 
 
+### practice 1 
+
+write  voting app in k8s - python and node in nodeport mode - no need to .net to be svc other should be deploy and svc. like above example. postgres and redis you can wite in statefulset. app in deployment kind.
+
+
+
+
+
+
+
+
+
+
+
+
 
  
 
