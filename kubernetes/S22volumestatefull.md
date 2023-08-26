@@ -163,6 +163,8 @@ curl 10.244.2.23   - should work -it used for trouble shooting
 
 curl 10.97.130.45  - should work -it used for trouble shooting  - refer to selector. check the selector with source yaml or with:
 
+curl 192.168.44.136:30008   - should work  get it with: ip a
+
 kubectl get pods -o yaml
 
 
@@ -172,6 +174,19 @@ kubectl expose ....
 
 
 
+(external - net) <---node(ip and domain) <---- svc ----> deployment(loadbalance - or may hpa) ----> many pods
+
+in multi master senario(for ex. with 3 masters) we can use all amsters ip. but if we had domain name we should use solution snario like one of below options (solution clustering or HA clustering systems or HACS) :
+
+- use fourth (4) node to install haproxy on it. give its ip to domain assignment ip . (single point of failure) - ip floate on 4 is manually . and we have ip node 1 , 2 ,3. 
+
+- other solution is nginx reverse proxy solution on fourth node. (single point of failure) 
+
+- keepalived install on masters no need to fourth other server . we install keepalived on all masters assign 1 virtual ip (vip). vip is in ip range of masters ip. we can configure it manually as desired ip or use automatically generated vip by keeplaived.
+
+
+
+best senario is use 2 haproxy server (1core 1gig just for trafic handle) that install again keepalived on it then haproxy handle trafic to masters. 
 
 
 
