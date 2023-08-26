@@ -46,7 +46,61 @@ https://k9scli.io/
 
 # networks or services in k8s
 
-we call network in k8s, services. 
+we call network in k8s, services. services = networks .
+
+kubectl get svc 
+
+
+
+
+
+generally api gateway types: rest - soap - gRPC - web socket ,... . but api in k8s is rest api. rest object send to kube api server to create new instance. 
+
+to create service we write yaml file . that service rule as service reverse proxy. pod connect to kube proxy to connect master . we use service or svc or reverse proxy to acces external net. we have ip:port  host and ip:port  guest that use pat .
+
+nat: network address translation
+
+pat : port address translation
+
+service is in 4 types:
+
+1- load balancer : is used in cloud providers like: aws, azure , gcp,... to manage cloud load balance controller . 
+
+2- external name: when we use cname record . k8s return us a comlex random name that with this tools we change it to map it to other name with cname. but best practice in real world we dont use this instead we use ip and reverse proxy like nginx.
+
+in dns we have many record types: A record to name:ipv4  - AAAA record to name:ipv6 - CNAME record to name:name that used in dns servers  - MX record to domainmailserver:ip - ,.....
+
+3- cluster ip : that is default in k8s pod. whne we can not see our pod from external then ot use cluster ip. 
+
+4- node port: open port on every cluster node. should be over 30000. 
+
+we have 3 layer in node port mode:
+
+1- target port (pod)  - deployment is kind of load balancer
+
+2- port (svc port) 
+
+3- node port: ip master with port over 30000. 
+
+nodeport is include cluster ip.
+
+cluster ip include: svc (port) - pod (target port)
+
+node port include above addition : master node (domain ip)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
