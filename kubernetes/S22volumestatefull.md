@@ -190,7 +190,78 @@ best senario is use 2 haproxy server (1core 1gig just for trafic handle) that in
 
 
 
+best practice in service is: first namespace yaml --- deployment section --- service define section.
 
+
+for ex.:
+
+vi deplynginx.yml
+
+
+                  
+                  ---
+                  apiVersion: v1
+                  kind: Namespace
+                  metadata:
+                    name: web-server
+                  
+                  ---
+                  apiVersion: apps/v1
+                  kind: Deployment
+                  metadata:
+                    name: nginx-deploy
+                    namespace: web-server
+                    labels:
+                      app: nginx
+                  spec:
+                    replicas: 3
+                    selector:
+                      matchLabels:
+                        app: nginx
+                  
+                          # minReadySeconds: 10
+                          # strategy:
+                          # type: RollingUpdate
+                          # rollingUpdate:
+                          # maxUnavailable: 1
+                          # maxSurge: 1
+                  
+                    template:
+                      metadata:
+                        labels:
+                          app: nginx
+                      spec:
+                        containers:
+                        - name: nginx-container
+                          image: nginx:latest
+                          ports:
+                          - containerPort: 80
+                  ---
+                  apiVersion: v1
+                  kind: Service
+                  metadata:
+                    name: nginx-svc
+                    namespace: web-server
+                    labels:
+                      app: nginx
+                  spec:
+                    type: NodePort
+                    ports:
+                      - targetPort: 80
+                        port: 8080
+                        nodePort: 30008
+                    selector:
+                      app: nginx
+                  
+                  ---
+                  
+                  
+
+
+
+remember that we may have many ports list that we can list all and - .
+
+kubectl get pods -o wide -n web-server
 
 
 
