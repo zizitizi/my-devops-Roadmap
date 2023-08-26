@@ -117,36 +117,36 @@ kubectl get pods -A -o wide
 open that pods yaml file use 3dash role --- to seperate service and merge it to that pod file with alittle change
 
 
-
-apiVersion: v1
-kind: Pod
-metadata:
-  name: nginx-pod
-  namespace: default
-  labels:
-    app: myapp
-spec:
-    containers:
-      - name: nginx-ctr
-        image: nginx:latest
+      
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: nginx-pod
+        namespace: default
+        labels:
+          app: myapp
+      spec:
+          containers:
+            - name: nginx-ctr
+              image: nginx:latest
+              ports:
+                - containerPort: 80
+      
+      ---
+      
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: myapp-services
+      spec:
+        type: NodePort
         ports:
-          - containerPort: 80
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: myapp-services
-spec:
-  type: NodePort
-  ports:
-     - targetPort: 80   # exactly equal to container port
-       port: 80    3 not important
-       nodePort: 30008   # external port
-  selector:   # very important section
-     app: myapp     #-same as pod label
-
+           - targetPort: 80   # exactly equal to container port
+             port: 80    3 not important
+             nodePort: 30008   # external port
+        selector:   # very important section
+           app: myapp     #-same as pod label
+      
 
 
 kubectl get pods -o wide
