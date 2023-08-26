@@ -255,13 +255,63 @@ vi deplynginx.yml
                   
                   ---
                   
+
+
+
+
                   
+
+ kubectl get deploy -o wide -n web-server
+
+  kubectl get svc -o wide -n web-server
+
+ kubectl get pods -o wide -n web-server    - we can connect to each pod and change html code to see load balancer change
+
+ kubectl exec -it nginx-deploy-5b58668cfc-5vs25 -- bash   - run this command on related node
+
+ curl 192.168.44.136:30008  - lb to 3 pod on masters or every  where 
+
 
 
 
 remember that we may have many ports list that we can list all and - .
 
-kubectl get pods -o wide -n web-server
+kubectl get pods -o wide -n web-server   - we can use kubens or kubectx tools to avoid default ns with kubens. we can assign default namespace manually to our main apps. also it use to move between virtual clusters with kubectx. 
+
+to install it:
+
+git clone https://github.com/ahmetb/kubectx /opt/kubectx
+
+chmod +x /opt/kubectx /opt/kubens
+
+ cd /opt/kubectx/
+
+ ls -l
+
+ cp kubens /usr/local/bin/kubens
+
+
+  cd -        - from now on we can use kubens command
+
+
+kubens   - show all namespaces
+
+kubens web-server  - get you into namespace web-server and change default to web-server
+
+ kubens default   -  get you and change into default 
+
+
+deploy and service should be on same namespace.
+
+
+
+
+ 
+
+
+
+
+
 
 
 
