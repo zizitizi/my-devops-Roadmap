@@ -22,7 +22,7 @@ https://k8syaml.com/
 
 but remember to delete label ads octupus 
 
-        octopusexport: OctopusExport
+octopusexport: OctopusExport
 
 
 
