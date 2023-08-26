@@ -90,6 +90,93 @@ node port include above addition : master node (domain ip)
 
 
 
+2 way is exeist to define service:
+
+1- in command mode:
+
+use expose to assign a service to a deployment  or ... . if we dont mention port it cosider equal to target port.
+also if we dont mention node port it assign a port abave 46000 to it.
+
+kubectl expose rc nginx-rc --name=nginx-svc --target-port=8080 --type=NodePort
+
+
+
+
+2- with yaml file: we recommand it to define it once and store it in git repo after than u can call it when ever you need it. 
+
+to assign a service to a pod
+
+first apply a pod
+
+kubectl apply -f pod1.yml
+
+
+kubectl get pods -A -o wide 
+
+
+open that pods yaml file use 3dash role --- to seperate service and merge it to that pod file with alittle change
+
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  namespace: default
+  labels:
+    app: myapp
+spec:
+    containers:
+      - name: nginx-ctr
+        image: nginx:latest
+        ports:
+          - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-services
+spec:
+  type: NodePort
+  ports:
+     - targetPort: 80   # exactly equal to container port
+       port: 80    3 not important
+       nodePort: 30008   # external port
+  selector:   # very important section
+     app: myapp     #-same as pod label
+
+
+
+kubectl get pods -o wide
+
+
+kubectl get svc -o wide
+
+
+pod: 10.244.2.23:80 
+
+svc: 10.97.130.45:80 
+
+curl 10.244.2.23   - should work -it used for trouble shooting
+
+curl 10.97.130.45  - should work -it used for trouble shooting  - refer to selector. check the selector with source yaml or with:
+
+kubectl get pods -o yaml
+
+
+then use lable copy it ot our service separate yaml file. or use command service create :
+
+kubectl expose ....
+
+
+
+
+
+
+
+
 
 
 
