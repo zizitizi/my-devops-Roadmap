@@ -311,6 +311,110 @@ write  voting app in k8s - python and node in nodeport mode - no need to .net to
 
 
 
+https://github.com/dockersamples/example-voting-app/tree/main/k8s-specifications
+
+
+1.28 k8s:
+change restart policy - sidecare containers - no need to disable swap - mix version proxy ,...
+
+
+# volumes
+
+2 type of volumes: by container run times - by k8s (pv) 
+
+
+## by container run time:
+
+volumes mounts below container is in guest. volumes in below spec section is in host.
+name is same in 2 sections. hostpath or emty directory. k8s is not order sensitive becaouse all yaml is compile once to gether. this mode is use in one replica cluster . in more than 1 replica we recommand to use pv and pvc.
+
+spec:
+  containers:
+  - image: k8s.gcr.io/test-webserver
+    name: test-container
+    volumeMounts:
+    - mountPath: /app
+      name: cache-volume
+  volumes:
+  - name: cache-volume
+    emptyDir: /tmp
+
+
+
+or exapmle:
+
+spec:
+  containers:
+  - name: nginx-ctr
+    image: nginx:latest
+    ports:
+       - containerPort: 80
+    volumeMounts:
+      - mountPath: /usr/share/nginx/html/
+        name: html-directory
+      - mountPath: /var/log/nginx/
+        name: nginx-log
+  volumes:
+    - name: html-directory
+      emptyDir: /root/html/
+    - name: nginx-log
+      emptyDir: /root/log/
+
+
+
+or exapmle add this lines to nginx deployment sample file:
+
+spec:
+  containers:
+  - name: nginx-ctr
+    image: nginx:latest
+    ports:
+       - containerPort: 80
+    volumeMounts:
+      - mountPath: /usr/share/nginx/html/
+        name: html-directory
+      - mountPath: /var/log/nginx/
+        name: nginx-log
+  volumes:
+    - name: html-directory
+      hostPath:
+         path: /root/html/
+    - name: nginx-log
+      hostPath:
+         path: /root/log/
+
+
+
+then make dir /root/html/ , /root/log/ in host 
+
+
+when you get 403 forbidden then you should give permission to yhat directory: and path is maked in all worker node . then we should give permission to in all worker. and all pods not create on masters all created in worker then we make and give this permissions in all workers and its highly recommand to use nfs in this mode . by the way that this mode is not recommanded. we recommand to use pv and pvc. 
+
+chmod 777 html log
+
+chmod -R 777 html log   - in worker node
+
+kubectl rollout restart deployment/nginx-deployment 
+
+
+
+
+hint: image pull policy in CI/CD set to always because new image publish with tag latest can be downloaded every time to make new replica set.
+
+
+
+## by persistent volumes
+
+
+pv or persistent volumes
+
+
+pvc or persistent volume claim 
+
+
+in linux we have logical volume manager or lvm. 
+
+
 
 
 
