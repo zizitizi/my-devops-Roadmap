@@ -486,22 +486,22 @@ first define pv:
 vi pv.yml
 
 
-
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: task-pv-volume
-  labels:
-    type: local
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/mnt/data"
-
+                  
+                  apiVersion: v1
+                  kind: PersistentVolume
+                  metadata:
+                    name: task-pv-volume
+                    labels:
+                      type: local
+                  spec:
+                    storageClassName: manual
+                    capacity:
+                      storage: 10Gi
+                    accessModes:
+                      - ReadWriteOnce
+                    hostPath:
+                      path: "/mnt/data"
+                  
 
 
 mkdir /mnt/data   - on specified node that is pv in file system mode. in nfs no need to make manually and this stage
@@ -517,19 +517,19 @@ kubectl get pv -o wide
 
 vi pvc.yml
 
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: task-pv-claim
-spec:
-  storageClassName: manual
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 3Gi
-      
+                  
+                  apiVersion: v1
+                  kind: PersistentVolumeClaim
+                  metadata:
+                    name: task-pv-claim
+                  spec:
+                    storageClassName: manual
+                    accessModes:
+                      - ReadWriteOnce
+                    resources:
+                      requests:
+                        storage: 3Gi
+                        
       
 kubectl apply -f pvc.yml
 
@@ -544,25 +544,25 @@ capacity show amount of space . not claim amount is storage we can limit it with
 
 vi pod-pv.yml
 
-
-apiVersion: v1
-kind: Pod
-metadata:
-  name: task-pv-pod
-spec:
-  volumes:
-    - name: task-pv-storage
-      persistentVolumeClaim:
-        claimName: task-pv-claim
-  containers:
-    - name: task-pv-container
-      image: nginx
-      ports:
-        - containerPort: 80
-          name: "http-server"
-      volumeMounts:
-        - mountPath: "/usr/share/nginx/html"
-          name: task-pv-storage
+                  
+                  apiVersion: v1
+                  kind: Pod
+                  metadata:
+                    name: task-pv-pod
+                  spec:
+                    volumes:
+                      - name: task-pv-storage
+                        persistentVolumeClaim:
+                          claimName: task-pv-claim
+                    containers:
+                      - name: task-pv-container
+                        image: nginx
+                        ports:
+                          - containerPort: 80
+                            name: "http-server"
+                        volumeMounts:
+                          - mountPath: "/usr/share/nginx/html"
+                            name: task-pv-storage
 
 
 
