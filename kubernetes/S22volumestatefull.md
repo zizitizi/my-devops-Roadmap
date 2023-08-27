@@ -405,6 +405,7 @@ hint: image pull policy in CI/CD set to always because new image publish with ta
 
 ## by persistent volumes
 
+we can limit storage resource by pv , pvc.
 
 ### pv or persistent volumes 
 
@@ -477,12 +478,13 @@ write below example for pv and pvc with nfs type.
 
 example:
 
-we can define pv in seperate yaml file. but in deply or service we should define pvc to claim pvc.
+we can define pv, pvc in seperate yaml file. but in deply or service we should define pvc to claim pvc.
 
 
 first define pv:
 
 vi pv.yml
+
 
 
 apiVersion: v1
@@ -502,12 +504,74 @@ spec:
 
 
 
-mkdir /mnt/data
+mkdir /mnt/data   - on specified node that is pv in file system mode. in nfs no need to make manually and this stage
 
 
 kubectl apply -f pv.yml
 
 kubectl get pv -o wide
+
+
+
+
+
+vi pvc.yml
+
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: task-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+      
+      
+kubectl apply -f pvc.yml
+
+kubectl get pvc -o wide
+      
+pv status from available change to bound . 
+
+capacity show amount of space . not claim amount is storage we can limit it with limitstorage command in pvc.
+
+
+
+
+vi pod-pv.yml
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: task-pv-pod
+spec:
+  volumes:
+    - name: task-pv-storage
+      persistentVolumeClaim:
+        claimName: task-pv-claim
+  containers:
+    - name: task-pv-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: task-pv-storage
+
+
+
+kubectl apply -f pod-pv.yml
+
+
+
+this in filesystem mode if pod server crashed then /mnt/data/ not exist on it unless you write node affinity to specified server that have it. then its best practice to use nfs in pvc. 
+
 
 
 
@@ -545,11 +609,14 @@ pv is on host and pvc on guest.
 
 
 
+volume type best practice is : host path - config map - pvc
 
 
 
 
 
+
+nfs config on master we should od it manually . 
 
 
 
