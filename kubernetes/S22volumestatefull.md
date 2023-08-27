@@ -477,6 +477,72 @@ write below example for pv and pvc with nfs type.
 
 example:
 
+we can define pv in seperate yaml file. but in deply or service we should define pvc to claim pvc.
+
+
+first define pv:
+
+vi pv.yml
+
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: task-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+
+
+
+mkdir /mnt/data
+
+
+kubectl apply -f pv.yml
+
+kubectl get pv -o wide
+
+
+
+
+reclaim policy:
+
+default is retain . retain is manually reclaimation. retain keeps data even if pvc or deployment is deleted. if we want we should delete manually. after delete pvc if we write pvc in same path we see that data again.
+
+delete used in cloud storage like aws , azure ,...
+
+recycle used when pvc deleted its data will deleted with (rm -rf )
+
+
+volume mode:
+
+is in default filesystem(local) if you need change it for nfs,......
+
+
+
+storage class:
+
+every pv is can have class that specified with calss name. is a something like label that we call that ov with that name. we can call in pvc's storage class name or with name of that pv. is about make group with multiple pv to allocate one of that group of pv by k8s. 
+
+
+
+
+
+
+
+PV amount is base on TiB , GiB ,MiB . *1024 count. gibibyte tibibyte mibibyte,..
+
+TB ,GB is *1000 .
+
+pv is on host and pvc on guest.
+
 
 
 
