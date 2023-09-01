@@ -70,12 +70,12 @@ kubectl create secret docker-registry regcred --docker-server=<your-registry-ser
 
 where:
 
-_<your-registry-server> is your Private Docker Registry FQDN. Use https://index.docker.io/v1/ for DockerHub.
+**<your-registry-server> is your Private Docker Registry FQDN. Use https://index.docker.io/v1/ for DockerHub.
 <your-name> is your Docker username.
 <your-pword> is your Docker password.
 <your-email> is your Docker email.
-You have successfully set your Docker credentials in the cluster as a Secret called regcred._
-
+You have successfully set your Docker credentials in the cluster as a Secret called regcred.
+**
 
 
 to verigy regcred:
