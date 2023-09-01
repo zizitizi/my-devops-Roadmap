@@ -115,7 +115,7 @@ kubectl apply -f my-private-reg-pod.yaml
 kubectl get pod private-reg
 
 
-#### to tshoot some error:
+#### to tshoot some errors:
 
 In case the Pod fails to start with the status ImagePullBackOff, view the Pod events:
 
