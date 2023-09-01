@@ -9,6 +9,7 @@ To change the default registry for Docker to a private registry that requires au
 
 Create or edit the /etc/docker/daemon.json file on your Docker host machine.
 Add the following lines to the file, replacing your-registry with the URL of your private registry and your-username and your-password with your registry credentials:
+
             {
               "auths": {
                 "your-registry": {
@@ -17,17 +18,22 @@ Add the following lines to the file, replacing your-registry with the URL of you
               },
               "registry-mirrors": ["https://your-registry"]
             }
+
 Note that the auths key is used to specify the credentials for your private registry, and the registry-mirrors key is used to specify the URL of the registry.
 
 Save the file and exit.
 Restart the Docker daemon to apply the changes:
+
             $ sudo systemctl restart docker
+            
 Verify that the configuration has been applied by running the docker info command. You should see the URL of your registry listed under “Registry Mirrors”.
+
             $ docker info
             ...
             Registry Mirrors:
               https://your-registry/
             ...
+
 With this configuration, Docker will use your private registry as the default registry for pulling images and will authenticate with your registry credentials.
 
 
@@ -69,10 +75,9 @@ With this configuration, Docker will use your private registry as the default re
             data:
               .dockerconfigjson: {{ template "imagePullSecret" . }}
 
+###########################################################################################################################
 
-
-
-
+###########################################################################################################################
 
 
 
