@@ -1,9 +1,9 @@
 
 
-# Kubernetes: Pull an Image from a Private Registry using Yaml and Helm File
+***Kubernetes: Pull an Image from a Private Registry using Yaml and Helm File***
 to do this change we have 3 options:
 
-## Method 1 – Change docker config default registry (depracted due to k8s 1.27 use containerd instead of docker)
+# Method 1 – Change docker config default registry (depracted due to k8s 1.27 use containerd instead of docker)
 
 To change the default registry for Docker to a private registry that requires authentication, you can follow these steps:
 
@@ -37,7 +37,7 @@ Verify that the configuration has been applied by running the docker info comman
 With this configuration, Docker will use your private registry as the default registry for pulling images and will authenticate with your registry credentials.
 
 
-## Method 2 – Create a Secret based on existing credentials using in Pod Spec
+# Method 2 – Create a Secret based on existing credentials using in Pod Spec
 
 
 cat ~/.docker/config.json
@@ -70,15 +70,16 @@ kubectl create secret docker-registry regcred --docker-server=<your-registry-ser
 
 where:
 
-**<your-registry-server> is your Private Docker Registry FQDN. Use https://index.docker.io/v1/ for DockerHub.
-<your-name> is your Docker username.
-<your-pword> is your Docker password.
-<your-email> is your Docker email.
+- <your-registry-server> is your Private Docker Registry FQDN. Use https://index.docker.io/v1/ for DockerHub.
+- <your-name> is your Docker username.
+- <your-pword> is your Docker password.
+- <your-email> is your Docker email.
+
+
 You have successfully set your Docker credentials in the cluster as a Secret called regcred.
-**
 
 
-to verigy regcred:
+#### to verigy regcred:
 
 
 kubectl get secret regcred --output=yaml
@@ -127,7 +128,7 @@ If you then see an event with the reason set to FailedToRetrieveImagePullSecret,
 Make sure that the Secret you have specified exists, and that its name is spelled properly.
 
 
-## Method 3 – Create a Secret based on existing credentials using Helm chart
+# Method 3 – Create a Secret based on existing credentials using Helm chart
 
 ![image](https://github.com/zizitizi/my-devops-Roadmap/assets/123273835/b652d4ea-6849-4a53-bff6-5ab361fbdb97)
 
