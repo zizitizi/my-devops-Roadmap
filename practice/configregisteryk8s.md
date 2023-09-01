@@ -70,7 +70,7 @@ The output contains a section similar to this:
 
 Create this Secret, naming it regcred:
 
-                        kubectl create secret docker-registry regcred --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>
+            kubectl create secret docker-registry regcred --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>
 
 where:
 
@@ -86,13 +86,13 @@ You have successfully set your Docker credentials in the cluster as a Secret cal
 #### to verigy regcred:
 
 
-                        kubectl get secret regcred --output=yaml
+            kubectl get secret regcred --output=yaml
 
 
 or get more detail to decode it to understand:
 
 
-                        kubectl get secret regcred --output="jsonpath={.data.\.dockerconfigjson}" | base64 --decode
+            kubectl get secret regcred --output="jsonpath={.data.\.dockerconfigjson}" | base64 --decode
 
 
 #### for using it in a pod or object do:
@@ -102,27 +102,27 @@ Create a Pod that uses your Secret
 Here is a manifest for an example Pod that needs access to your Docker credentials in regcred:
 
 
-                                    
-                                    apiVersion: v1
-                                    kind: Pod
-                                    metadata:
-                                      name: private-reg-nginx
-                                    spec:
-                                      containers:
-                                      - name: nginx
-                                        image: myrepo:nginx
-                                      imagePullSecrets:
-                                      - name: regcred
+            
+            apiVersion: v1
+            kind: Pod
+            metadata:
+              name: private-reg-nginx
+            spec:
+              containers:
+              - name: nginx
+                image: myrepo:nginx
+              imagePullSecrets:
+              - name: regcred
                                     
 
 now apply your pod:
 
-                        kubectl apply -f my-private-reg-pod.yaml
+            kubectl apply -f my-private-reg-pod.yaml
 
 now verify your pod:
                         
 
-                        kubectl get pod private-reg
+            kubectl get pod private-reg
 
 
 #### to tshoot some errors:
@@ -130,7 +130,7 @@ now verify your pod:
 In case the Pod fails to start with the status ImagePullBackOff, view the Pod events:
 
 
-kubectl describe pod private-reg
+            kubectl describe pod private-reg
 
 
 If you then see an event with the reason set to FailedToRetrieveImagePullSecret, Kubernetes can't find a Secret with name (regcred, in this example). If you specify that a Pod needs image pull credentials, the kubelet checks that it can access that Secret before attempting to pull the image.
