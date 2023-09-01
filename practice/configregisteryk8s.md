@@ -1,7 +1,11 @@
 
 
 ***Kubernetes: Pull an Image from a Private Registry using Yaml and Helm File***
+
+
 to do this change we have 3 options:
+
+
 
 # Method 1 – Change docker config default registry (depracted due to k8s 1.27 use containerd instead of docker)
 
