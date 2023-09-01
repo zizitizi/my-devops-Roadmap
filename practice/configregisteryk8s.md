@@ -49,20 +49,20 @@ cat ~/.docker/config.json
 The output contains a section similar to this:
 
 
-{
-    "auths": {
-        "https://index.docker.io/v1/": {
-            "auth": "c3R...zE2"
-        }
-    }
-}
+            {
+                "auths": {
+                    "https://index.docker.io/v1/": {
+                        "auth": "c3R...zE2"
+                    }
+                }
+            }
 
 
 
 ***Create a Secret based on existing credentials***
 
 
-                        kubectl create secret generic regcred --from-file=.dockerconfigjson=/root/.docker/config.json --type=kubernetes.io/dockerconfigjson
+            kubectl create secret generic regcred --from-file=.dockerconfigjson=/root/.docker/config.json --type=kubernetes.io/dockerconfigjson
 
 
 
@@ -70,7 +70,7 @@ The output contains a section similar to this:
 
 Create this Secret, naming it regcred:
 
-                                    kubectl create secret docker-registry regcred --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>
+                        kubectl create secret docker-registry regcred --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>
 
 where:
 
@@ -86,7 +86,10 @@ You have successfully set your Docker credentials in the cluster as a Secret cal
 #### to verigy regcred:
 
 
-                                    kubectl get secret regcred --output=yaml
+                        kubectl get secret regcred --output=yaml
+
+
+or get more detail to decode it to understand:
 
 
                         kubectl get secret regcred --output="jsonpath={.data.\.dockerconfigjson}" | base64 --decode
