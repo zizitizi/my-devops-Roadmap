@@ -103,11 +103,11 @@ Here is a manifest for an example Pod that needs access to your Docker credentia
                                     spec:
                                       containers:
                                       - name: private-reg-container
-                                        image: <your-private-image>
+                                        image: myrepo:nginx
                                       imagePullSecrets:
                                       - name: regcred
                                     
-                                    
+
 
 kubectl apply -f my-private-reg-pod.yaml
 
