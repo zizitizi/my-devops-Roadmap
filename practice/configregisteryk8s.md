@@ -62,7 +62,7 @@ The output contains a section similar to this:
 ***Create a Secret based on existing credentials***
 
 
-kubectl create secret generic regcred     --from-file=.dockerconfigjson=/root/.docker/config.json     --type=kubernetes.io/dockerconfigjson
+                        kubectl create secret generic regcred --from-file=.dockerconfigjson=/root/.docker/config.json --type=kubernetes.io/dockerconfigjson
 
 
 
@@ -70,7 +70,7 @@ kubectl create secret generic regcred     --from-file=.dockerconfigjson=/root/.d
 
 Create this Secret, naming it regcred:
 
-kubectl create secret docker-registry regcred --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>
+                                    kubectl create secret docker-registry regcred --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>
 
 where:
 
@@ -86,10 +86,10 @@ You have successfully set your Docker credentials in the cluster as a Secret cal
 #### to verigy regcred:
 
 
-kubectl get secret regcred --output=yaml
+                                    kubectl get secret regcred --output=yaml
 
 
-kubectl get secret regcred --output="jsonpath={.data.\.dockerconfigjson}" | base64 --decode
+                        kubectl get secret regcred --output="jsonpath={.data.\.dockerconfigjson}" | base64 --decode
 
 
 #### for using it in a pod or object do:
@@ -112,11 +112,14 @@ Here is a manifest for an example Pod that needs access to your Docker credentia
                                       - name: regcred
                                     
 
+now apply your pod:
 
-kubectl apply -f my-private-reg-pod.yaml
+                        kubectl apply -f my-private-reg-pod.yaml
 
+now verify your pod:
+                        
 
-kubectl get pod private-reg
+                        kubectl get pod private-reg
 
 
 #### to tshoot some errors:
