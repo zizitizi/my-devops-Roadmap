@@ -99,10 +99,10 @@ Here is a manifest for an example Pod that needs access to your Docker credentia
                                     apiVersion: v1
                                     kind: Pod
                                     metadata:
-                                      name: private-reg
+                                      name: private-reg-nginx
                                     spec:
                                       containers:
-                                      - name: private-reg-container
+                                      - name: nginx
                                         image: myrepo:nginx
                                       imagePullSecrets:
                                       - name: regcred
