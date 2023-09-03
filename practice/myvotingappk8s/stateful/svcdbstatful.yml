@@ -11,4 +11,3 @@ spec:
         targetPort: 5432
         nodePort: 30005
 
-~
