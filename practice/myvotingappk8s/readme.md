@@ -21,7 +21,8 @@ in this senario we use deploy for vote and result , stateful for db and redis , 
 just download stateful dir and run:
 
 
-   kubectl apply -f stateful/
+     kubectl apply -f stateful/
+   
 
 to check status:
 
