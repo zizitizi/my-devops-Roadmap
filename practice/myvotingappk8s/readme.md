@@ -1,10 +1,18 @@
- #### my example voting app
+
+ 
+ # my example voting app
+ 
 
  below is our senario:
+
+ 
 
 ![image](https://github.com/zizitizi/my-devops-Roadmap/assets/123273835/bd1771cc-f488-4a55-92d3-849f4e50c280)
 
 
+ 
+ 
+ 
  #  using stateful and service: 
 
 in this senario we use deploy for vote and result , stateful for db and redis , service all exclude worker.
@@ -12,15 +20,15 @@ in this senario we use deploy for vote and result , stateful for db and redis , 
 
 just download stateful dir and run:
 
-kubectl apply -f stateful/
+   kubectl apply -f stateful/
 
 to check status:
 
-kubectl get all
+   kubectl get all
 
 to remove svc
 
-kubectl delete -f stateful/
+   kubectl delete -f stateful/
 
 
 
@@ -32,14 +40,14 @@ kubectl delete -f stateful/
 
  in  downloaded stateful folder delete statful yaml file and related svc file. replace them with file in folder deploy. then run:
 
- kubectl apply -f stateful/
+    kubectl apply -f stateful/
 
 to check status:
 
-kubectl get all
+   kubectl get all
 
 to remove svc
 
-kubectl delete -f stateful/
+   kubectl delete -f stateful/
 
 
