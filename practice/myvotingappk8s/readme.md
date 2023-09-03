@@ -27,12 +27,13 @@ just download stateful dir and run:
 to check status:
 
 
-   kubectl get all
+     kubectl get all
+   
 
 to remove svc:
 
 
-   kubectl delete -f stateful/
+     kubectl delete -f stateful/
 
 
 
@@ -46,15 +47,17 @@ to remove svc:
  
 
     kubectl apply -f stateful/
+    
 
 to check status:
 
 
-   kubectl get all
+     kubectl get all
+     
 
 to remove svc:
 
 
-   kubectl delete -f stateful/
+     kubectl delete -f stateful/
 
 
