@@ -40,6 +40,13 @@ for other user than root add below line to that file:
 
 
 
+or another way:
+
+in root: cd ~/.kube
+
+cp /etc/kubernetes/admin.conf ./conf
+
+
 if kubectl did not work correctly it means cluster is not ruuning and api server is down. if it works we can get system pods and its describes.
 
 also we can check kubelet daemon for errors in all nodes:
