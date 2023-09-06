@@ -46,6 +46,8 @@ in root: cd ~/.kube
 
 cp /etc/kubernetes/admin.conf ./conf
 
+if we have this file in our laptop and can ping master then you can use kubectl from your laptop no need to login to master.
+
 
 if kubectl did not work correctly it means cluster is not ruuning and api server is down. if it works we can get system pods and its describes.
 
