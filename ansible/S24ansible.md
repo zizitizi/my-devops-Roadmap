@@ -25,13 +25,16 @@ in multi master senario we have 2 otions:
  
 
 
+to see logs in k8s :
 
- 
+kubectl describe pods ----
+
+kubectl logs pods ----
 
 
 
 
-
+in some ttshoot becarefil to node affinity and configmap ,... nginx write mysql then nedd node affinity. redis write in ram that other node not have permission to see it.
 
 
 
