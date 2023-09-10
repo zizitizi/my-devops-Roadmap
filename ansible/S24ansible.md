@@ -114,7 +114,7 @@ sudo -i
 
 apt update; apt install ansible -y   - in controller machines. 
 
-
+ ansible --version
 
 
 
@@ -137,11 +137,80 @@ its recommand to use public and private key for ansible user. and disable passwo
 
 best practice is use user ansible to ssh from controller to remote machines. to see log in syslog if config change with it or other user. 
 
+ansible user should be sudoer with no pass to change config . keep in mind not to use root to keep security .
+
+
+make ansible user in all machines locally or by activedirectory or using ldap. 
 
 #### solving partition resize
 
 https://packetpushers.net/ubuntu-extend-your-default-lvm-space/
 
+
+## axample: use 3 server. one in controller and remote machine. 2 is just remote machine.
+
+
+add user ansible to all 3 machines: in debian use -D.
+
+useradd -m -s /bin/bash -c “Ansible User” ansible
+
+add user to sudo group:
+
+usermod -aG sudo ansible
+
+passwd ansible
+
+
+we use pub key method in controller and one of remote machine and third serve base on password.
+
+in controller:
+
+ssh-keygen
+
+su - ansible
+
+in all machines do:
+
+
+visudo  or vi /etc/sudoer 
+
+% means group - 
+
+in below of lines:
+# Allow members of group sudo to execute any command  
+add following line:
+
+ansible ALL=(ALL:ALL) NOPASSWD: ALL
+
+SAVE AND EXIT FILE. this change make prevent from asking sudo password of ansible user.
+
+ssh-keygen
+
+ssh-copy-id ansible@192.168.44.151  - in all machines - it means rsa-key.pub copy to in authorize-key. 
+
+best practice to go to sshd-config controller server:
+
+ vi /etc/ssh/sshd_config
+
+
+ 
+change port:
+
+Port 2022
+
+PubkeyAuthentication yes
+
+PasswordAuthentication no
+PermitEmptyPasswords no
+
+save and exit
+
+systemctl restart sshd
+
+
+
+
+hint: platform engineering is : devops(docker-yaml) + SRE(monitoring-ansible) + cloud partitioner (aws- vm- service-ceph-openstack)
 
 
 
