@@ -130,10 +130,12 @@ https://galaxy.ansible.com/
 
 ## ssh connection authentication
 
-we can use password phrase but it nit recommand save it on laptop it may be leak.
+we can use password phrase (in inventory file or..) but it not recommand save it on laptop it may be leak.
 
-its recommand to use public and private key .
+its recommand to use public and private key for ansible user. and disable password authentication in sshd-config file.
 
+
+best practice is use user ansible to ssh from controller to remote machines. to see log in syslog if config change with it or other user. 
 
 
 #### solving partition resize
