@@ -118,9 +118,13 @@ apt update; apt install ansible -y   - in controller machines.
 
 
 
+Jump-start your automation project with great content from the Ansible community. Galaxy provides pre-packaged units of work known to Ansible as roles and collections.
 
+Content from roles and collections can be referenced in Ansible PlayBooks and immediately put to work. You'll find content for provisioning infrastructure, deploying applications, and all of the tasks you do everyday.
 
+Use the Search page to find content for your project, then download them onto your Ansible host using ansible-galaxy, the command line tool that comes bundled with Ansible.
 
+https://galaxy.ansible.com/
 
 
 
