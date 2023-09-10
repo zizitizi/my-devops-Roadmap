@@ -53,12 +53,12 @@ Makes infrastructure more flexible and ready to use.
 
 main 3 iac tools that use in all interview is: 
 
-ansible: ssh based. os sould be installed and run and ssh is installed too. its daemon less or service less. agent less its run when we need it call it for run. then its light weight app. just need to install ansible in controller . and pythin in remote machines for extra feature,( linux has pythin in default on itself. cisco has too) if not ansible use it self python module too for base feature.
+- ansible: ssh based. os sould be installed and run and ssh is installed too. its daemon less or service less. agent less its run when we need it call it for run. then its light weight app. just need to install ansible in controller . and pythin in remote machines for extra feature,( linux has pythin in default on itself. cisco has too) if not ansible use it self python module too for base feature.
 
-puppet: ssl based. os sould be installed and run and ssl is installed too. its agent base to check config in some minute. then its heavy agent app.
+- puppet: ssl based. os sould be installed and run and ssl is installed too. its agent base to check config in some minute. then its heavy agent app.
  can freeze config - then changing puppet made config. generate a log and reset new config after for ex.: 1 hour to puppet config in that device. 
 
-teraform: its Iac and infrastucutre provisioners too. can use ssh. it can use for low level provision in ilo levet and in adition of use port ssh it can use IPMI port to install os on bare metal server . in cloud environment for ex.: in private cloud like openstack we can use teraform to install many os . in aws we can use teraform to create many vm with specified config and os. its heavy agent app.
+- teraform: its Iac and infrastucutre provisioners too. can use ssh. it can use for low level provision in ilo levet and in adition of use port ssh it can use IPMI port to install os on bare metal server . in cloud environment for ex.: in private cloud like openstack we can use teraform to install many os . in aws we can use teraform to create many vm with specified config and os. its heavy agent app.
 
 - other chef ,... 3 above is very famous. 
 
@@ -69,6 +69,62 @@ in Iac need a controller ( in our laptop - our in controller server in datacente
 devops: automation for servers
 
 devnet: automation for switches and routers- ansible - linux- network - ccna , ...
+
+
+
+in practical we use hybrid senario . use ansible to install puppet agent on all machine. use terafform to instal os and ..... use ansible to install salt and teraform on servers. 
+
+example:
+
+in cloud openstack senario we have all 3 below to use as:
+
+ansible: for regular config that we have thier playbook before. its use to config managments. we have its config yml before and use them many times.
+
+puppet: its use to freeze our config in servers. 
+
+saltstack: we us its cli to get status of serves. its cli tools is very good. 
+
+
+ssh coneection is low speed connections. ansible is good to 100 server for 1000 server puppet is good and good performance then ansible. 
+
+
+ansible has 2 type of file:
+
+- playbook: yaml file to keep config of server. ansible and teraform use yaml language but other use different.
+
+- host inventory: config file of server info's. include: ip - user -pass- protocol - port. for every company we have one of it. in ssl based we have not this file.
+
+
+
+	Ansible Control Machine Requirements:
+I.	Install Python 2 (2.6 or 2.7) or Python 3 (3.5 or Higher).(mandatory)
+II.	Install Python 2 or 3 on Remote Machines. (optional)
+III.	Windows does not support as a Control Machine (Just by WSL).
+
+
+
+with raw module in ansible we can run ansible playbook in remote machines without python but just run that commands and then we can not use extra feature (module ) of ansible in that machines.
+
+
+
+## install ansible:
+
+
+sudo -i
+
+apt update; apt install ansible -y   - in controller machines. 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
