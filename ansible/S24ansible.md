@@ -128,6 +128,18 @@ https://galaxy.ansible.com/
 
 
 
+## ssh connection authentication
+
+we can use password phrase but it nit recommand save it on laptop it may be leak.
+
+its recommand to use public and private key .
+
+
+
+#### solving partition resize
+
+https://packetpushers.net/ubuntu-extend-your-default-lvm-space/
+
 
 
 
