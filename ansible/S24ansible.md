@@ -273,9 +273,108 @@ ansible_connection=ssh	  -  Ansible Connection Type [ssh/winrm/localhost]. winrm
 ansible_user=ansible   - 	SSH User, if no user specified current user will used.
 
 
-ansible_ssh_pass=Aa@123	  -  SSH Password.
+ansible_ssh_pass=Aa@123	  -  SSH Password. sshpass -p test123 scp user@ip ....
 
 
+
+zizi51 ansible_host=192.168.44.151 ansible_connection=ssh ansible1_user=ansible ansible1_port=22   - you can ignore default parameter like below
+zizi ansible_host=192.168.44.136 ansible_user=ansible
+zizi50 ansible_host=192.168.44.150 ansible_ssh_pass=123
+
+#Sample Inventory parameters
+web1 ansible_host=web1.example.com ansible_connection=ssh ansible_user=root
+db01 ansible_host=db01.example.com ansible_connection=winrm ansible_user=admin
+mail1 ansible_host=192.168.10.3 ansible_connection=ssh ansible_ssh_pass=Aa@123
+
+ubuntu1 ansible_host=localhost ansible_connection=localhost
+
+
+
+
+if user not specified above in inventory file then ansible consider user that run commmand ansible_playbook. 
+
+
+yaml file in k8s --> manifest
+
+yaml file in ansible --> playbook
+
+send config in ansible in 2 way:
+
+1- ad-hoc command : ansible
+
+2- playbook yaml file : ansible-playbook 
+
+
+
+ ansible --list-hosts all   - list all hosts
+
+
+ ansible --list-hosts all -i inventory.txt
+ 
+ 
+ ansible ubuntu1 -m ping -i inventory.txt
+ 
+ 
+
+ ansible all -m ping -i /etc/ansible/hosts  - when use default inventory no need -i like below:
+
+ ansible all -m ping 
+
+you should install sshpass on controller and login with ansible user.
+
+sudo apt install sshpass -y
+
+for using sshpass to send -y to hosts you should change below config in /etc/ssh/sshd_config file host key cheking to no and uncomment it. or just for one time ssh to that host to transfer fingerprint then use sshpass.
+
+sudo vi /etc/ssh/sshd_config
+
+#IgnoreUserKnownHosts no  ---> IgnoreUserKnownHosts yes
+
+or ssh to that host one time:
+
+ ssh ansible@192.168.44.150   - add fingerprint
+
+
+
+ ## list of built-in ansible module that we learn in this section:
+
+ 1- ping
+ 2- command
+
+
+
+
+
+
+
+
+
+
+
+
+#### 1- ping 
+
+  ansible all -m ping   -- no need extra arg
+
+
+#### 2- command
+
+command module needs an arguments:
+
+ansible all -m command -a "cat /etc/hostname"
+
+ansible all -m command -a "uptime"
+
+ansible all -m command -a "date"  - you can see ansible send command In parallel
+
+ansible all -m command -a "timedatectl"
+
+
+
+
+
+
+  
 
 
 
