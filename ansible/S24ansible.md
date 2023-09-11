@@ -214,6 +214,74 @@ hint: platform engineering is : devops(docker-yaml) + SRE(monitoring-ansible) + 
 
 
 
+note: add ansible user pub key that you trust him or her.
+
+
+## ansible inventory
+
+we make default directory for ansible and place inventory file for our projects or related inventory file there. and use an inventory file with -i .
+
+ mkdir /etc/ansible/
+
+ vi /etc/ansible/hosts
+
+
+
+ we can write domain name and ip or range of ip . or range:
+
+ server[001:015].sematech.com
+
+ 192.168.44.[110:130]
+
+ #is commenting
+
+ #Ex 1: Ungrouped hosts, specify before any group headers.
+blue.example.com
+192.168.100.10
+
+ grouping:
+
+ #Ex 2: A collection of hosts belonging to the 'webservers' group
+[webservers]
+www[001:006].example.com
+192.168.1.110
+
+[db-servers]
+db01.intranet.mydomain.net
+10.25.1.56
+
+[all_servers]
+webservers
+db-servers
+
+
+an ip may be member in many groups. 
+
+
+Parameters	Description:
+
+
+ansible_host=192.168.1.10   -	IP or DNS Name of the Host.
+
+
+ansible_port=2022	 -  SSH Default port for connecting to.
+
+
+ansible_connection=ssh	  -  Ansible Connection Type [ssh/winrm/localhost]. winrm is windows remote desktop.
+
+
+ansible_user=ansible   - 	SSH User, if no user specified current user will used.
+
+
+ansible_ssh_pass=Aa@123	  -  SSH Password.
+
+
+
+
+
+
+
+
 
 
 
