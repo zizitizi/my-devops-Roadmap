@@ -340,7 +340,7 @@ or ssh to that host one time:
 
  1- ping
  2- command
-
+ 3- apt
 
 
 
@@ -359,6 +359,13 @@ or ssh to that host one time:
 
 #### 2- command
 
+this is default command for -m in ansible and we can ignore it 
+
+like:
+
+ansible all -a "cat /etc/hostname"
+
+
 command module needs an arguments:
 
 ansible all -m command -a "cat /etc/hostname"
@@ -369,7 +376,37 @@ ansible all -m command -a "date"  - you can see ansible send command In parallel
 
 ansible all -m command -a "timedatectl"
 
+ansible all -a "whoami"   - return ansible user but:
 
+
+ansible all -a "sudo whoami"  - return root user for ssh with pub key connection but error for sshpass connection that need sudo password to pass. send ctlr+c to break. we can solve this error in 2 way:
+
+this not recommanded:
+
+
+ sudo vi /etc/ansible/hosts
+
+ zizi50 ansible_host=192.168.44.150 ansible_ssh_pass=123 ansible_sudo_pass=123
+
+or:
+
+ansible all -b -a "whoami"   - -b or --become  - change user to root
+
+
+ansible all -bK -a "whoami"   - K --ask-become-pass ask for sudo pass to become - its recommanded- becarefull all sudo pass for ansible user should be the same on all hosts.
+
+ansible all --become-user zizi -K -a "whoami"   - run as zizi and ask pass zizi on all hosts.
+
+3 color in output of ansible command means:
+
+1- green : unchanged but successful command
+
+2- yellow: change in result
+
+3- red : failed
+
+
+#### 3- apt
 
 
 
