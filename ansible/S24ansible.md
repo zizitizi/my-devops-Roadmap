@@ -409,6 +409,18 @@ ansible all --become-user zizi -K -a "whoami"   - run as zizi and ask pass zizi 
 #### 3- apt
 
 
+this command is for install , uninstall , update package. that have 2 arguments. name and state=(present for install,latest for update,absent for uninstall) package
+
+
+
+
+***important note:*** 
+when you got this error :
+
+zizi51 | FAILED | rc=-1 >>
+Timeout (12s) waiting for privilege escalation prompt:
+
+one of reasons may be in network layer. check (cat /etc/hosts ) that host name be correct
 
 
   
