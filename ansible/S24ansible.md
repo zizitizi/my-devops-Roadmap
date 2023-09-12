@@ -411,7 +411,9 @@ ansible all --become-user zizi -K -a "whoami"   - run as zizi and ask pass zizi 
 
 this command is for install , uninstall , update package. that have 2 arguments. name and state=(present for install,latest for update,absent for uninstall) package
 
+ansible all -m apt -a "name=figlet state=present"   - can not work becaouse user become root to install then run below command instead:
 
+ansible all -bK -m apt -a "name=figlet state=present"
 
 
 ***important note:*** 
