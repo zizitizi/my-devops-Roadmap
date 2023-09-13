@@ -341,6 +341,7 @@ or ssh to that host one time:
  1- ping
  2- command
  3- apt
+ 4- service
 
 
 
@@ -427,12 +428,65 @@ one of reasons may be in network layer. check (cat /etc/hosts ) that host name b
 
   
 
+ansible is service less and cache less every time it runs first collect facts and then change or unchanged.
+
+
+to remove docker repo with ansuble from all servers:
+
+ ansible all -bK -a "rm -rf /etc/apt/source.list.d/docker.list"
 
 
 
+DO ALL BELOW IN VISUDO TO PREVENT ASK PASS WORD EVERYTIME.
+
+ ansible ALL=(ALL:ALL) NOPASSWD: ALL
+
+THEN WE CAN IGNORE -K:
+
+ansible all -b -m apt -a "name=figlet state=present"
+
+
+OR WE CAN USE SUDO IN COMMMAND INSTEAD -b:
+
+ ansible all  -a "sudo rm -rf /etc/apt/source.list.d/docker.list"
 
 
 
+ansible-doc apt
+
+
+ansible web-srv -b -m apt -a “name=apache2 state=latest only_upgrade=yes”    - only if apache2 existed update it to latest. use yes or on.
+
+ ansible all -b -m apt -a "name=apache2 state=latest only_upgrade=yes"
+
+
+ ansible all -b -m apt -a "name=apache2 state=absent purge=yes"  - when remove it purge its configuration.
+
+
+to run apt update befor apt install set update_cache=yes. we can write this option any where of our arguments.cause it compile with python.
+
+ 
+ ansible all -b -m apt -a "name=apache2 state=latest update_cache=yes"  - first run apt update then install or update to latest apache2
+
+
+to force verbose or create debug log set -v increasinly to more log: -v or -vv or -vvv or -vvvv  --> its common to use -v or -vv.
+
+
+ansible all -m command -a "figlet $USER"
+
+
+figlet print banner.
+
+figlet banner
+
+
+#### 4- service
+
+
+this module is same as systemctl. it has 2 main arguments: name - state : Reloaded , Restarted,  Running, Started or Stopped. enabled=yes
+
+
+a
 
 
 
