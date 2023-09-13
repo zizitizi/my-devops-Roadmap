@@ -486,7 +486,7 @@ figlet banner
 this module is same as systemctl. it has 2 main arguments: name - state : Reloaded , Restarted,  Running, Started or Stopped. enabled=yes
 
 
-a
+
 
 
 
