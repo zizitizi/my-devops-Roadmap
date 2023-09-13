@@ -177,7 +177,7 @@ visudo  or vi /etc/sudoer
 % means group - 
 
 in below of lines:
-# Allow members of group sudo to execute any command  
+#Allow members of group sudo to execute any command  
 add following line:
 
 ansible ALL=(ALL:ALL) NOPASSWD: ALL
@@ -340,9 +340,13 @@ or ssh to that host one time:
 
  1- ping
  2- command
- 3- apt
- 4- service
-
+ 3- raw
+ 4- shell
+ 5- apt
+ 6- service
+ 7- copy
+ 8- file
+ 9- setup
 
 
 
@@ -407,7 +411,64 @@ ansible all --become-user zizi -K -a "whoami"   - run as zizi and ask pass zizi 
 3- red : failed
 
 
-#### 3- apt
+#### 3- raw
+
+This module, unlike all others, doesn’t use python on the remote system.
+This means it could be used on devices like IoT kit or networking devices that don’t have any other supported methods.
+
+
+
+if we have not python on a server we have just a option using raw module other feature and module not work.
+
+ansible all -b -m raw -a "apt install apache2 -y"
+
+
+
+
+
+
+
+#### 4- shell 
+
+
+If the command you want to execute should use local environment variables or you want to pipe the output to a file or grep (“<", ">“, “|”, “;”, “&”), then this is the droid you are looking for.
+
+
+
+ansible all -b -m shell -a "apt install apache2 -y"
+
+
+
+
+
+
+###### note:
+
+difference  between raw shell and command is :
+
+command execute and compile and build in python .
+
+shell is open shell in destination commonly bash and execute in it .
+
+raw just run a coomand in destination no matter python is exist or not. 
+
+performance: 1- command 2- shell 3- raw
+
+for example:
+
+ ansible all -m command -a "echo "hello" > ~/outputtest.txt"  - did not work and correctly and not create output
+
+
+  ansible all -m shell -a "echo "hello" > ~/outputtest.txt"  - make output correctly
+
+  ansible all -m raw -a "echo "hello" > ~/outputtest.txt"  - make output correctly
+
+in linux server we run shell . raw is for unix or other type of server.
+
+command is python based and have not option for piping or environment or redirection out put ,... (echo $USER) not run in command.
+
+
+#### 5- apt
 
 
 this command is for install , uninstall , update package. that have 2 arguments. name and state=(present for install,latest for update,absent for uninstall) package
@@ -480,10 +541,90 @@ figlet print banner.
 figlet banner
 
 
-#### 4- service
+#### 6- service
 
 
 this module is same as systemctl. it has 2 main arguments: name - state : Reloaded , Restarted,  Running, Started or Stopped. enabled=yes
+
+
+ansible-doc service
+
+
+ansible all -b -m service -a "name=apache2 state=started enabeled=yes"
+
+
+
+
+#### 7- copy
+
+copy a file from controller to servers
+
+src on controller and dest on remote machines.
+
+
+ansible all -m copy -a “src=/etc/passwd dest=/tmp”
+
+when we use backup option time stamp is same with that file. but for copy time is copy time
+
+content to create content in place . we can use content or src.
+
+directory_mode=yes copy the directory not that file and create dir.
+
+force=yes copy the file newly even if exist replaced.
+
+group=root make group owner change to root .need sudo or  -b and that may be it make copy in root home
+
+mode=640 change the permisions to 640  .need sudo or  -b and that may be it make copy in root home
+
+
+owner=root  change the owner of that file to root
+
+remote_src  copy from remote machin to remote machines ip/target.
+
+date is not update when file replaced.
+
+
+#### 8- file
+
+we can create file or directory and delete it . also emty file can created with. many similarity to copy.
+
+its state may be soft link or hrad link or toouch. we dont have src here. main option is dest and state.
+
+ansible all -m file -a “dest=/tmp/new mode=777 owner=ansible group=ansible state=directory”
+
+ansible all -m file -a “dest=/tmp/new state=absent”
+
+
+also it used for change persmision in a file on servers.
+
+
+
+
+#### 9- setup
+
+
+is just gathering facts on a server.
+This module is automatically called by playbooks to gather useful variables about remote hosts. It can also be executed directly to check what variables are available to a host. ip - ipv6 - hardware resource - informations - kernel -time -....... every thing uoy need. in puppet we have factor like setup to gathering fact.
+
+
+ansible all -m setup
+
+
+
+
+ansible zizi -m setup
+
+
+
+## ansible playbook
+
+
+
+
+
+
+
+
 
 
 
