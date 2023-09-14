@@ -1,0 +1,28 @@
+###ping module
+- name: pingplaybook
+  hosts: all
+  tasks:
+    - ping:
+
+
+####test for command module
+
+-name: Check the remote host Hostname, Version, Distribution with UNAME
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
