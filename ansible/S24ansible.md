@@ -619,6 +619,69 @@ ansible zizi -m setup
 ## ansible playbook
 
 
+write all comands, arguments and modules ,... in yaml file. 
+
+one play book consist of multiple play and tasks ,... but best practice is writing one play in 1 playbook. multiple task in one play can be write.
+
+
+
+
+
+vi playbook1.yml
+
+
+- name: playbook1
+  hosts: ["zizi51" , "zizi"]
+
+  become: yes
+
+  tasks:
+    - name: getting uptime
+      command: uptime
+
+    - name: showing hostname
+      shell: "cat /etc/hostname > ~/output2.txt"
+
+    - name: install apache2
+      apt:
+        name: apache2
+        state: latest
+        update_cache: yes
+
+    - name: start apache service
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
+
+
+
+ansible-playbook playbook1.yml
+
+
+ansible-playbook we can run it with -b if we dont use become option. or -i to specify hosts if not specified in yml file.
+
+
+unreachable means can not stablished ssh connection
+
+failed means get errors. something like permission deny ,.....
+
+skipped means we have if conditions that one command skipped and not runs then make skipped section blue color.
+
+rescued means we set timeout if 5 time out then skip go to next then it is rescued it self
+
+ignored means if we set to face ignore in failed status go to next. ansible playbook in default when face with an error it breaks and stops. but when ignore error it resume to finish its tasks. set ignore_errors: yes in a specified task.
+
+
+***note:***
+
+to know which app use port 80:
+
+sudo lsof -i tcp:80
+
+##### practice write yaml file to above module in ansible.
+
 
 
 
