@@ -87,13 +87,44 @@
         dest: $HOME/hoststest
     - name: copy2 remote-remote
       copy:
-        src: $HOME/hoststest
+        src: /etc/hosts
         remote_src: true
         dest: $HOME/hoststest2
     - name: copy content
       copy:
         dest: $HOME/hoststest3
         content: " hello this test3 content from ansible3 "
+
+
+
+####test for module file 
+
+#test for file
+- name: filedir
+  hosts: all
+  become: true
+  tasks:
+    - name: Recursively change ownership of a directory
+      file:
+         path: /etc/fooo
+         state: directory
+         recurse: yes
+         owner: ansible
+         group: ansible
+
+
+####test for setup module
+
+#test for setup
+- name: setup
+  hosts: all
+  tasks:
+    - name: Collect only facts returned by facter
+      ansible.builtin.setup:
+         gather_subset:
+              - '!all'
+              - '!<any valid subset>'
+              - facter
 
 
 
