@@ -7,8 +7,93 @@
 
 ####test for command module
 
--name: Check the remote host Hostname, Version, Distribution with UNAME
+#check the hostname os version
+- name: os-checking
+  hosts: all
+  tasks:
+    - name: hostname
+      command: "cat /etc/hostname"
+    - name: uname
+      command: "uname -a"
 
+
+####test for raw module
+
+#test raw module
+- name: test-for-raw
+  hosts: all
+  tasks:
+    - name: run ifconfig
+      raw: ifconfig
+      register: ifconfig
+    - debug: var=ifconfig
+
+
+####test for shell module
+
+#test shell
+- name: shell-test
+  hosts: all
+  tasks:
+    - name: create a text file in $HOME with the /bin/sh shell
+      shell: echo "Hello, World!" > $HOME/test_file.txt
+      register: shell_output
+    - debug: var=shell_output
+
+
+####test for apt module
+
+#test for apt module
+- name: test-apt
+  hosts: all
+  become: true
+  tasks:
+    - name: apt-ifconfig
+      apt:
+         name: net-tools
+         state: latest
+         update_cache: yes
+
+
+####test for service module
+
+#test for service module test for start dockerd and syslog
+- name: test-service
+  hosts: all
+  become: true
+  tasks:
+    - name: services
+      service:
+        name: "{{ item }}"
+        state: started
+        enabled: true
+      register: service_output
+      loop:
+          -  docker.service
+          - rsyslog
+
+    - debug: var=service_output
+
+
+####test for copy module
+#test for copy module
+- name: copy-command
+  hosts: all
+  become: true
+  tasks:
+    - name: copy-localtoremote
+      copy:
+        src: /etc/hosts
+        dest: $HOME/hoststest
+    - name: copy2 remote-remote
+      copy:
+        src: $HOME/hoststest
+        remote_src: true
+        dest: $HOME/hoststest2
+    - name: copy content
+      copy:
+        dest: $HOME/hoststest3
+        content: " hello this test3 content from ansible3 "
 
 
 
