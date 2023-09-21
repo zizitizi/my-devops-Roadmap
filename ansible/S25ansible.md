@@ -131,7 +131,199 @@ Windows	Win_copy	Win_command	Win_msi	Win_ping	Win_msq	Win_shell	Win_path	Win_ser
 
 
 
-# lininfile module
+# lineinfile module
+
+attach new line in a file. also need to grep some exp and replace it in a file. we can use it instead sed command in ansible. here backup: yes means ansible take backup file with all time and permission with name that file + random number + dtae time+~ that no other app can not read this file. and then change the main file.
+
+                  #Sample Ansible lineinfile-module.yaml
+                  
+                    name: Add DNS server
+                    hosts: localhost
+                    tasks:
+                      -  name: Add DNS server to resolv.conf
+                         lineinfile:
+                           path: /etc/resolv.conf
+                           line: 'nameserver 8.8.8.8'
+                           
+         
+         
+
+
+ansible-playbook playbook4.yml -K    - to run it.
+
+
+
+
+read :
+
+ansible-doc lineinfile
+
+
+
+
+- line
+        The line to insert/replace into the file.
+        Required for `state=present'.
+        If `backrefs' is set, may contain backreferences that will get expanded with the `regexp' capture groups if the
+        regexp matches.
+        (Aliases: value)[Default: (null)]
+        type: str
+
+- mode
+        The permissions the resulting file or directory should have.
+        For those used to `/usr/bin/chmod' remember that modes are actually octal numbers. You must either add a leading
+        zero so that Ansible's YAML parser knows it is an octal number (like `0644' or `01777') or quote it (like `'644'' or
+        `'1777'') so Ansible receives a string and can do its own conversion from string into number.
+        Giving Ansible a number without following one of these rules will end up with a decimal number which will have
+        unexpected results.
+        As of Ansible 1.8, the mode may be specified as a symbolic mode (for example, `u+rwx' or `u=rw,g=r,o=r').
+        [Default: (null)]
+        type: raw
+
+- others
+        All arguments accepted by the [ansible.builtin.file] module also work here.
+        [Default: (null)]
+        type: str
+
+- owner
+        Name of the user that should own the file/directory, as would be fed to `chown'.
+        [Default: (null)]
+        type: str
+
+= path
+        The file to modify.
+        Before Ansible 2.3 this option was only usable as `dest', `destfile' and `name'.
+        (Aliases: dest, destfile, name)
+        type: path
+
+- regexp
+
+
+to grep specified text find. sample option is to use : 
+
+- firstmatch or insert after or insert before.
+
+
+- and regexp use to grep.
+
+
+sample delete specified line:
+
+                  - name: playbook4
+                    hosts: all
+                    become: yes
+                    tasks:
+                      - name: delete a spec line
+                        lineinfile:
+                            path: /etc/resolv.conf
+                            regex: 'nameserver 9.9.9.9'
+                            backup: yes
+                            state: absent  #default if not write is present and add to file
+
+
+
+
+ansible-playbook playbook4.yml -K
+
+to replace a line:
+
+                  - name: playbook4
+                    hosts: all
+                    become: yes
+                    tasks:
+                      - name: delete a spec line and replace
+                        replace:
+                            path: /etc/resolv.conf
+                            regex: 'nameserver 9.9.9.9'
+                            backup: yes
+                            replace: 'nameserver 9.9.1.1'
+  
+
+
+ansible-playbook playbook4.yml -K
+
+
+
+# mail module:
+
+send mail from mail server to out.first run a mail server in your server or use external mail server. use for notify in ansible play book as end task to ensure all play are execute succefully or use it with condition if a tsk run succefully or not. and...
+
+
+
+
+                  name: sending mail 
+                    hosts: localhost
+                    tasks:
+                      - name: sending mail to root
+                        mail:
+                           subject: 'System has been successfully configured’
+                           delegate_to: localhost
+                         
+                      - name: Sending an e-mail using Gmail SMTP servers
+                        mail:
+                          host: smtp.gmail.com
+                          port: 587
+                          username: ansible@sematec.com
+                          password: mysecret
+                          to: John Smith <john.smith@example.com>
+                          subject: Ansible-report
+                          body: 'System has been successfully provisioned.'
+                        delegate_to: localhost
+
+ansible-playbook mail-module.yaml
+
+
+                  
+                  - name: mail playbook
+                    hosts: ubuntu3
+                  
+                    tasks:
+                      - name: install mailutils
+                        become: yes
+                        apt:
+                          name: mailutils
+                          update_cache: yes
+                          state: present
+                  
+                      - name: mail to root
+                        mail:
+                          to: root
+                          subject: "Sending mail to root user"
+                          body: "This is a test message"
+                        delegate_to: 192.168.1.130
+
+
+
+      
+
+
+# Ansible FIREWALL Module Example:
+
+
+
+
+                  name: Set Firewall Configurations
+                    hosts: centos
+                    become: yes
+                    tasks:
+                      -  firewalld:
+                           service: https
+                           permanent: true
+                           state: enabled
+                      
+                      -  firewalld:
+                           port: 8080/tcp
+                           permanent: true
+                           state: disabled
+                                    
+                      -  firewalld:
+                           source: 192.168.100.0/24
+                           zone: internal
+                           state: enabled 
+         
+         
+
+ansible-playbook firewall-module.yaml
 
 
 
@@ -142,6 +334,9 @@ Windows	Win_copy	Win_command	Win_msi	Win_ping	Win_msq	Win_shell	Win_path	Win_ser
 
 
 
+
+
+      
 
 
 
