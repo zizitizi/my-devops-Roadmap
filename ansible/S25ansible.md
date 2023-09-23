@@ -326,6 +326,147 @@ ansible-playbook mail-module.yaml
 ansible-playbook firewall-module.yaml
 
 
+# variable in ansible
+
+Variables can be defined in three below scopes:
+
+1- Global Scope: Variables set from the Command-Line or Ansible Configuration. write in inventory but not in front of hosts . vaes write in rest of inventoy.
+
+2- Play Scope: Variables set in the Play & relates structures. best practice play scope with file vars.
+
+3- Host Scope: Variables set on Host Groups & Individual Hosts by inventory.
+
+
+we can call variables by {{ var }} .
+
+we can define multiple var in  vi /etc/ansible/hosts - one time for ever. that is called host level variable.
+
+
+sample  for host level:
+
+
+ vi /etc/ansible/hosts
+
+zizi51 ansible_host=192.168.44.151
+zizi ansible_host=192.168.44.136 ansible_user=ansible http_port=80 myname=arash
+zizi50 ansible_host=192.168.44.150 ansible_ssh_pass=123 ansible_sudo_pass=123
+
+
+and in playbook call with:
+
+    -  firewalld:
+         port: "{{ http_port }}/tcp"
+         permanent: true
+         state: disabled
+         
+         
+  
+sample for play scope level:
+
+  name: Set Firewall Configurations
+  hosts: centos
+  become: true
+  vars:
+    http_port: 8080
+    snmp_port: 161-162
+    internal_ip_range: 192.168.100.0
+  tasks:
+    -  firewalld:
+         service: https
+         permanent: true
+
+
+
+
+
+
+#test for apt module
+- name: test-apt
+  hosts: all
+  become: true
+
+  vars:
+    app_name: "vsftpd"
+
+  handlers:
+    - name: start vsftpd
+      service: name=vsftpd enabled=yes state=started
+
+  tasks:
+    - name: install {{ app_name }}
+      apt:
+         name: {{ app_name }}
+         state: latest
+         update_cache: yes
+      ignore_errors: yes
+      notify: start vsftpd
+
+
+
+
+or we can ser vars in file and call that file in var section in playbook.
+
+vi vars_file.yaml
+http_port: 8080
+snmp_port: 161-162
+internal_ip_range: 192.168.100.0
+
+
+
+vi firewall-playbook.yaml
+
+  name: Set Firewall Configurations
+  hosts: centos
+  become: true
+  vars_files:
+    - vars.yaml
+  tasks:
+    -  firewalld:
+         service: https
+         permanent: true
+
+
+
+sample for global level:
+
+
+in file  vi /etc/ansible/hosts
+
+                  zizi51 ansible_host=192.168.44.151
+                  zizi ansible_host=192.168.44.136 ansible_user=ansible http_port=80 myname=arash
+                  zizi50 ansible_host=192.168.44.150 ansible_ssh_pass=123 ansible_sudo_pass=123
+                  app_name=vsftpd
+                  http_port=80 
+                  myname=arash
+
+
+
+
+
+### filter facts:
+
+
+ansible zizi -m setup
+
+
+to filetr for ex. os family do:
+
+ansible all -m setup -a "filter=*family"
+
+
+### debug
+
+debug message is for print output . debug : msg=... ==is same as echo. we can write a meesage end of playbook to see if entire of playbook runs successfully.
+
+
+
+
+
+
+
+
+
+
 
 
 
