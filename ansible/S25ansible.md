@@ -456,7 +456,24 @@ ansible all -m setup -a "filter=*family"
 
 ### debug
 
-debug message is for print output . debug : msg=... ==is same as echo. we can write a meesage end of playbook to see if entire of playbook runs successfully.
+debug message is for print output . debug : msg=... ==is same as echo. we can write a meesage end of playbook to see if entire of playbook runs successfully. have many arguments like: msg - var - register,...
+
+
+- name: pingplaybook
+  hosts: all
+  tasks:
+    - ping:
+
+    - name: printing masseg
+      debug:
+         msg: "helow from zizi51"
+
+
+- hosts: ubuntu2
+
+  tasks:
+  - debug:
+      var: ansible_facts  -->Or can filter like Var: ansible_facts[“cmdline”]
 
 
 
@@ -466,10 +483,63 @@ debug message is for print output . debug : msg=... ==is same as echo. we can wr
 
 
 
+## register
+
+is multiple line variable. out put of relaed command is set in register. then we can call it later by register name in for ex. debug messeage.
 
 
 
 
+note : 
+
+to use content to file use | to use all below content as content message for that file. ex.:
+
+                  copy:
+                     content: |
+                         hi from zizi51
+                         today is suny day
+                         my name is chatgpb
+                     dest: /tmp/tst.txt
+                         
+
+       
+
+
+- hosts: centos
+  vars:
+    - var_thing: "eldorado"
+
+  tasks:
+    - name: say something
+      command: echo -e "{{ var_thing }}!\n Do you believe {{ var_thing }} exist?!\nI like to know about {{ var_thing }}"
+      register: results1
+
+    - name: show results
+      debug: msg={{ results1 }}
+
+
+
+you can Filter stdout_lines: debug: msg={{ results1.stdout_lines }}  - note that mesg= not msg:
+
+
+
+another example you can use kubeadm init for command that save stdout to exract jion token and commadn from it. 5 task use lineinfile and regex too. redirection works just with shell command . also swapp off ,.. . use lineinfile and replace instead of sed. do backup yes for your tasks. curl==get-url
+
+
+echo -e "hi\nto you\nbye"  - write in multiple line
+
+in out put of ansible playbook message we see:
+
+stderr_lines: use to see error lines   - useful
+
+stdout_lines: to see output line and its usefull
+
+
+all indentation got by dot. for ex.:
+
+{{ result1.stdout_lines }}
+
+# condition in ansible:
 
 
 
