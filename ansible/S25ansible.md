@@ -539,7 +539,34 @@ all indentation got by dot. for ex.:
 
 {{ result1.stdout_lines }}
 
+
+
 # condition in ansible:
+
+
+Create the name of the registered variable using the register keyword. A registered variable always contains the status of the task that created it.
+
+
+                  - hosts: all
+                    become: yes
+                  
+                    tasks:
+                      - name: install apache2
+                        apt: name=apache2 state=latest
+                        update_cache: yes
+                        ignore_errors: yes
+                        register: variable
+                  
+                      - name: install httpd
+                        yum: name=httpd state=latest
+                        failed_when: "'FAILED' in variable"
+
+
+
+
+
+
+
 
 
 
