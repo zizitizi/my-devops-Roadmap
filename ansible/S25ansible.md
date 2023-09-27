@@ -627,10 +627,64 @@ or
 
 ### 2- with_files:
 
+  tasks:
+   - name: show file(s) contents
+     debug: msg={{ item }}
+     with_file:
+      - myfile1.txt
+      - myfile2.txt
+
+
+it print debug msg and works like cat myfile1.txt ,cat myfile2.txt
+
+
+vimdiff - returns 2 files differencation.
+
 
 
 
 ### 3- with_sequence:
+
+
+it acts as for loop.
+
+
+  tasks:
+   - name: show file(s) contents
+     debug: msg={{ item }}
+     with_sequence: start=1 end=5
+
+this task prints 1 to 5. in bash:
+
+for (i=1 ; i>6 ; i++)
+do
+  echo "$i"
+done
+
+
+# ansible vault
+
+if we dont wat to have sudoer with no pass and send pass in playbook then to safty use vault to secret the ansible play book . it prevent playbook cat too. to encrypt passwords or playbooks.
+
+ansible-vault create apache-playbook.yaml
+New Vault password:
+Confirm New Vault password:
+
+
+
+encrypt_string   - encrypt password
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
