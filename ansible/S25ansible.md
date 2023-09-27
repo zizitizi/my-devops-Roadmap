@@ -586,11 +586,51 @@ Create the name of the registered variable using the register keyword. A registe
 
 
 
+# loop in ansible
+
+Sometimes needed to repeat the execution of a same task using different values.
+For example, installing multiple packages , or ... . 
+
+
+reapetedly command with reapetedly task. in 3 ways:
+
+### 1- with_items:(deprecated)
+
+  tasks:
+   - name: install packages
+     apt: name={{ item }} update_cache=yes state=latest
+     with_items:
+      - vim
+      - nano
+      - apache2
+
+
+or  just write items in list like below:
+
+
+
+name:
+   - vim
+   - nano
+   - apache2
+   - curl
+   - figlet
+
+or
+
+  tasks:
+   - name: install packages
+     apt:
+       name=['vim', 'nano', 'apache2', 'curl', 'figlet']
+       update_cache=yes
+       state=latest
+
+### 2- with_files:
 
 
 
 
-
+### 3- with_sequence:
 
 
 
