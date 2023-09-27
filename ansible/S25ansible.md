@@ -543,6 +543,13 @@ all indentation got by dot. for ex.:
 
 # condition in ansible:
 
+we have coditions:
+
+failed_when: use when result of that task was failed
+
+when: do when codition in facts in setup moduled we find parameters. fact is used frequently. then read ansible facts carefully. or we can use with result of commands with failed_when. then it works look like else. 
+
+
 
 Create the name of the registered variable using the register keyword. A registered variable always contains the status of the task that created it.
 
@@ -560,6 +567,21 @@ Create the name of the registered variable using the register keyword. A registe
                       - name: install httpd
                         yum: name=httpd state=latest
                         failed_when: "'FAILED' in variable"
+
+
+
+
+- hosts: ubuntu,centos,suse
+  become: yes
+
+  tasks:
+    - name: Remove Apache on Ubuntu Server
+      apt: name=apache2 state=absent
+      when: ansible_os_family == "Debian"
+
+    - name: Remove Apache on CentOS  Server
+      yum: name=httpd  state=absent
+      when: ansible_os_family == "RedHat"
 
 
 
