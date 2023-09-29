@@ -676,6 +676,97 @@ encrypt_string   - encrypt password
 
 
 
+ansible-vault encrypt playbookping.yml
+
+
+cat playbookping.yml
+
+
+$ANSIBLE_VAULT;1.1;AES256
+
+
+ ansible-vault view playbookping.yml  -  to cat encrypted playbook
+
+ ansible-vault edit playbookping.yml  -  to edit encrypted playbook
+
+ to create encrypted playbook from scratch use:
+
+
+ ansible-vault create playbooktest.yml 
+
+ansible-playbook playbookping.yml --ask-vault-pass   - to play encrypted playbook - deprecated
+
+
+
+ansible-vault decrypt apache-playbook.yaml   - to decrypt encrypted playbook
+
+
+
+to use password file to encrypte without ask password
+
+vi password.txt
+
+
+Aa@12345
+
+
+ansible@controller:~$ ansible-playbook apache-playbook.yaml --vault-password-file password.txt    - deprecated
+
+
+
+
+ ansible-playbook playbookping.yml --vault-id @prompt   - it is same as but used instead of --ask-vault-pass
+
+
+ansible-playbook playbookping.yml --vault-id @password.txt   
+
+
+another way is using variable to encrpte that var then use encrypted pass in playbook and use become then no need to nopasssudoer and other... . for this purpose use below steps: (fun task2 :to see password in debug message)
+
+
+ ansible-vault encrypt_string 'Aa@12345' --name 'ansible_sudo_pass'
+
+
+
+ vi playbook6.yaml
+ 
+- name: play6 
+  hosts: all
+
+  vars:
+    - ansible_sudo_pass: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+326666333339393266323362376632623834656632326666333732633939396234393866636433363638373263343738613466633765383836353739383733650a64366162313163386139626261386133663035363334653866623165333337623566376165663739313332333
+  tasks:
+   - name: install apache2
+     become: yes
+     apt: name=apache2 state=latest
+
+   - name: print a secure variable
+     debug:
+       var: ansible_sudo_pass
+
+
+ansible-playbook playbook6.yaml --vault-id @prompt
+
+
+
+For changing vault password of an encrypted file, use ansible-vault rekey command:
+
+
+
+ansible-vault rekey apache-playbook.yaml
+
+
+
+# ansible template:
+
+template module is like copy module but in copy we use static file in template we use dynamic file then end of that file we should place .j2 to say to ansible for replacing var in each host then remove .j2 suffix then run that file .
+
+
+
+
+
 
 
 
