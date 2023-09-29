@@ -763,9 +763,85 @@ ansible-vault rekey apache-playbook.yaml
 
 template module is like copy module but in copy we use static file in template we use dynamic file then end of that file we should place .j2 to say to ansible for replacing var in each host then remove .j2 suffix then run that file .
 
+use dot to indentation. and detail
+
+
+vi index.html.j2
+
+
+                  <html>
+                  <center>
+                  <h1> This machine's hostname is {{ ansible_hostname }}</h1>
+                  <h2> os family is {{ ansible_os_family }}</h2>
+                  <small>file version is {{ file_version }}</small>
+                  <h1>myip is {{ ansible_default_ipv4.address }} </h1>
+                  {# This is comment, it will not appear in final output #}
+                  </center>
+                  </html>
 
 
 
+
+vi template-playbook.yaml
+
+                  - hosts: all
+                    become: yes
+                    vars:
+                     file_version: 1.0
+                  
+                    tasks:
+                     - name: install default web page
+                       template:
+                         src: index.html.j2
+                         dest: /var/www/html/index.html
+                         mode: 0777
+
+
+ansible-playbook template-playbook.yaml
+
+
+also we can use loop in src when we want copy multiple file in a dir:
+
+                  src: 
+                     - index.html.j2
+                     - docker-compose.yml.j2
+                     - package.json.j2
+                  
+                  dest: /home/ansible/
+
+
+# include 
+
+use to call another playbook in other playbook. 
+
+
+
+vi include-playbook.yaml
+---
+
+- include: pre-installation-playbook.yaml
+
+- hosts: all
+  become: yes
+  tasks:
+  - include: installation-playbook.yaml
+  - include: post-installation-playbook.yaml
+
+
+
+
+we can use include in k8s installlation process. 2 file : 1 for installation - one for initiation
+
+
+
+when we add a module on ansible from ansible galaxy we can use its direct command in ansible. no need to use for example raw,...
+
+
+
+
+
+
+  
 
 
 
