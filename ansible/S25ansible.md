@@ -837,11 +837,83 @@ we can use include in k8s installlation process. 2 file : 1 for installation - o
 when we add a module on ansible from ansible galaxy we can use its direct command in ansible. no need to use for example raw,...
 
 
+ansible controller is local other is remote machine. use local action to act and run in local server (not remote) which module you want as below.
+
+local_action:
+          module: copy
+          content: ....
+
+
+ regex works as grep in ansible module
+
+
+ get_url in ansible is same to curl and wget.
+
+
+ # ansible roles
+
+
+ its tree structure of ansible. we make this folders and structure with below command:
+
+
+ ansible-galaxy init new_role
+ 
+ 
+ first make directory for your project or companys
+
+ mkdir pardar
+
+
+  mkdir kingplus
+
+
+
+  cd to specify directory to init role we need apache and k8s ansible command in pardar and specified inventory file then
+
+   cd pardar/
+
+
+    ansible-galaxy init apache2   
+
+    ansible-galaxy init kubernetes
+
+
+    vi inventory.txt
+
+
+
+to define a task go to that folder and edit main task file or add another. and write just task section of a playbook in that file.
+
+if we have notify in task then go to handlers folder and specified handler.
+
+
+to write main role of apache2 to play that playbook in root of pardar. use name of directory of that roles as below . we can write many roles as we want in that section:
+
+vi apache2-playbook2.yml
+
+- name: apache2play
+  hosts: all
+  become: yes
+  roles:
+     - apache2
+
+
+       
+ansible-playbook apache2-playbook2.yml -i inventory.txt
 
 
 
 
-  
+# ansible-galaxy
+
+we have 2 type repo in there:
+
+1- roles: just run that command go to default folder find its install dir then do above step in roles
+
+2- modules: its ansible plugin. multiple module in one called collection. 
+
+ansible-galaxy search apache
+
 
 
 
