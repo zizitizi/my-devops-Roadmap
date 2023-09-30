@@ -27,6 +27,25 @@
             replace: '#/swap'
 
 
+#### update catch and install cert
+       - name: install cert with update catch
+         apt:
+           name:
+              - ca-certificates
+              - curl
+              - gnupg
+           state: latest
+           update_cache: yes
+           force: yes
+
+
+
+
+
+
+
+
+
 
              
 
