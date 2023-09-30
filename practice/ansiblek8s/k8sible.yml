@@ -27,7 +27,7 @@
             replace: '#/swap'
 
 
-#### update catch and install cert
+#### update catch and install required apps
        - name: install cert with update catch
          apt:
            name:
