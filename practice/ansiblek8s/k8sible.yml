@@ -1,7 +1,7 @@
 ## here is my play book code
 
 - name: prepareation
-  host: all
+  hosts: zizi51
   become: true
 
 
@@ -13,17 +13,20 @@
          lineinfile:
              path: /etc/resolv.conf
              line: 'nameserver 10.202.10.102'
+             state: present
        - name: reset adapter
          shell: netplan apply
 
 
 #### swapp all off in all machines
        - name: uncomment line with swap word
-         lineinfile:
+         replace:
             path: /etc/fstab
-            regex: '^/swap'
+            regexp: '^/swap'
             backup: yes
-            line: '#/swap'
+            replace: '#/swap'
+
+
 
              
 
