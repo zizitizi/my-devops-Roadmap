@@ -19,7 +19,11 @@
 
 #### swapp all off in all machines
        - name: uncomment line with swap word
-         
+         lineinfile:
+            path: /etc/fstab
+            regex: '^/swap'
+            backup: yes
+            line: '#/swap'
 
              
 
