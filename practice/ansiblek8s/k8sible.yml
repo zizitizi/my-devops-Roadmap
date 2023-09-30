@@ -1,4 +1,25 @@
 ## here is my play book code
 
+- name: prepareation
+  host: all
+  become: true
 
+
+#### change my system dns to desire dns to increase download speed
+  tasks:
+       - name: replace dns lines all
+         shell: echo "nameserver 10.202.10.202" > /etc/resolv.conf
+       - name: change dns
+         lineinfile:
+             path: /etc/resolv.conf
+             line: 'nameserver 10.202.10.102'
+       - name: reset adapter
+         shell: netplan apply
+
+
+#### swapp all off in all machines
+       - name: uncomment line with swap word
+         
+
+             
 
