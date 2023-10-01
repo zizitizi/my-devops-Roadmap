@@ -30,6 +30,32 @@
          register: swap_out
        - debug: msg={{ swap_out }}
 #### update catch and install cert for install containerd.io
+       - name: install cert with update catch
+         apt:
+           name:
+              - ca-certificates
+              - curl
+              - gnupg
+           state: latest
+           update_cache: yes
+           force: yes
+#### install keyring with permision to add docker repo to install containerd.io
+       - name: install keyring
+         file:
+           path: /etc/apt/keyrings
+           mode: 0755
+           state: directory
+       - name: gpg add
+         shell: 'get_url -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg'
+       - name: read permission for everyone for docker keyring gpg
+         file:
+            path: /etc/apt/keyrings/docker.gpg
+            mode: 444
+       - name: add docker repo
+         shell: 'echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+   tee /etc/apt/sources.list.d/docker.list > /dev/null'
 
 
 
