@@ -184,6 +184,8 @@
        file:
           content: {{ init_out }}
           path: /home/zizi/outinit.txt
-          
+     - name: find export config and save it
+       lineinfile:
+        
              
 
