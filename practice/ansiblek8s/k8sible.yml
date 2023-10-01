@@ -1,12 +1,14 @@
 ## here is my play book code
 
-- name: prepareation
-  hosts: zizi51
+- name: prepareation to install k8s on all server
+  hosts: all
   become: true
 
 
-#### change my system dns to desire dns to increase download speed
+
   tasks:
+
+#### change my system dns to desire dns to increase download speed  
        - name: replace dns lines all
          shell: echo "nameserver 10.202.10.202" > /etc/resolv.conf
        - name: change dns
@@ -161,5 +163,20 @@
 
 
 
+
+- name: initiate kubeadm cluster on master server
+  hosts: zizi
+  become: true
+
+
+
+  tasks:
+     - name: init command
+       shell: 'kubeadm init --pod-network-cidr=10.244.0.0/16'
+       register: init_output
+       file:
+          content: {{ init_out }}
+          path: /home/zizi/outinit.txt
+          
              
 
