@@ -56,6 +56,52 @@
   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
    tee /etc/apt/sources.list.d/docker.list > /dev/null'
+#### install containerd with update cache
+       - name: install containerd.io with update cache
+         apt:
+           name: containerd.io
+           update_cache: yes
+         ignore_errors: yes
+       - name: verify containerd.io installation
+         shell: 'containerd --version'
+         register: containerd_out
+       - debug:
+            msg={{ containerd_out }}
+       - name: config containerd
+         shell: 'containerd config default > /etc/containerd/config.toml'
+
+#### configure containerd.io
+       - name: change systemCgroup to true
+         replace:
+           path: /etc/containerd/config.toml
+           regexp: 'SystemdCgroup = false'
+           backup: yes
+           replace: 'SystemdCgroup = true'
+       - name: verify SystemdCgroup = true
+         shell: 'cat  /etc/containerd/config.toml | grep SystemdCgroup'
+         register: systemgroup_out
+       - debug:
+            msg={{ systemgroup_out }}
+       - name: daemon reload and restart containerd
+         systemd:
+           name: containerd
+           state: restarted
+           daemon_reload: yes
+       - name: verify containerd service status
+         shell: 'systemctl status containerd.service'
+         register: containerdstatus_out
+       - debug:
+            msg={{ containerdstatus_out }}
+
+#### configure modprobe
+       - name: configure modprobe
+         shell: 'modprobe br_netfilter;modprobe overlay'
+       - name: verify modprobe
+         shell: 'lsmod | grep br_netfilter;lsmod | grep overlay'
+         register: modprob_out
+       - debug:
+            msg={{ modprob_out }}
+
 
 
 
