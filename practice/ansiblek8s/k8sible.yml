@@ -1,4 +1,9 @@
-## here is my play book code
+### here is my play book code###
+
+
+######################DO ON ALL HOSTS################################
+#####################################################################
+
 
 - name: prepareation to install k8s on all server
   hosts: all
@@ -162,6 +167,8 @@
 
 
 
+######################DO ON MASTERS ONLY#############################
+#####################################################################
 
 
 - name: initiate kubeadm cluster on master server
