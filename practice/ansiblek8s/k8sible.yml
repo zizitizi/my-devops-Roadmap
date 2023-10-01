@@ -101,7 +101,8 @@
          register: modprob_out
        - debug:
             msg={{ modprob_out }}
-
+            
+#### configure sysctl
 
 
 
