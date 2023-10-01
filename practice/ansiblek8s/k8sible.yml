@@ -25,23 +25,11 @@
             regexp: '^/swap'
             backup: yes
             replace: '#/swap'
-
-
-#### update catch and install required apps
-       - name: install cert with update catch
-         apt:
-           name:
-              - ca-certificates
-              - curl
-              - gnupg
-           state: latest
-           update_cache: yes
-           force: yes
-
-
-
-
-
+       - name: verify swapoff
+         shell: 'swapon -s'
+         register: swap_out
+       - debug: msg={{ swap_out }}
+#### update catch and install cert for install containerd.io
 
 
 
