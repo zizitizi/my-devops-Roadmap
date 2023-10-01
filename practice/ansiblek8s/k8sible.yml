@@ -6,7 +6,9 @@
 
 
 - name: prepareation to install k8s on all server
-  hosts: all
+  hosts: 
+     - masters
+     - nodes
   become: true
 
 
@@ -172,20 +174,67 @@
 
 
 - name: initiate kubeadm cluster on master server
-  hosts: zizi
+  hosts: 
+      - masters
   become: true
 
 
 
+
+#### change my system dns to desire dns to increase download speed
   tasks:
-     - name: init command
-       shell: 'kubeadm init --pod-network-cidr=10.244.0.0/16'
-       register: init_output
-       file:
-          content: {{ init_out }}
-          path: /home/zizi/outinit.txt
-     - name: find export config and save it
-       lineinfile:
-        
-             
+       - name: init command
+         shell: 'kubeadm init --pod-network-cidr=10.244.0.0/16 > /home/zizi/outinit.txt'
+         register: init_output
+         copy:
+            content: {{ init_out }}
+            dest: /home/zizi/outinit.txt
+            force: yes
+
+#### find export config and save it in bashrc
+       - name: find export config and save it
+         lineinfile:
+            path: /home/zizi/outinit.txt
+            regexp: 'export'
+            register: export_line
+       - debug:
+            var: export_line.matched_line
+       - name: write config to bashrc
+            lineinfile:
+                 path: /etc/bash.bashrc
+                 line: {{ export_line.matched_line }}
+                 state: present
+
+#### export join command to save it in txt file and run it on nodes
+       - name: fine join tokenin above file
+         lineinfile:
+            path: /home/zizi/outinit.txt
+            regexp: 'kubeadm join'
+            register: token_line
+       - debug:
+            var: token_line.matched_line
+       - copy:
+            content: {{ token_line }}
+            dest: /home/zizi/token.sh
+            force: yes
+
+
+
+######################DO ON ALL HOSTS################################
+#####################################################################
+
+- name: prepareation
+  hosts:
+      - nodes
+  become: true
+
+  tasks:
+
+#### join nodes to clusters
+       - name: give execute permission to token.sh
+         shell: 'chmod +x /home/zizi/token.sh'
+       - name: join nodes
+         shell: './home/zizi/token.sh'
+
+
 
