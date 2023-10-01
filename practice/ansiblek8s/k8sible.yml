@@ -132,6 +132,32 @@
       ignore_errors: yes
 
 
+#### prepare k8s repo add key and repo
+    - name: Add GPG key for k8s
+      apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+    - name: add k8s repo list
+      shell: 'echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list'
+
+
+#### install and update k8s
+    - name: install kubeadm with update repo
+      apt:
+         name:
+           - kubeadm
+           - kubelet
+           - kubectl
+         force: yes
+         update_cache: yes
+         state: latest
+
+#### mark hold installation
+    - name: mark hold k8s installation
+      shell: 'apt-mark hold kubelet kubeadm kubectl'
+      register: mark_out
+    - debug: msg={{ mark_out }}
+
 
 
 
