@@ -113,7 +113,9 @@ in monitoring we dont use log instead use for: app service or infra ,hardware,..
 
 
 
+## key elements in monitoring:
 
+1- metrics:
 
 
 
