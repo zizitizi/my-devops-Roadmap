@@ -69,7 +69,6 @@ monitoring can rely on agents or be agentless.
 Agents are independent programs that install on the monitored device to collect data on hardware or software performance data and report it to a management server. (SNMP)
 Agentless monitoring uses existing communication protocols to emulate an agent, with many of the same functionalities. (SSH, SSL)
 
-What is the difference between Monitoring Tools and Log Analyzers?!
 
 
 
@@ -87,9 +86,30 @@ grafana=visualizer
 grafana has not nms or data gathering system then it should have one nms system in behind like: prometheus,zabix,....
 
 
+zabix is agentbase then works on snmp protocol. snmp v3 (encrypt+user pass)is secure then you always use snmp v3. in v2 just encrypt in v1 nothing belong to secureity.
+
+nms speak with snmp with its agent in client then we can use one monitoring in that protocol. in agent base but in agent less in base on ssh or ssl.
+
+
+prometheus is agentless and egent base too. its agent name is exporter that works with http on any port you want. with differnet port for ex.: one for dbexporter - node exporter- container exporter - ,.... in go lang opensource and high speed. 
+
+prometheus is agnet base with http (not snmp) . to use snmp install snmp exporter. to use agentless then install ssh exporter.
 
 
 
+
+What is the difference between Monitoring Tools and Log Analyzers?!
+
+monitoring is not log analyser. log analyser is directory path to app logs and sys logs ,.. then visualize on that logs. fro ex.: user report on logs. like:
+for backden ELK or elastik stack include: (elastik search (nms) - logstash (gather agent) - kibana (gui - we can use grafana))  - use to log application in backend.
+
+kibana is log analyser but grafana is log analyser+monitoring.
+
+for frontend Sentry - web performance monitoring click states,... like google analytics that is on net and ip,....
+
+log analyser security like: splunk - log security analyser.
+
+in monitoring we dont use log instead use for: app service or infra ,hardware,.. 
 
 
 
