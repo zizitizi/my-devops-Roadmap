@@ -74,6 +74,17 @@ What is the difference between Monitoring Tools and Log Analyzers?!
 
 
 
+core of monitoring software is NMS ( network monitoring system) . nms gather data that called metric base on time and classify them then visualize it in visualizer in graph or..
+
+zabix,opmanager,solarwinds= nms+visualizer
+
+
+prometheus=nms
+
+grafana=visualizer
+
+
+grafana has not nms or data gathering system then it should have one nms system in behind like: prometheus,zabix,....
 
 
 
