@@ -46,6 +46,21 @@ terraform do versioning in deployment. and track resource change. rollback easil
 
 infrastructure provisioning. that can do config managmnet (same as ansible ) too. 
 
+can login with ipmi port to  server on cloud (or ilo) and run os and vm.. we can work with hcl or yml or json. 
+
+
+	Chef	Puppet	Ansible	Saltstack	Terraform
+Architecture	Server/Client	Server/Client	Server Only	Server/Client	Server/Client
+Ease of Setup	Moderate	Moderate	Very Easy	Moderate	Very Easy
+Language	Specify how to do a task	Specify only what to do	Specify how to do a task	Specify only what to do	Specify how to do a task
+Scalability	Scalable	Scalable	Scalable	Scalable	Scalable
+Management	Tough as it requires to learn Ruby DSL	Tough as it requires to learn Puppet DSL	Very Easy by YAML	Agnostic & Simple	JSON (YAML)
+Interoperability	High	High	High	High	High
+Cloud Availability	Amazon	Amazon, Azure	Amazon	None	Amazon
+Communication	Knife Tool	SSL	SSH	SSH	SSH
+
+
+
 
 
 
