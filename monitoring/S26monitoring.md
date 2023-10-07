@@ -60,6 +60,29 @@ Cloud Availability	Amazon	Amazon, Azure	Amazon	None	Amazon
 Communication	Knife Tool	SSL	SSH	SSH	SSH
 
 
+# monitoring (Prometheus)
+
+monitoring is a process to gather metrics about the operations of an IT environment's hardware & software to ensure all functions as expected to support apps & services.
+Basic monitoring is performed through device operation checks, while advanced monitoring gives granular views on operational states, including average response times, number of application instances, error/request rates, CPU usage & application availability.
+
+monitoring can rely on agents or be agentless.
+Agents are independent programs that install on the monitored device to collect data on hardware or software performance data and report it to a management server. (SNMP)
+Agentless monitoring uses existing communication protocols to emulate an agent, with many of the same functionalities. (SSH, SSL)
+
+What is the difference between Monitoring Tools and Log Analyzers?!
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
