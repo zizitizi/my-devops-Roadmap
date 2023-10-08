@@ -115,12 +115,33 @@ in monitoring we dont use log instead use for: app service or infra ,hardware,..
 
 ## key elements in monitoring:
 
-1- metrics:
+1- metrics: gather
+
+2- monitoring: nms
+
+3- alerting : notify .
 
 
+type of monitoring:
 
 
+- pull based: prom. send pull http get request to read data.
 
+  
+- push based: need push gateway . data from exporter push to gateway then prometheus pull from push gateway. then we need to install converter that ll be push gateway.
+
+
+ prometheus is pull based but it can be push based. its default is pull then its simple and easy. we use push method when we dont have exporter on that app and need write script to send data. 
+
+ 
+
+hint: in host use exporter. then install prom. in your laptop. then use grafana cloud.
+
+
+zabix is heavy than prometheus.
+
+
+prometheus is white box. then when treshold is reached ( cpu 80% - high ping time - ...) .  we have metric - log - trace. but in black ox we just notify to treshold reached and not show amounts. also we can install black box exporter
 
 
 
