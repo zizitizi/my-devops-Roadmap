@@ -145,9 +145,83 @@ prometheus is white box. then when treshold is reached ( cpu 80% - high ping tim
 
 
 
+data=index=metrics
+
+exporter=agent
+
+
+prometheus nms pull data from exporter agent with http get request. service discovery detet pacet in network and type of them but we do not use from this. we use other service.
+
+push gateway if you want you can install it for app that we want to push from that app
+
+
+alert manager if you want you can install it but we dont use it we use grafana alert manager instead.
+
+
+garafana can has difference dta source: prometheus- aws cloud watch-zabix-elastik,....
+
+install this modules:
+
+prometheus-grafana-push gateway-exporters
 
 
 
+
+list of exporter:
+https://prometheus.io/docs/instrumenting/exporters/
+
+
+
+to monitoring containers install exporter: cAdvisor(container advisor from google)
+
+to monitor hardware resource like: cpu , mem,.. install node exporter
+
+to monitor pods in k8s install: kube-state-metrics  - install pods in form daemonset
+
+
+you should keep  in your mind above name.
+
+
+
+prometheus scrape data from related exporter. then we should add this config for each exporter in ymlconfig  file .like:
+192.168.44.12:9091
+
+setup prometheus procedure:
+
+Install Prometheus and Grafana
+Install Prometheus Node Exporter on Linux servers to be monitored
+Configure Node Exporter
+Configure Prometheus server with Scrap jobs
+Add Dashboards to Grafana
+Start visualizing system metrics on Grafana
+
+
+we always install prom. in docker or k8s;
+
+
+in docker:
+
+docker run -d -p 9090:9090 --name prom --volume /etc/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+
+docker run -d -p 3000:3000 --name grafana grafana/grafana
+
+
+in k8s:
+
+kubectl create namespace prometheus
+
+
+helm repo add stable https://charts.helm.sh/stable
+
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+helm repo update
+
+helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack --namespace prometheus
+
+
+
+prometheus stack means: prometheus-grafana-push gateway-alert-node exporter
 
 
 
