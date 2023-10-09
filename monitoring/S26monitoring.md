@@ -224,9 +224,169 @@ helm install kube-prometheus-stack prometheus-community/kube-prometheus-stack --
 prometheus stack means: prometheus-grafana-push gateway-alert-node exporter
 
 
+install on docker:
+
+docker run \
+    -p 9090:9090 \
+    -v /path/to/prometheus.yml:/etc/prometheus/prometheus.yml \
+    prom/prometheus
+
+
+docker run -d -p 3000:3000 --name=grafana \
+  --volume grafana-storage:/var/lib/grafana \
+  grafana/grafana-enterprise
 
 
 
+
+    
+
+docker run     -p 9090:9090   -dit     prom/prometheus
+
+docker ps
+
+docker cp gifted_raman:/etc/prometheus/prometheus.yml .
+
+
+ls
+
+docker ps -a
+
+docker rm -f gifted_raman hopeful_herschel
+
+
+docker run \
+    -p 9090:9090 -dit \
+    -v /home/zizi/prometheus.yml:/etc/prometheus/prometheus.yml \
+    prom/prometheus
+
+
+****but best practice is that first make network to call each other with name:****
+
+
+docker network create prom-net
+
+
+docker run     -p 9090:9090 -dit --name prometheus --network prom-net    -v /home/zizi/prometheus.yml:/etc/prometheus/prometheus.yml     prom/prometheus
+
+
+ docker run -d -p 3000:3000 --network prom-net --name=grafana \                     --volume grafana-storage:/var/lib/grafana \
+  grafana/grafana-enterprise
+
+
+  docker ps -a
+
+  
+if you are on virtual box dont forget to forward port 9090
+
+http://192.168.44.136:9090/   - try not to publish 9090 to external - most important section in this page is just - status>targets - target is where that we monitor it.
+when we install specified exporter then add its scrape config to yml file then reset prom. them check if its add to targets.
+
+metrics available in /metrics url
+
+http://192.168.44.136:9090/metrics
+
+http://192.168.44.136:3000/  - default user pass is admin admin - 
+
+
+we can add new address to scrape here in yaml:
+
+			  static_configs:
+			  - targets:
+			    - localhost:9090
+
+
+
+in grfana first login do:
+
+1- change password
+
+2- add new data source in:
+
+Home>Connections>Data sources>prometheus
+
+give a name: Prometheus-1  . becouse in docker network its in same network with prom we can call with name--> Prometheus server URL: http://prometheus:9090
+
+scrape interval is 15s in default but if you change it you should change it in prometheus config too. there should be same. then press save and test
+
+we can add multiple prom. or ather connections.
+
+3- in dashboard section we should build our dashboard
+
+
+in explore section we can test our connection and targets
+
+
+process_cpu_seconds_total{instance="localhost:9090"}   - then run query too see graph.
+
+
+add to dashborads
+
+
+#### install exporters
+
+first search prometheus exporters.
+for example we want to add complete node exporters:
+
+Node/system metrics exporter (official)
+
+go to link: https://github.com/prometheus/node_exporter
+
+in port 9100. we can install it by ansible. 
+
+we want to add it by docker run then . run below command in host:
+
+docker run -d \
+  --net="host" \
+  --pid="host" \
+  -v "/:/host:ro,rslave" \
+  quay.io/prometheus/node-exporter:latest \
+  --path.rootfs=/host
+
+
+
+  to monitor node hardware we should give it host network and give full permission to read / .
+
+
+
+  then run :
+
+   netstat -pentual | grep 9100
+
+
+   then press url:
+
+   http://192.168.44.136:9100/metrics  - refresh it to update
+
+
+ #### change yml config prometheus
+
+  vi prometheus.yml
+
+
+ 
+add scrape config here (docker ip:docker inspect prometheus> here added) below scrape_configs:
+
+
+  - job_name: "zizi"
+    static_configs:
+      - targets: ["172.20.0.1:9100"]
+
+
+save it and reset   
+
+docker restart prometheus
+
+
+in prometheus check targets:
+
+http://192.168.44.136:9090/targets?search=
+
+
+
+in grafana:
+
+in explore test it 
 
 
 
