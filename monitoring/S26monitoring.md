@@ -389,6 +389,23 @@ in grafana:
 in explore test it 
 
 
+then when you want to add monitoring node. first install with node exporter with its link in prom. site add with docker image to specified dockernetwork. then add its scrape confog rest prom. tne refresh grafa then explore to test it . then to add grafana dashboard go to dashbord menu in grafana . then add new dashboard. you can upload json or add dashboard id from Import via grafana.com:
+
+https://grafana.com/grafana/dashboards/
+
+search your node name then select with most download tag. then copy id then add id to your grafana - add name - can change folder name- load it.
+
+for ex.:
+
+https://grafana.com/grafana/dashboards/1860-node-exporter-full/
+
+
+also you can build your dashboard.
+
+
+in node exporter most monitor resource is:
+
+cpu usage - mem - disk space - disk I/O - net send/recive - 
 
 
 
