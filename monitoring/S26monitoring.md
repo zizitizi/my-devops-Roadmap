@@ -408,6 +408,49 @@ in node exporter most monitor resource is:
 cpu usage - mem - disk space - disk I/O - net send/recive - 
 
 
+use builder or code to biuld dashboard . or make test dashbpard first.or use copy ready grafana template dashboard code in your dashboard. or use grafana explorer to search your metric and filter it. then duplicate section A to add new metric to current diagram. then you can add it to a new dashboard or existing dashboard.
+
+
+when add in new dashborad you can hit 3 dot and edit dashboard. other option is available to edit here: legend value - display - timezone(ifbrowser then its same as client time zone) - grid -color- graph style - unit (data- byte ,..) - treshold - alret ,....
+
+
+sample:
+
+too manitor postgres - run container exporter postgres on postgres node or where that can see the postgres instance then give it name and address and user pass to exporter container by docker run or compose:
+
+https://prometheus.io/docs/instrumenting/exporters/ ----> postgres_exporter
+
+https://github.com/prometheus-community/postgres_exporter  -----> run in docker network that is same with postgres node. or in other server publish postgres port to extenal to see that from prometheus (ip :port add in prometheus) :
+
+			# Start an example database
+			docker run --net=host -it --rm -e POSTGRES_PASSWORD=password postgres
+			# Connect to it
+			docker run \
+			  --net=host \
+			  -e DATA_SOURCE_NAME="postgresql://postgres:password@localhost:5432/postgres?sslmode=disable" \
+			  quay.io/prometheuscommunity/postgres-exporter
+
+
+
+call it port :9116 in prometheus.yml then addd grafana ready dashboard. 
+
+gitlab and github exporter is suitable for monitor amount of commit ,...
+
+to monitor container use CAdvisor exporter
+
+to monitor pods use kube-state-metrics exporter
+
+
+
+if we have many exporter scrape config more that 500 ,.. the best practice is use sprate prometheus with grafana:
+
+prom-db (postgres-exporter -  mysql-exporter  - ,..)
+
+prom-node (infra -  node1-exporter  - node2-exporter  -,...)
+
+prom-web (nginx-exporter -  apache-exporter  - rev-proxy-exporter  - ,...)
+
+
 
 
 
