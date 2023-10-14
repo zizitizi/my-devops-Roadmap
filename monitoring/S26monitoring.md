@@ -452,6 +452,30 @@ prom-web (nginx-exporter -  apache-exporter  - rev-proxy-exporter  - ,...)
 
 
 
+***example voting app:***
+
+in this sample senario we have voting app with 3 servers in docker swarm. in this arcitect we have frintend consist of voting and result app and backend 2 db redis and postgres and worker dotnet. then we need:
+
+3 node exporter to monitor cpu mem storage network,..
+
+1 redis exporter
+
+1 postgres exporter - in database metrics we need for ex: query/second - up or down - 
+
+we have 2 web app(voting and result) then add blackbox exporter to monitor app is up or down and its performance , The blackbox exporter allows blackbox probing of endpoints over HTTP, HTTPS, DNS, TCP, ICMP and gRPC.
+
+https://prometheus.io/docs/instrumenting/exporters/
+
+https://github.com/prometheus/blackbox_exporter
+
+all node is base on container then we need 3 CAdvisor exporter too for monitor containers. (up- usage cpu and mem storage net ,... of containers)
+
+
+totally we need 8 exporter and 1 prometheus and 1 grafana in this voting app senario . this senario is based.
+
+
+
+
 
 
 
