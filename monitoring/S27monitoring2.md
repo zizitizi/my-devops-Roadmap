@@ -65,7 +65,41 @@ sudo docker run \
   gcr.io/cadvisor/cadvisor
 
 
+cadvisor per each server install and add its scrape config to prometheus.yml in docker swarm
 
+
+http://192.168.44.136:8080/containers/
+
+then add its scrape config to promethus.yml
+
+  - job_name: "containerszizi"
+    static_configs:
+      - targets: ["172.18.0.1:8080"]
+
+
+
+save and reset container . check it up:
+
+http://192.168.44.136:9090/targets?search=
+
+
+then go to grafana dashboard and import it. then go to grafana dashboard site:
+
+https://grafana.com/grafana/dashboards
+
+
+add id to your dashboard
+
+
+to filter result in edit dashboard go to code write down:
+
+{name!="containernotwanttoseeit" , name}
+
+
+
+# helm
+
+is package manager for k8s
   
 
 
@@ -73,23 +107,11 @@ sudo docker run \
 
 
 
-![image](https://github.com/zizitizi/my-devops-Roadmap/assets/123273835/6c761f0b-b31a-4cc7-a945-ae406f5eedfd)
-
-
-
-![image](https://github.com/zizitizi/my-devops-Roadmap/assets/123273835/e331ef60-3168-44b5-8d8c-fc8d15553f33)
 
 
 
 
 
-![image](https://github.com/zizitizi/my-devops-Roadmap/assets/123273835/5f53be14-fa1e-4ff4-813a-a1457aabd8cf)
-
-
-
-
-
-![image](https://github.com/zizitizi/my-devops-Roadmap/assets/123273835/f28560fc-ac81-458f-be27-d10ea237e511)
 
 
 
