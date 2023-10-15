@@ -97,10 +97,110 @@ to filter result in edit dashboard go to code write down:
 
 
 
+Node environment monitoring:
+Recommended: https://grafana.com/grafana/dashboards/159 
+https://grafana.com/dashboards/1860 
+https://grafana.com/dashboards/3662 
+https://grafana.com/dashboards/8919 
+https://github.com/arashforoughi/grafana-dashboards
+
+
+
+Docker and System Monitoring:
+Recommended: https://grafana.com/grafana/dashboards/14282 
+https://grafana.com/grafana/dashboards/179 
+https://grafana.com/grafana/dashboards/11600 
+https://grafana.com/grafana/dashboards/193 
+
+
+
+
+Kubernetes Cluster Monitoring:
+Recommended: https://grafana.com/grafana/dashboards/315 
+https://grafana.com/grafana/dashboards/6336 
+https://grafana.com/grafana/dashboards/395 
+https://grafana.com/grafana/dashboards/7249 
+
+
+
+
+
+
+
+
 # helm
 
 is package manager for k8s
+
+helm.sh
+
+https://artifacthub.io/
+
   
+helm list
+
+helm uninstall packagename
+
+
+helm repo list
+
+you can install kube-prometheus-stack from helm repo
+
+
+Add repository
+
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+Install chart
+
+helm install my-kube-prometheus-stack prometheus-community/kube-prometheus-stack --version 51.7.0
+
+
+to monitor pods
+
+goto exportersite
+
+https://prometheus.io/docs/instrumenting/exporters/
+
+https://github.com/kubernetes/kube-state-metrics
+
+
+one installation is enough for all your cluster becouse it run as daemon set
+
+
+
+                  apiVersion: apps/v1
+                  kind: DaemonSet
+                  spec:
+                    template:
+                      spec:
+                        containers:
+                        - image: registry.k8s.io/kube-state-metrics/kube-state-metrics:IMAGE_TAG
+                          name: kube-state-metrics
+                          args:
+                          - --resource=pods
+                          - --node=$(NODE_NAME)
+                          env:
+                          - name: NODE_NAME
+                            valueFrom:
+                              fieldRef:
+                                apiVersion: v1
+                                fieldPath: spec.nodeName
+
+
+
+then run  
+
+
+add its scrape config
+              
+
+
+
+
+
+
+
 
 
   
