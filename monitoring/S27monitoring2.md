@@ -196,6 +196,9 @@ kubectl expose deployment kube-state-metrics -n kube-system --name=kube-state-me
 
 then run  
 
+http://192.168.44.136:32430/
+
+
 
 add its scrape config
               
