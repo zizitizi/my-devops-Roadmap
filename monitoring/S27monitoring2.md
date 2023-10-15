@@ -198,9 +198,20 @@ then run
 
 http://192.168.44.136:32430/
 
-
-
 add its scrape config
+
+  - job_name: "kube-static-config"
+    static_configs:
+      - targets: ["192.168.44.136:32430"]
+
+
+ docker restart prometheus
+
+ check explorer and go  to grafana dashboard and import dashboard like: 13332
+
+
+
+
               
 then add its dashboard id (13332) . in aws server cpu-mem - networka is most important but in baremetall or phisical server storage and i/o also important.
 
