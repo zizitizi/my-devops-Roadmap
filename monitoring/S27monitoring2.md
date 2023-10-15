@@ -123,9 +123,9 @@ https://grafana.com/grafana/dashboards/7249
 
 
 
+in dashboard grafana for stop container use : allcontainernumber - (runningcontainer)
 
-
-
+running container: count(container_last_seen{image!=""})
 
 
 # helm
@@ -155,6 +155,11 @@ Install chart
 
 helm install my-kube-prometheus-stack prometheus-community/kube-prometheus-stack --version 51.7.0
 
+or we can install kube state metrics manually with below stage 
+
+
+# kube state metrics
+
 
 to monitor pods
 
@@ -167,25 +172,24 @@ https://github.com/kubernetes/kube-state-metrics
 
 one installation is enough for all your cluster becouse it run as daemon set
 
+if yo install it as deploy then you should install it on each node
 
 
-                  apiVersion: apps/v1
-                  kind: DaemonSet
-                  spec:
-                    template:
-                      spec:
-                        containers:
-                        - image: registry.k8s.io/kube-state-metrics/kube-state-metrics:IMAGE_TAG
-                          name: kube-state-metrics
-                          args:
-                          - --resource=pods
-                          - --node=$(NODE_NAME)
-                          env:
-                          - name: NODE_NAME
-                            valueFrom:
-                              fieldRef:
-                                apiVersion: v1
-                                fieldPath: spec.nodeName
+https://devopscube.com/setup-kube-state-metrics/
+
+git clone https://github.com/devopscube/kube-state-metrics-configs.git
+
+
+kubectl apply -f kube-state-metrics-configs/
+
+kubectl get deployments kube-state-metrics -n kube-system
+
+
+kubectl get all  -n kube-system
+
+
+then expose this clusterip port with command:
+
 
 
 
@@ -194,6 +198,16 @@ then run
 
 add its scrape config
               
+then add its dashboard id . in aws server cpu-mem - networka is most important but in baremetall or phisical server storage and i/o also important.
+
+for cpu memory commonly use guage 
+
+for network commonly use stat
+
+for storage disk space commonly use bar guage lcd
+
+
+
 
 
 
