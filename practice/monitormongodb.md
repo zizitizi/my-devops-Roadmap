@@ -10,18 +10,18 @@
  
 docker container ls
 
-   docker exec -it mongo mongosh
+               docker exec -it mongo mongosh
 
 
 
 test with command
 
 
-   db.runCommand(
-      {
-         hello: 1
-      }
-   )
+               db.runCommand(
+                  {
+                     hello: 1
+                  }
+               )
 
 
 http://192.168.44.151:27017/
