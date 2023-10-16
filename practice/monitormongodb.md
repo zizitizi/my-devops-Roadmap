@@ -46,8 +46,23 @@ http://192.168.44.151:9216/metrics
 
 
 
+# add scrape config to prometheus server yml
 
 
+  - job_name: "mongodocker monitor"
+    static_configs:
+      - targets: ["192.168.44.151:9216"]
+
+
+
+check it up:
+
+http://192.168.44.136:9090/targets?search=
+
+
+# add grafana dashboard
+
+import mangodb dashboard id and save it. 7353
 
 
 
