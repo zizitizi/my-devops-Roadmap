@@ -304,7 +304,7 @@ then reset grafana then go to datasource and add zabix
 or do all in docker compose
 
 
-
+https://grafana.com/grafana/plugins/alexanderzobnin-zabbix-app/?tab=installation
 
 
 
