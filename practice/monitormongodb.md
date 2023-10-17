@@ -1,4 +1,8 @@
 
+***practice:*** run mongodb in docker compose and statfulset in k8s with helm monitor it with mongodb exporter(query per second - and response time)
+
+
+
 
 # run mongodb in docker
 
