@@ -5,9 +5,9 @@ may be some dashboard did not work im our grafana then we must make our dashboar
 
 free space formula in dashboard:
 
-
-100 - ((node_filesystem_avail_bytes{instance=~"172.31.10.118:9100",mountpoint="/",fstype=~"ext4|xfs"} * 100) / node_filesystem_size_bytes {instance=~"172.31.10.118:9100",mountpoint="/",fstype=~"ext4|xfs"})
-
+                  
+                  100 - ((node_filesystem_avail_bytes{instance=~"172.31.10.118:9100",mountpoint="/",fstype=~"ext4|xfs"} * 100) / node_filesystem_size_bytes {instance=~"172.31.10.118:9100",mountpoint="/",fstype=~"ext4|xfs"})
+                  
 
 #### alert rules in grafana
 
@@ -101,7 +101,16 @@ when it run its web gui in 9091 port without anything . if u write job it shows 
         
 
 
+use save this command to every push gataway:
 
+  cat << EOF | curl --data-binary @- http://172.31.3.30:9091/metrics/job/Websocket-connection/instance/172.31.3.30:9100
+      websocket_current_tcp_connections $WEBSOCKET_CONNECTIONS
+      EOF
+      
+
+http://172.31.3.30:9091/metrics   - push gateway address
+
+job/Websocket-connection/instance/172.31.3.30:9100 websocket_current_tcp_connections    - and other filter is query tha push to push gateway
 
 
       
