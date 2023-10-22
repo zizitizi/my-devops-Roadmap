@@ -39,7 +39,7 @@ sample: if you want number of user in site in nginx access log, then write scrip
 
 run it with specified docker compose. we should add push gate way in prometheus.yml file like others.
 
-prom pull all exporter like: push gateway. but we push desired app in push gateway
+prom pull all exporter like: push gateway. but we push desired app in push gateway. you can write bash script to give backup daily and send 1 in infinite reapetable while to pushgatway if down send 0. and monitor youe bakcups.
 
       
       - job_name:
@@ -106,11 +106,17 @@ use save this command to every push gataway:
   cat << EOF | curl --data-binary @- http://172.31.3.30:9091/metrics/job/Websocket-connection/instance/172.31.3.30:9100
       websocket_current_tcp_connections $WEBSOCKET_CONNECTIONS
       EOF
-      
+
+
+curl --data-binary @-     - we send data in pushgateway in this format save this      
 
 http://172.31.3.30:9091/metrics   - push gateway address
 
-job/Websocket-connection/instance/172.31.3.30:9100 websocket_current_tcp_connections    - and other filter is query tha push to push gateway
+job/Websocket-connection/instance/172.31.3.30:9100  - and other filter is query tha push to push gateway
+
+websocket_current_tcp_connections   - is the name of metrics
+
+$WEBSOCKET_CONNECTIONS   - value of the metrics
 
 
       
@@ -136,10 +142,23 @@ job/Websocket-connection/instance/172.31.3.30:9100 websocket_current_tcp_connect
 
 
 
+hint: in bash script while command sleep is same as cpu speed and its very high then it sends too many data to push gateway then use sleep 5 or sleep 1 to delay it.
 
 
 
+# service - systemctl 
 
+in all linux system services is in : /lib/systemd/system
+
+third parties service commonly is in : /etc/systemd/system
+
+but no difference in which directory in systemctl daemon reload its reload all those ffolder and files.
+
+3 type of file in system:
+
+- .wants: servive wants to run but if not. no matterthe service will be run.
+- .requires: service needs to boot if not load then service not boot.
+- .service: to wrie service in /etc/systemd/system/ make file that begin with specail name to specify your custom files from other one. fir ex.: mysrcrit_number_of_socket.service  - that service in systemctl will show be with this name.
 
 
       
@@ -205,6 +224,9 @@ job/Websocket-connection/instance/172.31.3.30:9100 websocket_current_tcp_connect
           static_configs:
           - targets: ['172.31.3.30:9091']
       
+
+
+
       
       
 
