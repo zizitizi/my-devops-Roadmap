@@ -247,6 +247,17 @@ if we have script and want to use in service then use complete path directory to
       
 
 
+***practice:*** add zabix agent to your grafana and its exporter to prom.
+
+
+# JENKINS
+
+but commonly we use   CI/CD in gitlab and github. but procedure is same. 
+
+plan - code - build -
+
+
+
 
       
       
