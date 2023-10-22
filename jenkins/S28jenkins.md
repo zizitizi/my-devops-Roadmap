@@ -285,10 +285,10 @@ CI/CD tools:
 jenkins - citlab ci - git hub actions - travis ci ( not free) - circle ci (not free)
 
 
-jenkins needs java 8 or 11 . or openjdk-11-jdk - linux and web ui base.
+jenkins needs java 8 or 11 but those deprecated then you should use openjdk-17-jdk - linux and web ui base.
 
 
-install on docker or helm or linux
+install on docker or helm or linux from jenkins.io
 
 jenkins is heavy by default its not run pipline in master - in 4 slave it run 4 pipline per slave  2 in master ( exec process) then totaly 16+2 pipline - all server master or slave should installed java before hand then use ansible to install it on all server
 
