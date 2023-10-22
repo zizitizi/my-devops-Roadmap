@@ -160,7 +160,13 @@ but no difference in which directory in systemctl daemon reload its reload all t
 - .requires: service needs to boot if not load then service not boot.
 - .service: to wrie service in /etc/systemd/system/ make file that begin with specail name to specify your custom files from other one. fir ex.: mysrcrit_number_of_socket.service  - that service in systemctl will show be with this name.
 
+in service file we have descriptions that appear in systemctl status .... . we can write the name of auther here.
 
+in after we say to system to run our script after that service its wanted. its cooman to use network.target. because network ls latest service that in run in system boot then we can run our service after it conveniently. best practice***
+
+type is type of that app that may be simple or not. user and grou is that user that have access to that script or app. execstart is path to our script.
+
+wantedby is which run level will be accessible.
       
       [Unit]
       Description=Websocket Connection Monitoring
@@ -177,12 +183,27 @@ but no difference in which directory in systemctl daemon reload its reload all t
 
 
 
+#### runlevel
 
+A runlevel is an operating state on a Unix and Unix-based operating system that is preset on the Linux-based system. Runlevels are numbered from zero to six. Runlevels determine which programs can execute after the OS boots up. when we power on pc then it load bois - health check - boot order ---> boot loader - if have linux boot loader that called grub (here we can change between linux and windows )  -----> kernel - loads in ram to perform with high speed - then run first procces that called init (to run configurations , apps ,..) - then OS is up and if ok then go to states that called run level 
 
+we have 7 type of run level:
 
+0- shutdown -halt
+1- maintenance mode (safe mode in windows) - single user mode - with out any deriver or network or .... with just one user
+2- multi user mode - same as mode 1 wnd without network but its multi user
+3- multi user same as 2 but with network - complete mode with CLI . 
+4- reserve and custom mode to use sysadmins
+5- complete gui or graphical mode in linux - graphical.target  
+6- reboot  - for ex.: when bios or mem is low - go to this run level to maintance server.
 
+with runlevel command we can see : N 5  - from nothing to runlevel 5 
 
+with init you can go to wny run level. init 0  - halt system
 
+systemctl enable --now mysrcrit_number_of_socket.service  - enabled and start that service. 
+
+if we have script and want to use in service then use complete path directory to file. not use dot .  - after every change do systemctl daemon reload and systemctl restart myservice
       
       # my global config
       global:
