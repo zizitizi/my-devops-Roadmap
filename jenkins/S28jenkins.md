@@ -254,7 +254,71 @@ if we have script and want to use in service then use complete path directory to
 
 but commonly we use   CI/CD in gitlab and github. but procedure is same. 
 
-plan - code - build -
+plan - code - build - test  - integrate (release) - deploy - opretate - monitor
+
+CI (continiuse integration) = plan - code - build - test  
+
+CD ( continiues commonly called deployment or Delivery) = integrate (release) - deploy - opretate - monitor
+
+
+difference between deploy and delivery??
+
+continiuse delivery ---> continiuse deployment. delivery is before deployment
+
+CI -> CD (DELIVERY) -> CD (DEPLOYMENT)
+
+CI IS BUILD PROCESS - docker file ,.....
+
+CD in delivery  - just app install in test environment - in testbed or staging server
+
+after final test confirmation (ATP=acceptance test procedure from customer or developer manager) when it approved then go to deployment step and implement in production server.
+
+in enterprise company:
+
+devops engineer = integrate (release) - deploy
+
+SRE = opretate (ansible - IAC ,...) - monitor (zabix - prom. - grafana , datadog (reat it important)..)
+
+
+CI/CD tools:
+
+jenkins - citlab ci - git hub actions - travis ci ( not free) - circle ci (not free)
+
+
+jenkins needs java 8 or 11 . or openjdk-11-jdk - linux and web ui base.
+
+
+install on docker or helm or linux
+
+jenkins is heavy by default its not run pipline in master - in 4 slave it run 4 pipline per slave  2 in master ( exec process) then totaly 16+2 pipline - all server master or slave should installed java before hand then use ansible to install it on all server
+
+best practice make user and group jenkins sudoer 
+
+
+jenkins use port 8080 thne open it in server
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
