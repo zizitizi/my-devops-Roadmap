@@ -295,8 +295,43 @@ jenkins is heavy by default its not run pipline in master - in 4 slave it run 4 
 best practice make user and group jenkins sudoer 
 
 
-jenkins use port 8080 thne open it in server
+jenkins use port 8090 thne open it in server
 
+
+in browser follow the instraction.
+
+jenkinns like ansible have plugin to work. we use suggested plugin here( exclude: ant - gradle - ldap - pam -matrix - email - mailer ) install them after install you can add any of those plugin when u want.
+
+
+used ram 1.2 gig , ...
+
+
+jenkins exporter is for monitor jenkins in prom.
+
+all apps is ci jenkins is ci too
+
+argo , flux is cd base. gitops. from deploy to git  push
+
+
+
+jenkins webhook to use in git lab and github
+
+
+add jenkins to sudo
+
+usermod -aG sudo jenkins
+
+
+add no pass in visudo:
+
+jenkins ALL=(ALL:ALL) NOPASSWD: ALL
+
+
+build triggers-> periodicaly schedule is in cronjob format
+
+
+
+azure is ci/cd for microsoft app its very simple.
 
 
 
