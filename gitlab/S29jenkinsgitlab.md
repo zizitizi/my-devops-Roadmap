@@ -70,6 +70,238 @@ to add new node to jenkins check if it have install java v11 or 17 on it.
 
 
 
+in jenkins use groovy language for write config file.
+
+we use Declarative Pipeline format file.
+
+build and deploy stage is mandatory and would be. but other stage is optional. sample stage:
+
+build- deploy - ip(for external network) - test
+
+in build stage we have this steps:
+
+git ( git repo server url )  - clone ( to specified server) - docker (dockerise-build file) - push ( to hub)
+
+in deploy stage we have this steps:
+
+run that image- in kuber or docker 0r docker compose or docker swarm - in with resource service or deployment ,.. - 
+
+stages are dockerise box. 
+
+pipeline {
+   agent any
+   stages {
+      stage('build') {
+          steps{
+            //
+            }
+          }
+      stage('test') {
+          steps{
+            //
+            }
+          }  
+             stage('deploy') {
+          steps{
+            //
+            }
+          }    
+        }
+}
+
+
+            
+then git repo is include:
+
+1- sorce code 
+2- ci/cd pipeline file( jenkins file - or gitlab-ci.yaml file- workflow.yml - circle-ci.yml - or ,...) - includes stages and steps
+3- docker file- project file should be containerize
+4- yaml file ( kuber)
+5- compose file
+
+
+
+sample stages( here we have 4 buttun):
+
+1- docker build
+2- docker push 
+3- kubectl apply -f
+4- test
+.
+.
+.
+.
+
+
+
+another jenkins file format is :Scripted Pipeline
+
+node {
+  stage ('build') {
+    //
+    }
+  stage ('deploy') {
+    //
+    }
+}
+
+
+you can test it in definitions> pipeline script> hello word(sample pipeline)
+
+
+or try sample pipeline:
+
+pipeline {
+   agent any
+   stages {
+      stage('build') {
+          steps{
+            echo 'building the applications'
+            }
+          }
+      stage('test') {
+          steps{
+            echo 'testing the applications'
+            }
+          }  
+             stage('deploy') {
+          steps{
+            echo 'deploying the applications'
+            }
+          }    
+        }
+}
+
+
+
+important its test in real world dont use agent any. use specified node name instead.
+
+
+
+in real world senario we have:
+
+build | test | deploy
+
+dev   |dev   | dev
+
+stg   | stg  | stg
+
+prod  |prod  | prod
+
+
+
+
+dev servers environmet to code
+
+stg environmet to test( test bed) 
+
+prod servers (deploy to public)
+
+
+then we have these server: build | test | deploy
+
+also in build server we have 3 server -  then here we have 3 jenkins file and specified node to specified wher we git or push ,.... these 3 jenkins file are same just difference is in lable name node in agent seciton we can not merge these 3. they are separate file (but in gitlab we can merge):
+
+dev-build-server 
+
+stg-build-server
+
+prod-build-server
+
+
+
+in menu status you can see that box or button and its timing that made in pipeline. raw is added if we run pipeline again it manitane status 10or 15 raw.
+
+
+we can define post actions:
+
+3 post attribute: success - failure - always
+
+for example after complete pipeline email admin
+
+then try:
+
+
+pipeline {
+   agent any
+   stages {
+      stage('build') {
+          steps{
+            echo 'building the applications'
+            }
+          }
+      stage('test') {
+          steps{
+            echo 'testing the applications'
+            }
+          }  
+             stage('deploy') {
+          steps{
+            echo 'deploying the applications'
+            }
+          }    
+        }
+   post {
+     success { 
+         mail -s "successfule finneshed pipelein" root@localhost
+   }
+     failure { 
+         mail -s "failed finneshed pipeline" root@localhost
+   }
+     always { 
+         mail -s "just finneshed pipeline" root@localhost
+         echo 'finished'
+   }
+        
+}
+
+
+
+we can define conditions:
+
+when {
+   experssions {
+       }
+     }
+
+     
+Here, test steps will be execute just if BRANCH_NAME variable equals to ‘dev’.
+Two expressions can use with || or &&.
+
+
+git flow or branching system is:
+
+- branch name in real: 3 brach use commonly: main for prod. of ok get downtime to affect site to see costomers.
+- staging for stg (qa test it same as productions) - on branch work then if ok merge to prod.
+- develop for dev ( devlopers use this and test) - branch(for example hotfix) work then merge to stage
+
+
+dev and stg is always further then main.
+
+### environemental variable
+
+Environmental Variables can used in jenkins file to call it you shoud use ${VAR}
+
+
+VAR = '1.2'
+
+### credential
+
+we have docker login push logout then we need credential then we can provide it in jenkins file( not recommanded). we define credential alwayes in mange jenkins>credentials menu
+
+scope system global can use in all projects.
+
+
+but if we define this in project setting page then it used just in that project
+
+user name password cred and give id then we can call that cres with that id.
+
+
+First, define Credentials in Jenkins GUI.
+Second, add a new Env Variable with value “credentials(‘Credential_ID’)”
+
+
+
 
 
 
