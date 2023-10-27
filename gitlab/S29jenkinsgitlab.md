@@ -54,13 +54,17 @@ also you can check it with:
 cd /var/lib/jenkins/workspace/devops/projectname/;ls -l
 
 
-we have tree project type in jenkins:
+### we have tree project type in jenkins:
 
-free style: just clone project from git repo and execute specified commands. (commonly not known as pipeline it usualy use for scripting)-Simple, Single Tasks
+#### free style: 
+
+just clone project from git repo and execute specified commands. (commonly not known as pipeline it usualy use for scripting)-Simple, Single Tasks
 Like, run tests
 
 
-pipeline: is use for ci/cd pieline. that is like butun box to play actions to go next stages.Configure Whole Delivery Flow Like, Test | Build | Package | Deploy … -Just for a Single Branch. we mergs stage tother for ex.: build butom - deploy buton - and or test butun. you can configure to gitlab or github or jenkins triggers in project configuration > general menu. commonly git repo send notification to ci/cd.
+#### pipeline: 
+
+is use for ci/cd pieline. that is like butun box to play actions to go next stages.Configure Whole Delivery Flow Like, Test | Build | Package | Deploy … -Just for a Single Branch. we mergs stage tother for ex.: build butom - deploy buton - and or test butun. you can configure to gitlab or github or jenkins triggers in project configuration > general menu. commonly git repo send notification to ci/cd.
 
 
 pipeline write there or send from scm(source code mangment-git repo,..) here. for example docker file or docker compose ,... to build ,...
@@ -299,6 +303,30 @@ user name password cred and give id then we can call that cres with that id.
 
 First, define Credentials in Jenkins GUI.
 Second, add a new Env Variable with value “credentials(‘Credential_ID’)”
+
+
+
+#### multibranch pipline:
+
+Like Pipeline Just for Multibranch. if we have for example 3 branch : main stg dev then we have jenkins file for each and specific pipline for them: jenkinsfile-main , jenkinsfile-stg , jenkinsfile-dev . multi branch in more smart then its recognize branches. but if we use simple pipline type to multibranch project we should write script and use condition.
+
+
+
+
+to see all environmet variable in your jenkons type in browser:
+
+http://127.0.0.1:8090/env-vars.html/
+
+
+for example you can use   BUILD_NUMBER in tag when you want push . dockertag:buildnumber. when developers use latest tag we can found specified tag in pipline with this var.
+
+
+
+### Ways of Triggers a Build
+
+
+
+
 
 
 
