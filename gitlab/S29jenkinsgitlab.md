@@ -439,8 +439,51 @@ external_url 'http://iporadrees/'   - to set url that you want use git lab on it
 you can config email or smtp or slack or ssl or cert ,.... 
 
 
+azure devops is complete pakage gitrepo ansible ci/cd nexus , now gitlab is same complete pakage.
+
+github is repo base but gitlab is project base . every project may have many repo.
+
+we can make user and or teams and assign them to a repo. access level is standard. every user or team can have 5 role:
+
+1- owner: higher level access
+
+2- maintainer: devops engineers -access setting
+
+3- developr: push - pull -merge - clone 
+
+4- reporter: readonly : pull - clone -  (not push)
+
+5- guest: view only
 
 
+
+in gitlab we have: projectname/reponame
+
+
+if want use gitlab for just ci/cd same as jenkins in new project page:
+
+Run CI/CD for external repository: Connect your external repository to GitLab CI/CD. 
+
+
+other option is:
+
+Create blank project: Create a blank project to store your files, plan your work, and collaborate on code, among other things.
+
+
+
+Create from template: Create a project pre-populated with the necessary files to get you started quickly.
+
+
+
+Import project: Migrate your data from an external source like GitHub, Bitbucket, or another instance of GitLab.
+
+
+
+
+gitlab and github may be mirror then they be sysnc with each other . but in gtlab-ce mirror from gitlab to github is ok but from github to gitlab is not free.
+
+
+auto devops is build ci to your pipeline but we disable it . its AI is not smart.
 
 
 
