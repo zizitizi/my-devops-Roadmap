@@ -363,7 +363,7 @@ to recommnaded this method. in this method in multibranch in buils configuration
 note: maven is package builder or compiler for java. npm or nodejs is  package builder or compiler for javascript or js. pip or pip3 is  package builder or compiler for python or pypy or py.  dotnetframework is  package builder or compiler for microsoft .net  .
 
 
-see below toturials and complete projects:
+see below toturials and complete projects for jenkins and kuber ,..:
 
 https://www.youtube.com/watch?v=8YyamgWdvFg
 
@@ -372,6 +372,23 @@ https://www.youtube.com/watch?v=XE_mAhxZpwU
 https://www.youtube.com/watch?v=X7bg3JVsGIw
 
 https://www.youtube.com/watch?v=X7bg3JVsGIw
+
+
+
+blue ocean plugins:
+
+is a gui graphical theme to jenkins to run pipeline see all in diagram and its user freindly.
+
+
+
+
+# gitlab
+
+
+
+
+
+
 
 
 
