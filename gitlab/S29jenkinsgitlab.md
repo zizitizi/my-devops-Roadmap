@@ -336,12 +336,58 @@ you can install discord notifier plugin to notify you in discord every change in
 
 same we can integrate gitlab and slack too.
 
+$JENKINS_BASE_URL/github-webhook
+
+in generic it'll be:
+
+$JENKINS_URL/generic-webhook-trigger/invoke 
+
+
+in gitlab go in project setting> integration menu. check desired box and give it  Jenkins server URL for example:
+
+http://30.40.50.2:8080/generic-webhook-trigger/invoke
+
+then give it user and pass jenkins server then test setting. with this setting gitlab push the jenkins. also here you can set https with ssl setting.
+
 
 
 
 2- periodically:
 
-to recommnaded this method.
+to recommnaded this method. in this method in multibranch in buils configuration in scan multibranch pipeline triggers check the box : periodically if not otherwise run and set the interval. 
+
+
+
+
+
+note: maven is package builder or compiler for java. npm or nodejs is  package builder or compiler for javascript or js. pip or pip3 is  package builder or compiler for python or pypy or py.  dotnetframework is  package builder or compiler for microsoft .net  .
+
+
+see below toturials and complete projects:
+
+https://www.youtube.com/watch?v=8YyamgWdvFg
+
+https://www.youtube.com/watch?v=XE_mAhxZpwU
+
+https://www.youtube.com/watch?v=X7bg3JVsGIw
+
+https://www.youtube.com/watch?v=X7bg3JVsGIw
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
