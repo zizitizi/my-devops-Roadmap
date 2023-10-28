@@ -327,7 +327,15 @@ for example you can use   BUILD_NUMBER in tag when you want push . dockertag:bui
 1- webhook:
 
 
-webhooks in apps is a type of api that when we put in gitlab when we have new commit then gitlab calls jenkins wehook to run pipline automatically. we use automatic pipeline in dev and stg environmets. in production or main becouse we need to get downtime then we do it manually coomonly in midnight. to use this feature we should add related plugin to jenkins. maybe github or gitlab or bitbucket ,.. plugins. in dashboard in manage jenkins in available pluging in generic webhook trigger that this is generic webhook and work with github gitlab , bitbucket , jira ,... too.
+webhooks in apps is a type of api that when we put in gitlab when we have new commit then gitlab calls jenkins wehook to run pipline automatically. we use automatic pipeline in dev and stg environmets. in production or main becouse we need to get downtime then we do it manually coomonly in midnight. to use this feature we should add related plugin to jenkins. maybe github or gitlab or bitbucket ,.. plugins. in dashboard in manage jenkins in available pluging in generic webhook trigger that this is generic webhook and work with github gitlab , bitbucket , jira ,... too. install it. and dont forget to check the restart jenkins options in next download page. restart may take a while. 
+
+whitelist enables if you set 0.0.0.0/0 every one can tiggers the webhook it. 
+
+
+you can install discord notifier plugin to notify you in discord every change in pipeline
+
+same we can integrate gitlab and slack too.
+
 
 
 
