@@ -324,8 +324,16 @@ for example you can use   BUILD_NUMBER in tag when you want push . dockertag:bui
 
 ### Ways of Triggers a Build
 
+1- webhook:
 
 
+webhooks in apps is a type of api that when we put in gitlab when we have new commit then gitlab calls jenkins wehook to run pipline automatically. we use automatic pipeline in dev and stg environmets. in production or main becouse we need to get downtime then we do it manually coomonly in midnight. to use this feature we should add related plugin to jenkins. maybe github or gitlab or bitbucket ,.. plugins. in dashboard in manage jenkins in available pluging in generic webhook trigger that this is generic webhook and work with github gitlab , bitbucket , jira ,... too.
+
+
+
+2- periodically:
+
+to recommnaded this method.
 
 
 
