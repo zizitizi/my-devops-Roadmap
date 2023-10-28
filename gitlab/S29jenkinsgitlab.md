@@ -385,6 +385,61 @@ is a gui graphical theme to jenkins to run pipeline see all in diagram and its u
 # gitlab
 
 
+gitlab has 2 versions :
+
+gitlab-ce: comunity editions is complete free edition of gitlab
+
+gitlab-ee: enterprise editions needs license and not free its for enterprise company. 
+
+
+you can install it on linux docker or with helm .see installation in :
+
+https://about.gitlab.com/install/
+
+
+gitlab and jenkins need many resource then its recommand to install it in linux or k8s cluster to use nfs and use  high availablity feature and they data should be permanent.
+
+
+stable is install gitlab in linix server.
+
+
+
+
+
+githau is just cloud base its SaaS or software as service. but gitlab has cloud and self managed(self hosted). amazone has ready to use gitlab vm.
+
+
+in linux use install from source documentation. default installation package for gitlab is gitlab-ee then you can use feature that paid. but if you want use just gtilab-ce in future then install gitlab-ce.
+
+
+you install gitlab-ce install from this site: its good to learn and use:
+
+
+https://computingforgeeks.com/how-to-install-gitlab-ce-on-ubuntu-linux/
+
+
+
+after installation gitlab give you tools that called gitlab-ctl to manage it. to see status:
+
+gitlab-ctl status  - same you can use start and stop ,..
+
+
+gitlab needs 3.8 or 4 gig ram. gitlab installer default has : postgres - nginx - exporter - prometheus - redis ,... becaouse its important gitlab server should be under monitoring.
+
+
+gitlab config file is in :
+
+/etc/gitlab
+
+vi gitlab.rb - to change setting like:
+
+
+external_url 'http://iporadrees/'   - to set url that you want use git lab on it 
+
+you can config email or smtp or slack or ssl or cert ,.... 
+
+
+
 
 
 
