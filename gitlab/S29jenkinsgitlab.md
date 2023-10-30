@@ -486,11 +486,102 @@ gitlab and github may be mirror then they be sysnc with each other . but in gtla
 auto devops is build ci to your pipeline but we disable it . its AI is not smart.
 
 
+#### gitlab menu
+
+issue is for isue the bug or problam
+
+
+wiki can integrate with confluence to write document. 
+
+
+code is write code and commit managment
+
+
+build section is for devops that include: pipelines - jobs - pipeline editor - scheduled pipeline (same as cron job) - artifacts
+
+in pipeline section we create pipeline. in jenkis to create pipeline first we go to our git repo create jenkinsfile there. so when we clone that repo in jenkins , its automatically detect jenkins file and run pipeline form that file and run stage and steps.
+
+
+in all ci/cd pipeline we have specified file. that all have same context and infra . jobs stage steps,... : 
+
+in gitlab : .gitlab-ci.yml
+
+in github: .github-workflow.yml
+
+in circle-ci : .circle-ci.yml
+
+
+you can use template to write this file or write it ypurself from pipeline editor menu. if it exist then open it other wise click on configure pipeline to opne and create new file. its case sensitive:
+
+Pipeline syntax is correct   - is check in backgroud your syntax
+
+stages:          # List of stages for jobs, and their order of execution- its == number of butons  - each stage contains jobs
+  - build
+  - test
+  - deploy
+
+build-job:       # This job runs in the build stage, which runs first. In each job, we specify which stage this job belongs to. 
+  stage: build
+  script:                       # consist of desired commands
+    - echo "Compiling the code..."
+    - echo "Compile complete."
+
+unit-test-job:   # This job runs in the test stage.
+  stage: test    # It only starts when the job in the build stage completes successfully.
+  script:
+    - echo "Running unit tests... This will take about 60 seconds."
+    - sleep 60
+    - echo "Code coverage is 90%"
+
+lint-test-job:   # This job also runs in the test stage.
+  stage: test    # It can run at the same time as unit-test-job (in parallel).
+  script:
+    - echo "Linting code... This will take about 10 seconds."
+    - sleep 10
+    - echo "No lint issues found."
+
+deploy-job:      # This job runs in the deploy stage.
+  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+  environment: production
+  script:
+    - echo "Deploying application..."
+    - echo "Application successfully deployed."
 
 
 
 
+you can see build number and view pipeline. refresh to see update or retry to run again
 
+
+*****each jobs contains:*****
+
+stage: mandatory that revealed its belong to wich stage
+
+before script: optional- it run before script that commamnly use for preconfigurations goals. for ex: docker login - ./preconfig.sh  - its dependancy for script
+
+script: mandatory its run commands - if before scripts run succefully than script starts. for ex.: docker build -t tag .  -  docker push  - docker tag  - docker compose up -d (for deploy stage)
+
+after script: optional -  then this always run. for : docker log out  - docker ps -a   - or send information email for admin
+
+
+important note:
+
+after script always run.
+
+before script : failed --> script not run but after script runs
+
+
+
+
+in setting integrations is very important for ex.: with slack or grafana or datadog ,.... if your app is not in this sections to integrate use webhook sections. integration is very important.
+
+
+in integration for notify for ex.: with slack telgeram ,.... we get webhook from telegram and slack ,....
+
+but in itegration for trigger in pipline with ci/cd for bitbucket ,... then we get webhook from gitlab. then add new in wehook menu in setting. 
+
+
+in ci/cd menu in settings : runner is here. install runner in each stage servers with tag we call it in pipeline in job with tag. in label handel with label. handel called server . we add runner in this section and follow instrauction and run commnad to install it on servers.
 
 
 
