@@ -58,6 +58,34 @@ tags:   registerd runner label
 we can define test or production or develop environment in gitlab menu> operate >environemt
 
 
+when we define environmet  in .gitlab-ci.yml use stage environmet and set manual in pipeline env sections.
+
+
+in setting menu use to integration and runners ,..
+
+
+integration: use this and webhook to integrate
+
+
+in access token to access without pssword.
+
+
+in ci/cd section we do more:
+
+public pipeline or not. git strategy : git clone is more better that git fetch(just loqs and incremental).
+
+in runner section :  Project runners in left is internal ruuner for our project. in right or  Shared runners  is wordwide runners.
+
+
+shared runner we add it we its tag to use as our server then our pipeline run there and then finished and exit and clean. 
+
+we use gitlab onpromise and its agent.
+
+
+
+puse act as cordon in pods. 
+
+set new runner and set tag and type of runner then create runner . in next page use commands.
 
 
 
