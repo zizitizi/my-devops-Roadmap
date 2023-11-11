@@ -55,6 +55,9 @@ tags:   registerd runner label
 
 
 
+we can define test or production or develop environment in gitlab menu> operate >environemt
+
+
 
 
 
