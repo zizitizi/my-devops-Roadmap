@@ -140,6 +140,22 @@ data is persisted there. data have 2 copy one is in self server other is in nfs 
 
 we have 7 site .all html web site run with nginx and nodejs app run with nodejs pm2. one extra nginx for reverse proxy . just pubishe 80:80 reverse proxy to public its safe. it forward request of web sites to specific container. all 7 is one ip set dns domain. we map one ip public. reverse proxy looks at header http request that with domain then forward for ex.: web1.com to specific internal ip 
 
+in reverse proxy we use docker compose for it map conf folder and log folder 
+
+./conf:/etc/nginx/conf.d
+
+./log:/var/log/nginx
+
+in conf folder we have one file for each site (domain name) - but its recommand not to delete default.conf file ( to handle errors)
+
+server name is domain name that we buy. 
+
+proxy_pass tell where go the client requests. if we add reverse proxy and web1 container in same network then call it with it name and port. for ex.: http://kpi-dashboard:80/; 
+
+
+
+
+
 
 
 bookstack and conflouence is documentation software. bookstack is open source an d self hosted. and integration with diagram.net . 
