@@ -122,7 +122,27 @@ we protect branch from merge , push ,..for ex: production
 
 
 
+real senario: 4 server - gitlab- monitoring - production- development - test - ha - backup -7 website - 1 ip public- 7 domain name:
 
+to solve if we use k8s its low performance- then we choose docker swarm - 
+
+let 3 node be cluster node . 
+
+other one is to be as server for : gitab-grafana-prom - bookstack - backup takes here and send to cluster master nfs server with most biggest storage to save them 3 tb and docker hub integration and build image there and deploy for staging with labaling stg.
+
+2 other cluster node is for build and push to hub. deploy for production with labaling stg. and this 2 servers have load balancing with nginx. pull from hub and are nfs client. 
+
+in ci/cd we have 2 docker compose file : dockercompose-stg.yml  - dockercompose-prod.yml
+
+then in gitlan make 2 env with 2 butoon : stg - prod. when developers hit the stg button pipeline related to it with dockercompose-stg.yml runs. when developers hit the prod button  pipeline related to it with dockercompose-prod.yml runs.
+
+data is persisted there. data have 2 copy one is in self server other is in nfs server.
+
+we have 7 site .all html web site run with nginx and nodejs app run with nodejs pm2. one extra nginx for reverse proxy . just pubishe 80:80 reverse proxy to public its safe. it forward request of web sites to specific container. all 7 is one ip set dns domain. we map one ip public. reverse proxy looks at header http request that with domain then forward for ex.: web1.com to specific internal ip 
+
+
+
+bookstack and conflouence is documentation software. bookstack is open source an d self hosted. and integration with diagram.net . 
 
 
 
