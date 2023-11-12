@@ -168,7 +168,22 @@ in dns server we have to just 2 port: 80 or 443 . to use other port one solutin 
 ingress is mre lb. cillium -treafic metal, nginx can use as ingress. nginx is distr. with nginx and k8s company but which is developed by k8s  is more efficient.
 
 
-in k8s cluster one is master who have nginx with reverse proxy and clusterip with pods ip and ports. svc that point to specific pods.
+in k8s cluster one is master who have nginx with reverse proxy and clusterip with pods ip and ports. svc that point to specific pods. or use other server as ha proxy to forward.
+
+
+caddy reverse proxy is more easy than nginx. just source and destination ip. in it.
+
+
+image tag in compose is latest in deploy.yml in deployment is tag is latest.  it calls zero down time . it just docker compose up or kubectl apply.
+
+if not works we make button rollback that change unknown image to latest
+
+
+
+
+
+
+
 
 
 
