@@ -180,6 +180,123 @@ if not works we make button rollback that change unknown image to latest
 
 
 
+to add env var in git lab in setting  ci/cd in variable section you can add them.
+
+
+#### github action :
+
+is same as gitlab-ci but gitlab has self hosted but github is cloud base and need internet.
+
+
+
+gitlab as simple than github action
+its first options.
+
+
+artifact in pipeline job is save in artifact section in gitlab. its a ruslt or output of that job.
+
+
+sitespeed.io   --> give  us browser performance test.
+
+
+use ai in devops to quality code test. 
+
+
+gitlab -github - azure devops. is the first rank
+
+github repo with awsome is commonly good resource to learn with tutorial and sample. 
+
+learn simple pipeline database backend and web server - voting app is good sample
+
+
+#### recommand:
+
+k8s -> practice  - try to learn ingress and egress  -multi master - leader election - resource read- cluster rule - service acount - resource control  (intermediate level)
+
+a log analyser. recommand : ELK --> include: elastic search - log stach -kebana (in enterprise company)
+
+grafana---> with plugin loki configuration. log monitor (in small company)
+
+
+Gitops --> install argoCD
+
+security+ --> devsecops
+
+lpic2
+
+lpic3 ---> virtualization - HA
+
+
+
+k8s advanced: CRD (custom resource definition ) -  operator   - need golang
+
+
+devops eng. task in database ---> lunch - config - backup - HA - restore   - maintenance not working with query , data command
+
+
+working with mongosh or redis-cli ,.. learn to connect to database to write script.
+
+other task in db belong to db man.
+
+
+test engin do test to it.
+
+
+
+go ---> k8s - prom- docker - argo
+
+
+
+
+devops base req: docker - k8s - ansible - pipeline - bash
+
+
+
+#### cloud
+
+
+if you want to know cloud:
+
+public cloud: aws - GCP  - azure  - cloud practioner amazone (how to use k8s customise in amazone) - badget saving.
+
+
+private cloud: for ex.: we have 20 servers and want to install cloud on it. openstack(nasa) - opennebula(apache) - cloud stack-
+
+lpic2 - lpic3 virtual - storage (ceph) then read openstack ---> cloud engineer  - haigh job position price.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
