@@ -162,13 +162,13 @@ bookstack and conflouence is documentation software. bookstack is open source an
 
 
 
+in dns server we have to just 2 port: 80 or 443 . to use other port one solutin is ingress. other solution is nginx as reverse proxy.
 
 
+ingress is mre lb. cillium -treafic metal, nginx can use as ingress. nginx is distr. with nginx and k8s company but which is developed by k8s  is more efficient.
 
 
-
-
-
+in k8s cluster one is master who have nginx with reverse proxy and clusterip with pods ip and ports. svc that point to specific pods.
 
 
 
