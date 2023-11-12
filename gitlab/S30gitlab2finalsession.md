@@ -88,6 +88,39 @@ puse act as cordon in pods.
 set new runner and set tag and type of runner then create runner . in next page use commands.
 
 
+to install runner click on  How do I install GitLab Runner?   and follow the instruction.
+
+
+after installation copy token command and run on that server:
+
+gitlab-runner register  --url https://gitlab.com  --token glrt-Who2625aD6LHb5V-1yje
+
+
+
+clone project in working directory
+
+
+than start project: gitlab-runner run
+
+systemctl gitlab-runner start
+
+
+then register it to that site or host address:
+
+
+gitlab-runner register
+
+
+then follow instruction. give gitlab.com to url if you host give it name\
+
+after com[letion verify it:
+
+gitlab-runner verify
+
+
+we protect branch from merge , push ,..for ex: production
+
+
 
 
 
