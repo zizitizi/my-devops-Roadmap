@@ -91,28 +91,28 @@ in deploy stage we have this steps:
 run that image- in kuber or docker 0r docker compose or docker swarm - in with resource service or deployment ,.. - 
 
 stages are dockerise box. 
-
-pipeline {
-   agent any
-   stages {
-      stage('build') {
-          steps{
-            //
-            }
-          }
-      stage('test') {
-          steps{
-            //
-            }
-          }  
-             stage('deploy') {
-          steps{
-            //
-            }
-          }    
-        }
-}
-
+      
+      pipeline {
+         agent any
+         stages {
+            stage('build') {
+                steps{
+                  //
+                  }
+                }
+            stage('test') {
+                steps{
+                  //
+                  }
+                }  
+                   stage('deploy') {
+                steps{
+                  //
+                  }
+                }    
+              }
+      }
+      
 
             
 then git repo is include:
@@ -139,43 +139,43 @@ sample stages( here we have 4 buttun):
 
 
 another jenkins file format is :Scripted Pipeline
-
-node {
-  stage ('build') {
-    //
-    }
-  stage ('deploy') {
-    //
-    }
-}
+      
+      node {
+        stage ('build') {
+          //
+          }
+        stage ('deploy') {
+          //
+          }
+      }
 
 
 you can test it in definitions> pipeline script> hello word(sample pipeline)
 
 
 or try sample pipeline:
-
-pipeline {
-   agent any
-   stages {
-      stage('build') {
-          steps{
-            echo 'building the applications'
-            }
-          }
-      stage('test') {
-          steps{
-            echo 'testing the applications'
-            }
-          }  
-             stage('deploy') {
-          steps{
-            echo 'deploying the applications'
-            }
-          }    
-        }
-}
-
+      
+      pipeline {
+         agent any
+         stages {
+            stage('build') {
+                steps{
+                  echo 'building the applications'
+                  }
+                }
+            stage('test') {
+                steps{
+                  echo 'testing the applications'
+                  }
+                }  
+                   stage('deploy') {
+                steps{
+                  echo 'deploying the applications'
+                  }
+                }    
+              }
+      }
+      
 
 
 important its test in real world dont use agent any. use specified node name instead.
@@ -225,48 +225,48 @@ for example after complete pipeline email admin
 
 then try:
 
-
-pipeline {
-   agent any
-   stages {
-      stage('build') {
-          steps{
-            echo 'building the applications'
-            }
-          }
-      stage('test') {
-          steps{
-            echo 'testing the applications'
-            }
-          }  
-             stage('deploy') {
-          steps{
-            echo 'deploying the applications'
-            }
-          }    
-        }
-   post {
-     success { 
-         mail -s "successfule finneshed pipelein" root@localhost
-   }
-     failure { 
-         mail -s "failed finneshed pipeline" root@localhost
-   }
-     always { 
-         mail -s "just finneshed pipeline" root@localhost
-         echo 'finished'
-   }
-        
-}
-
+      
+      pipeline {
+         agent any
+         stages {
+            stage('build') {
+                steps{
+                  echo 'building the applications'
+                  }
+                }
+            stage('test') {
+                steps{
+                  echo 'testing the applications'
+                  }
+                }  
+                   stage('deploy') {
+                steps{
+                  echo 'deploying the applications'
+                  }
+                }    
+              }
+         post {
+           success { 
+               mail -s "successfule finneshed pipelein" root@localhost
+         }
+           failure { 
+               mail -s "failed finneshed pipeline" root@localhost
+         }
+           always { 
+               mail -s "just finneshed pipeline" root@localhost
+               echo 'finished'
+         }
+              
+      }
+      
 
 
 we can define conditions:
 
-when {
-   experssions {
-       }
-     }
+      when {
+         experssions {
+             }
+           }
 
      
 Here, test steps will be execute just if BRANCH_NAME variable equals to ‘dev’.
@@ -515,37 +515,37 @@ you can use template to write this file or write it ypurself from pipeline edito
 
 Pipeline syntax is correct   - is check in backgroud your syntax
 
-stages:          # List of stages for jobs, and their order of execution- its == number of butons  - each stage contains jobs
-  - build
-  - test
-  - deploy
-
-build-job:       # This job runs in the build stage, which runs first. In each job, we specify which stage this job belongs to. 
-  stage: build
-  script:                       # consist of desired commands
-    - echo "Compiling the code..."
-    - echo "Compile complete."
-
-unit-test-job:   # This job runs in the test stage.
-  stage: test    # It only starts when the job in the build stage completes successfully.
-  script:
-    - echo "Running unit tests... This will take about 60 seconds."
-    - sleep 60
-    - echo "Code coverage is 90%"
-
-lint-test-job:   # This job also runs in the test stage.
-  stage: test    # It can run at the same time as unit-test-job (in parallel).
-  script:
-    - echo "Linting code... This will take about 10 seconds."
-    - sleep 10
-    - echo "No lint issues found."
-
-deploy-job:      # This job runs in the deploy stage.
-  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
-  environment: production
-  script:
-    - echo "Deploying application..."
-    - echo "Application successfully deployed."
+      stages:          # List of stages for jobs, and their order of execution- its == number of butons  - each stage contains jobs
+        - build
+        - test
+        - deploy
+      
+      build-job:       # This job runs in the build stage, which runs first. In each job, we specify which stage this job belongs to. 
+        stage: build
+        script:                       # consist of desired commands
+          - echo "Compiling the code..."
+          - echo "Compile complete."
+      
+      unit-test-job:   # This job runs in the test stage.
+        stage: test    # It only starts when the job in the build stage completes successfully.
+        script:
+          - echo "Running unit tests... This will take about 60 seconds."
+          - sleep 60
+          - echo "Code coverage is 90%"
+      
+      lint-test-job:   # This job also runs in the test stage.
+        stage: test    # It can run at the same time as unit-test-job (in parallel).
+        script:
+          - echo "Linting code... This will take about 10 seconds."
+          - sleep 10
+          - echo "No lint issues found."
+      
+      deploy-job:      # This job runs in the deploy stage.
+        stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+        environment: production
+        script:
+          - echo "Deploying application..."
+          - echo "Application successfully deployed."
 
 
 
