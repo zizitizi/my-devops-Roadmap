@@ -134,7 +134,7 @@ other one is to be as server for : gitab-grafana-prom - bookstack - backup takes
 
 in ci/cd we have 2 docker compose file : dockercompose-stg.yml  - dockercompose-prod.yml
 
-then in gitlan make 2 env with 2 butoon : stg - prod. when developers hit the stg button pipeline related to it with dockercompose-stg.yml runs. when developers hit the prod button  pipeline related to it with dockercompose-prod.yml runs.
+then in gitlab make 2 env with 2 butoon : stg - prod. when developers hit the stg button pipeline related to it with dockercompose-stg.yml runs. when developers hit the prod button  pipeline related to it with dockercompose-prod.yml runs.
 
 data is persisted there. data have 2 copy one is in self server other is in nfs server.
 
