@@ -101,7 +101,7 @@ prometheus is agnet base with http (not snmp) . to use snmp install snmp exporte
 What is the difference between Monitoring Tools and Log Analyzers?!
 
 monitoring is not log analyser. log analyser is directory path to app logs and sys logs ,.. then visualize on that logs. fro ex.: user report on logs. like:
-for backden ELK or elastik stack include: (elastik search (nms) - logstash (gather agent) - kibana (gui - we can use grafana))  - use to log application in backend.
+for backdend ELK or elastik stack include: (elastik search (nms) - logstash (gather agent) - kibana (gui - we can use grafana))  - use to log application in backend.
 
 kibana is log analyser but grafana is log analyser+monitoring.
 
