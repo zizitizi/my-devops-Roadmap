@@ -273,9 +273,9 @@ practice4 - what and how is labeling? how can we label workers and masters in do
 
 in real we dont have virtual clustering in swarm. but with labeling we can do it manually.  in practice when we have 5 server or node one solution is make 2 swarm cluster with  2 for staging and 3 for production. but its not best practice. we do 5 node in one swarm cluster and label with 2 stg and 3 with prd . 
 
-docker service create --label stg
-
-docker service create --label prd
+   docker service create --label stg
+   
+   docker service create --label prd
 
 then make all 5 node masters and workers. its persist to fault of 2 node. 
 
@@ -304,67 +304,67 @@ docker stack can work with docker swarm and k8s<=v1.23 . depends on in docker st
 
 nfs in k8s in complicated. if data is so critical and sensitive then Ask the organization's network administrator or db engineers to cluster that data and place the data in the relevant servers and give its address .
 
-#### this file is meant for Docker Swarm stacks only
-#### trying it in compose will fail because of multiple replicas trying to bind to the same port
-#### Swarm currently does not support Compose Spec, so we'll pin to the older version 3.9
-
-version: "3.9"
-
-services:
-
-  redis:
-    image: redis:alpine
-    networks:
-      - frontend
-
-  db:
-    image: postgres:15-alpine
-    environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "postgres"
-    volumes:
-      - db-data:/var/lib/postgresql/data
-    networks:
-      - backend
-
-  vote:
-    image: dockersamples/examplevotingapp_vote
-    ports:
-      - 5000:80
-    networks:
-      - frontend
-    deploy:
-      replicas: 2
-
-  result:
-    image: dockersamples/examplevotingapp_result
-    ports:
-      - 5001:80
-    networks:
-      - backend
-
-  worker:
-    image: dockersamples/examplevotingapp_worker
-    networks:
-      - frontend
-      - backend
-    deploy:
-      replicas: 2
-
-networks:
-  frontend:
-  backend:
-
-volumes:
-  db-data:
-
-
-
-
-docker stack ls
-
-docker stack ps voting-app
-
+   #### this file is meant for Docker Swarm stacks only
+   #### trying it in compose will fail because of multiple replicas trying to bind to the same port
+   #### Swarm currently does not support Compose Spec, so we'll pin to the older version 3.9
+   
+   version: "3.9"
+   
+   services:
+   
+     redis:
+       image: redis:alpine
+       networks:
+         - frontend
+   
+     db:
+       image: postgres:15-alpine
+       environment:
+         POSTGRES_USER: "postgres"
+         POSTGRES_PASSWORD: "postgres"
+       volumes:
+         - db-data:/var/lib/postgresql/data
+       networks:
+         - backend
+   
+     vote:
+       image: dockersamples/examplevotingapp_vote
+       ports:
+         - 5000:80
+       networks:
+         - frontend
+       deploy:
+         replicas: 2
+   
+     result:
+       image: dockersamples/examplevotingapp_result
+       ports:
+         - 5001:80
+       networks:
+         - backend
+   
+     worker:
+       image: dockersamples/examplevotingapp_worker
+       networks:
+         - frontend
+         - backend
+       deploy:
+         replicas: 2
+   
+   networks:
+     frontend:
+     backend:
+   
+   volumes:
+     db-data:
+   
+   
+   
+   
+   docker stack ls
+   
+   docker stack ps voting-app
+   
 
 docker stack services voting-app  == docker service ls
 
