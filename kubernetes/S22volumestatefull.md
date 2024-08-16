@@ -75,13 +75,13 @@ in dns we have many record types: A record to name:ipv4  - AAAA record to name:i
 4- node port: open port on every cluster node. should be over 30000. 
 
 we have 3 layer in node port mode:
-
-1- target port (pod)  - deployment is kind of load balancer
-
-2- port (svc port) 
-
-3- node port: ip master with port over 30000. 
-
+            
+            1- target port (pod)  - deployment is kind of load balancer
+            
+            2- port (svc port) 
+            
+            3- node port: ip master with port over 30000. 
+            
 nodeport is include cluster ip.
 
 cluster ip include: svc (port) - pod (target port)
@@ -328,60 +328,60 @@ change restart policy - sidecare containers - no need to disable swap - mix vers
 volumes mounts below container is in guest. volumes in below spec section is in host.
 name is same in 2 sections. hostpath or emty directory. k8s is not order sensitive becaouse all yaml is compile once to gether. this mode is use in one replica cluster . in more than 1 replica we recommand to use pv and pvc.
 
-spec:
-  containers:
-  - image: k8s.gcr.io/test-webserver
-    name: test-container
-    volumeMounts:
-    - mountPath: /app
-      name: cache-volume
-  volumes:
-  - name: cache-volume
-    emptyDir: /tmp
+            spec:
+              containers:
+              - image: k8s.gcr.io/test-webserver
+                name: test-container
+                volumeMounts:
+                - mountPath: /app
+                  name: cache-volume
+              volumes:
+              - name: cache-volume
+                emptyDir: /tmp
 
 
 
 or exapmle:
 
-spec:
-  containers:
-  - name: nginx-ctr
-    image: nginx:latest
-    ports:
-       - containerPort: 80
-    volumeMounts:
-      - mountPath: /usr/share/nginx/html/
-        name: html-directory
-      - mountPath: /var/log/nginx/
-        name: nginx-log
-  volumes:
-    - name: html-directory
-      emptyDir: /root/html/
-    - name: nginx-log
-      emptyDir: /root/log/
-
+            spec:
+              containers:
+              - name: nginx-ctr
+                image: nginx:latest
+                ports:
+                   - containerPort: 80
+                volumeMounts:
+                  - mountPath: /usr/share/nginx/html/
+                    name: html-directory
+                  - mountPath: /var/log/nginx/
+                    name: nginx-log
+              volumes:
+                - name: html-directory
+                  emptyDir: /root/html/
+                - name: nginx-log
+                  emptyDir: /root/log/
+            
 
 
 or exapmle add this lines to nginx deployment sample file:
 
-spec:
-  containers:
-  - name: nginx-ctr
-    image: nginx:latest
-    ports:
-       - containerPort: 80
-    volumeMounts:
-      - mountPath: /usr/share/nginx/html/
-        name: html-directory
-      - mountPath: /var/log/nginx/
-        name: nginx-log
-  volumes:
-    - name: html-directory
-      hostPath:
-         path: /root/html/
-    - name: nginx-log
-      hostPath:
-         path: /root/log/
+                  spec:
+                    containers:
+                    - name: nginx-ctr
+                      image: nginx:latest
+                      ports:
+                         - containerPort: 80
+                      volumeMounts:
+                        - mountPath: /usr/share/nginx/html/
+                          name: html-directory
+                        - mountPath: /var/log/nginx/
+                          name: nginx-log
+                    volumes:
+                      - name: html-directory
+                        hostPath:
+                           path: /root/html/
+                      - name: nginx-log
+                        hostPath:
+                           path: /root/log/
 
 
 
